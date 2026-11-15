@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAV PRO Côte d’Ivoire — Énergie, engins & dépannage</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#ffffff;--card:#ffffff;--ink:#0f2a52;--mut:#52627d;--line:#dbe3ee;--navy:#0f2a52;--navy2:#1a427a;--or:#e63946;--yl:#c98a00;--soft:rgba(247,201,72,.18);--ok:#10b981;--warn:#f59e0b;--bad:#e5484d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+.app{height:100%;display:grid;grid-template-rows:auto auto 1fr;position:relative;overflow:hidden}
+.tb{background:var(--or);color:#fff;font-size:12.5px;font-weight:500;display:flex;gap:4px 18px;flex-wrap:wrap;justify-content:center;padding:4px 10px}
+.tb a{display:flex;align-items:center;gap:6px}.tb .ic{width:16px;height:16px}
+.hd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:6px 10px;background:var(--card);border-bottom:3px solid var(--yl);z-index:30}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.mk{height:38px;width:auto;display:block}
+.lt b{display:block;font-size:23px;font-weight:300;letter-spacing:1px;color:var(--or);line-height:1}
+.lt small{display:block;font-size:9.5px;letter-spacing:2.5px;color:var(--mut);margin-top:4px;padding-top:3px;border-top:1px solid var(--line)}
+.sp1{flex:1}.brk{flex-basis:100%;height:0}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ib{position:relative;background:var(--card);border:1px solid var(--line);width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--ink);cursor:pointer;flex:none}
+.bd{position:absolute;top:-5px;right:-5px;background:var(--or);color:#fff;font-size:12px;font-weight:700;min-width:19px;height:19px;border-radius:10px;display:grid;place-items:center;font-family:'Big Shoulders Display',sans-serif}
+.search{order:10;flex:1 1 0;min-width:0;display:flex;align-items:center;gap:8px;border:2px solid var(--yl);border-radius:14px;padding:0 12px;color:var(--yl);background:rgba(247,201,72,.07)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;height:38px;font-size:16px;color:var(--yl);font-weight:500}
+.search input::placeholder{color:var(--yl);opacity:.65}
+.spd{order:11;white-space:nowrap}
+main{overflow-y:auto;grid-column:1;background:radial-gradient(1100px 480px at 85% -10%,rgba(230,57,70,.05),transparent 62%),radial-gradient(900px 400px at -10% 30%,rgba(247,201,72,.06),transparent 60%)}
+.screen{display:none;animation:in .3s ease}.screen.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.w{max-width:1100px;margin:0 auto}.pad{padding:0 20px}
+h1,h2,.pr,.stat b,.plan em,.bd{font-family:'Big Shoulders Display','Outfit',sans-serif}
+h1{font-size:36px;font-weight:800;line-height:1.02;letter-spacing:.4px;text-transform:uppercase}
+h2{font-size:23px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+h3{font-size:17px;font-weight:600}
+.mut{color:var(--mut);font-size:14.5px;font-weight:400;line-height:1.5}
+.sec{display:flex;justify-content:space-between;align-items:center;padding:24px 20px 10px}
+.sec a{font-size:14px;color:var(--yl);font-weight:600;cursor:pointer}
+.sec h2:after{content:'';display:block;width:34px;height:3px;background:var(--yl);margin-top:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--or);color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:14.5px;font-weight:600;cursor:pointer;line-height:1.2;transition:filter .15s,background .15s}.btn .ic{width:18px;height:18px}.btn:hover{filter:brightness(1.08)}
+.btn.full{width:100%;max-width:420px}.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}.btn.yl{background:transparent;color:var(--yl);border:1.5px solid var(--yl)}.btn.yl:hover{background:var(--yl);color:#0b2347;filter:none}.btn.sm{padding:7px 11px;font-size:13px;border-radius:9px}.btn.sm .ic{width:16px;height:16px}.btn:disabled{opacity:.4}
+.sl{position:relative;margin:16px 20px 0;border-radius:22px;overflow:hidden;height:500px;background:linear-gradient(120deg,#123062 0%,#1d4880 58%,#8a1019 135%);border:1px solid var(--line);border-left:6px solid var(--yl)}
+.sld{position:absolute;inset:0;padding:20px 22px 84px;display:flex;flex-direction:column;gap:14px;opacity:0;pointer-events:none;transition:opacity .7s}
+.sld.on{opacity:1;pointer-events:auto}
+.sld .im{background:#fff;border-radius:16px;height:150px;display:grid;place-items:center;overflow:hidden;flex:none}.sld .im img{width:100%;height:100%;object-fit:contain}
+.sld h1{font-size:42px}.sld p{font-size:15.5px;opacity:.9;line-height:1.45;max-width:520px}
+.sbar{position:absolute;left:22px;right:22px;bottom:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dots{display:flex;gap:7px;margin-left:auto;align-items:center}.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer}.dots i.on{background:var(--yl);width:24px;border-radius:5px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px 20px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-bottom:3px solid var(--yl);border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer}
+.tile .ic{width:30px;height:30px;color:var(--yl);margin-bottom:6px}.tile b{display:block;font-size:15px;font-weight:600}.tile span{font-size:12.5px;color:var(--mut)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 20px 4px;scrollbar-width:none}
+.chip{flex:none;padding:9px 15px;border-radius:20px;border:1px solid var(--line);background:var(--card);font-size:13.5px;font-weight:500;cursor:pointer}.chip.on{background:var(--yl);color:#06142a;border-color:var(--yl);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:8px 20px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:6px;position:relative}
+.pi{height:120px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden;cursor:pointer}.pi img{width:100%;height:100%;object-fit:contain}
+.prod h4{font-size:14.5px;font-weight:500;min-height:38px;line-height:1.25;cursor:pointer}
+.pr{font-size:18px;font-weight:700;color:var(--yl);letter-spacing:.3px}
+.off{position:absolute;top:18px;left:18px;background:var(--or);color:#fff;font-size:11.5px;padding:3px 8px;border-radius:6px;z-index:2}
+.adm{display:flex;gap:6px}.adm .ib{width:36px;height:36px;border-radius:10px}
+.abar{margin:12px 20px 0;padding:12px;border:1px dashed var(--yl);border-radius:14px;background:var(--soft);display:none;gap:8px;flex-wrap:wrap;align-items:center;font-size:13.5px;font-weight:500}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 20px 12px}
+.card h3{margin-bottom:8px}.card ul{padding-left:18px;display:grid;gap:6px;color:var(--mut);font-size:14.5px;line-height:1.45}.card li::marker{color:var(--yl)}
+.row{display:flex;gap:12px;align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}.g{background:var(--ok)}.w2{background:var(--warn)}.r{background:var(--bad)}
+.tag{font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:6px;margin-top:6px}
+.det{display:grid;gap:20px;padding:8px 20px}
+.det .big{background:#fff;border:1px solid var(--line);border-radius:20px;height:300px;display:grid;place-items:center;overflow:hidden}.det .big img{width:100%;height:100%;object-fit:contain}
+.sp-hero{background:linear-gradient(160deg,var(--navy),#245a9e);padding:26px 20px 56px;border-radius:0 0 28px 28px;border-bottom:4px solid var(--yl)}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.5px;background:rgba(255,255,255,.1);padding:6px 12px;border-radius:20px;margin-bottom:14px}
+.live i{width:7px;height:7px;border-radius:50%;background:#ff5a5f;animation:pl 1.6s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(230,57,70,.7)}100%{box-shadow:0 0 0 10px rgba(230,57,70,0)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:-36px 20px 0;position:relative}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 8px;text-align:center}.stat b{font-size:36px;font-weight:800;color:var(--yl);display:block;line-height:1}.stat span{font-size:12.5px;color:var(--mut)}
+.steps{display:grid;grid-template-columns:1fr}.step{display:flex;gap:14px;padding:0 20px 18px}
+.sn{width:38px;height:38px;border-radius:12px;background:var(--soft);color:var(--yl);display:grid;place-items:center;flex:none}
+.step h5{font-size:16px;font-weight:600}.step p{font-size:14px;color:var(--mut);margin-top:2px}
+.plans{display:flex;gap:12px;overflow-x:auto;padding:0 20px 6px;scrollbar-width:none}
+.plan{flex:none;width:170px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer}.plan.on{border:1.5px solid var(--or);background:var(--soft)}
+.plan b{font-size:17px;display:block}.plan em{font-style:normal;font-size:38px;font-weight:800;color:var(--yl);display:block;margin:4px 0 2px;line-height:1}.plan span{font-size:12.5px;color:var(--mut);line-height:1.4;display:block}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:500}.opt .ic{color:var(--yl)}.opt.on{border-color:var(--or);background:var(--soft)}
+.opt small{font-size:12.5px;color:var(--mut);font-weight:400;line-height:1.35}
+.fg{padding:0 20px 12px}.fg label{font-size:14px;font-weight:500;display:block;margin-bottom:6px}
+.fg input,.fg textarea,.fg select{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:13px;font-size:15.5px;outline:0}.fg input:focus,.fg textarea:focus{border-color:var(--yl)}
+.err{color:#ff7a80;font-size:13.5px;padding:0 20px 8px;display:none}
+.tl{padding:0 20px}.ti{display:flex;gap:14px;padding-bottom:22px;position:relative;opacity:.45;transition:.4s}
+.ti:not(:last-child):before{content:"";position:absolute;left:19px;top:40px;bottom:0;width:1.5px;background:var(--line)}
+.ti .sn{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:50%}
+.ti.done{opacity:1}.ti.done .sn{background:var(--ok);color:#fff;border-color:var(--ok)}.ti.now{opacity:1}.ti.now .sn{background:var(--or);color:#fff;border-color:var(--or);animation:pl 1.6s infinite}
+.ti h5{font-size:16px;font-weight:600}.ti p{font-size:14px;color:var(--mut)}
+.tabs{display:flex;gap:8px;padding:0 20px 14px}.tabs .chip{flex:1;text-align:center}
+.pin{margin:0 20px 14px;padding:16px;border:2px dashed var(--yl);border-radius:16px;background:var(--soft);text-align:center}
+.pin b{display:block;font-family:'Big Shoulders Display';font-size:46px;letter-spacing:8px;color:var(--yl);line-height:1.1}
+.ft{background:var(--card);border-top:3px solid var(--yl);margin-top:30px;padding:24px 20px 120px;display:grid;gap:10px}
+.ft .w{display:grid;gap:10px}.ft a{display:flex;gap:10px;align-items:center;color:var(--ink);font-size:15px}.ft .ic{color:var(--yl)}
+.nav{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:var(--card);border-top:1px solid var(--line);padding:5px 0 calc(6px + env(safe-area-inset-bottom,0px));z-index:20}
+.ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;font-weight:500;color:var(--mut);cursor:pointer;width:68px;text-align:center}.ni.on{color:var(--yl)}
+.ni.dk{display:none}
+.ni.sp{margin-top:-30px}.ni.sp .ib2{width:56px;height:56px;border-radius:50%;background:var(--or);color:#fff;display:grid;place-items:center;border:4px solid var(--bg);box-shadow:0 6px 18px rgba(230,57,70,.45)}.ni.sp .ic{width:26px;height:26px}
+.sheet{position:absolute;inset:0;background:rgba(3,10,22,.65);z-index:50;display:none;align-items:flex-end;justify-content:center}.sheet.on{display:flex}
+.sh{background:var(--card);width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:20px;max-height:88%;overflow-y:auto;animation:in .25s}
+.sh .fg{padding:0 0 10px}
+.ci{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;gap:10px}
+.mi{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:16.5px;font-weight:500;cursor:pointer}.mi .ic{color:var(--yl)}
+.toast{position:absolute;top:120px;left:50%;transform:translateX(-50%) translateY(-200px);background:var(--navy2);border:1px solid var(--yl);color:#fff;padding:12px 18px;border-radius:14px;font-size:14.5px;z-index:99;transition:.35s;max-width:90%;text-align:center}.toast.on{transform:translateX(-50%)}
+.mn{}#domList{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+@media (max-width:899px){.screen{padding-bottom:74px}.sld h1{font-size:34px}.sl{height:430px}.sld .im{height:110px}.sld{padding-bottom:76px}.ni .ic{width:20px;height:20px}.ni.sp{margin-top:-20px}.ni.sp .ib2{width:46px;height:46px}.ni.sp .ic{width:22px;height:22px}.ft{padding-bottom:84px}.dk2,.tb a.dk2{display:none}.app.cmp .tb,.app.cmp .search,.app.cmp .spd,.app.cmp .brk{display:none}}
+@media (min-width:900px){
+.app{grid-template-columns:240px 1fr}.tb,.hd{grid-column:1/3}
+.hd{flex-wrap:nowrap;padding:12px 22px}.brk,.sp1,.mn{display:none}.ct{order:12}.search{order:0}.spd{order:0}.mk{height:60px}
+.nav{position:static;grid-row:3;grid-column:1;flex-direction:column;justify-content:flex-start;gap:4px;border-top:0;border-right:1px solid var(--line);padding:18px 12px}
+main{grid-column:2;grid-row:3}
+.ni{flex-direction:row;width:auto;padding:12px 14px;border-radius:12px;font-size:15.5px;gap:12px;text-align:left}.ni.on{background:var(--soft)}.ni.dk{display:flex}
+.ni.sp{margin:0}.ni.sp .ib2{width:auto;height:auto;background:none;border:0;box-shadow:none;color:inherit}.ni.sp .ic{width:22px;height:22px}
+.screen{padding-bottom:30px}.ft{padding-bottom:30px}
+.sl{height:420px}.sld{flex-direction:row;align-items:center;padding:30px 36px 90px;gap:30px}.sld .im{order:2;width:320px;height:240px}.sld .tx{flex:1}.sld h1{font-size:60px}
+.sbar{left:36px;right:36px}
+.tiles{gap:18px}.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.pi{height:150px}
+.det{grid-template-columns:1fr 1fr;align-items:start}.det .big{height:420px}
+.steps{grid-template-columns:1fr 1fr}.opts{grid-template-columns:repeat(5,1fr)}
+.sheet{align-items:center}.sh{border-radius:24px}h1{font-size:46px}.dk2{display:inline}.tb a.dk2{display:flex}.ib{width:42px;height:42px;border-radius:12px}}
+
+/* thème blanc : zones sombres conservées en texte clair */
+.sl,.sl .mut,.sp-hero,.sp-hero h1,.toast{color:#fff}
+.sl .btn.ghost{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
+.sl .btn.yl,.sp-hero .btn.yl{color:#f7c948;border-color:#f7c948}
+.sl .dots i.on,.sl .tag,.sp-hero .tag,.sp-hero .pr{color:#f7c948}
+.sp-hero .mut{color:#dbe4f2}
+.hd,.nav,.ft{box-shadow:0 1px 6px rgba(15,42,82,.06)}
+.card,.tile,.prod,.stat,.plan,.opt{box-shadow:0 1px 4px rgba(15,42,82,.06)}
+.search input{color:var(--ink)}.search{color:var(--yl);background:rgba(247,201,72,.1)}
+.search input::placeholder{color:var(--mut);opacity:.8}
+.ib2{border-color:#fff}
+.fg input,.fg textarea,.fg select{background:#f7f9fc}
+.sheet{background:rgba(15,42,82,.45)}
+.sh{box-shadow:0 -6px 24px rgba(15,42,82,.15)}
+
+/* ===== Design fluide + blocs produits en bleu ===== */
+html{scroll-behavior:smooth}
+main{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+h1{font-size:clamp(28px,4.6vw,40px)}
+h2{font-size:clamp(20px,2.6vw,25px)}
+.sld h1{font-size:clamp(30px,5.4vw,46px)}
+.sp-hero h1{font-size:clamp(30px,6vw,48px)}
+.mut{font-size:clamp(14px,1.6vw,15.5px)}
+.pad,.sec,.tiles,.chips,.grid,.det,.tabs,.plans,.opts,.fg,.tl,.step{padding-left:clamp(14px,3vw,24px);padding-right:clamp(14px,3vw,24px)}
+.card,.abar,.pin{margin-left:clamp(14px,3vw,24px);margin-right:clamp(14px,3vw,24px)}
+.grid{grid-template-columns:repeat(auto-fill,minmax(clamp(148px,22vw,220px),1fr));gap:clamp(10px,1.8vw,18px)}
+.tiles{gap:clamp(10px,1.6vw,16px)}
+
+/* transitions douces partout */
+.btn,.ib,.chip,.tile,.prod,.plan,.opt,.card,.stat,.ni,.mi,.search,.ci,.fg input,.fg textarea,.fg select{transition:transform .28s cubic-bezier(.22,.9,.3,1),box-shadow .28s ease,background-color .25s ease,border-color .25s ease,color .25s ease,filter .2s ease,opacity .25s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(230,57,70,.28)}
+.btn:active,.ib:active,.chip:active,.tile:active,.opt:active,.plan:active{transform:scale(.97)}
+.ib:hover,.chip:hover,.opt:hover,.plan:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,42,82,.14)}
+.tile:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(15,42,82,.14)}
+.search:focus-within{box-shadow:0 0 0 4px rgba(201,138,0,.18)}
+.fg input:focus,.fg textarea:focus,.fg select:focus{box-shadow:0 0 0 4px rgba(201,138,0,.16)}
+
+/* apparition en douceur */
+.screen.on{animation:in .45s cubic-bezier(.22,.9,.3,1)}
+.grid>*,.tiles>*{animation:rise .5s cubic-bezier(.22,.9,.3,1) both}
+.grid>*:nth-child(2){animation-delay:.04s}.grid>*:nth-child(3){animation-delay:.08s}.grid>*:nth-child(4){animation-delay:.12s}
+.grid>*:nth-child(5){animation-delay:.16s}.grid>*:nth-child(6){animation-delay:.2s}.grid>*:nth-child(n+7){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.sh{animation:sheetUp .38s cubic-bezier(.22,.9,.3,1)}
+@keyframes sheetUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet{transition:background .3s ease}
+
+/* blocs produits en bleu */
+.prod{--card:#1a427a;--ink:#fff;--mut:#c3d1e6;--line:#2f5a94;--yl:#f7c948;--soft:rgba(247,201,72,.16);
+ background:linear-gradient(160deg,#173b70 0%,#0f2a52 100%);color:#fff;border:1px solid #2a4f86;border-bottom:3px solid #f7c948;
+ box-shadow:0 6px 18px rgba(15,42,82,.22);overflow:hidden}
+.prod:hover{transform:translateY(-5px);box-shadow:0 16px 30px rgba(15,42,82,.32);border-color:#3b68a8}
+.prod .pi{background:#fff;box-shadow:inset 0 0 0 1px rgba(15,42,82,.06)}
+.prod .pi img{transition:transform .5s cubic-bezier(.22,.9,.3,1)}
+.prod:hover .pi img{transform:scale(1.06)}
+.prod h4{color:#fff}
+.prod .btn.ghost{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.28)}
+.prod .btn.ghost:hover{background:rgba(255,255,255,.18)}
+.prod .ib{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+
+@media (prefers-reduced-motion:reduce){
+ html,main{scroll-behavior:auto}
+ *,*:before,*:after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+}
+
+/* ===== Tous les blocs en bleu ===== */
+.card,.tile,.stat,.plan,.opt,.chip,.sh,.pin,.det .big+*{--card:#1a427a;--ink:#fff;--mut:#c3d1e6;--line:#2f5a94;--yl:#f7c948;--soft:rgba(247,201,72,.16);color:#fff}
+.card,.tile,.stat,.plan,.opt{background:linear-gradient(160deg,#173b70 0%,#0f2a52 100%);border:1px solid #2a4f86;box-shadow:0 6px 18px rgba(15,42,82,.2)}
+.tile,.stat{border-bottom:3px solid #f7c948}
+.plan.on,.opt.on{background:linear-gradient(160deg,#1d4a86 0%,#12305b 100%);border-color:#e63946}
+.chip{background:#173b70;border-color:#2a4f86;color:#fff}
+.chip:hover{background:#1d4a86}
+.chip.on{background:#f7c948;color:#06142a;border-color:#f7c948}
+.pin{background:linear-gradient(160deg,#173b70 0%,#0f2a52 100%);border-color:#f7c948}
+.sh{background:linear-gradient(180deg,#173b70 0%,#0f2a52 100%);box-shadow:0 -8px 28px rgba(15,42,82,.35)}
+.sh .fg input,.sh .fg textarea,.sh .fg select,.card .fg input,.card .fg textarea,.card .fg select{background:rgba(255,255,255,.1);color:#fff;border-color:#3b68a8}
+.sh .fg input::placeholder,.sh .fg textarea::placeholder,.card .fg input::placeholder,.card .fg textarea::placeholder{color:#aebfd9}
+.sh .fg select option,.card .fg select option{color:#0f2a52}
+.card .btn.ghost,.sh .btn.ghost,.plan .btn.ghost,.opt .btn.ghost{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.28)}
+.sh .ib,.card .ib{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+
+/* contact Speed Dépannage */
+.sp-contact{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.sp-contact a{display:flex;align-items:center;gap:12px;padding:11px 18px;border-radius:14px;color:#fff;text-decoration:none;flex:1 1 200px;max-width:280px;transition:transform .28s cubic-bezier(.22,.9,.3,1),box-shadow .28s ease,filter .2s ease}
+.sp-contact a:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.28)}
+.sp-contact a:active{transform:scale(.97)}
+.sp-contact span{display:flex;flex-direction:column;line-height:1.15}
+.sp-contact small{font-size:11.5px;opacity:.85;font-weight:400;letter-spacing:.3px}
+.sp-contact b{font-size:clamp(17px,2.4vw,20px);font-weight:700;letter-spacing:.5px}
+.sp-tel{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.4)}
+.sp-tel .ic{width:26px;height:26px;color:#f7c948;stroke-width:1.6}
+.sp-wa{background:#25D366;border:1.5px solid #25D366}
+.sp-wa .wa-logo{width:30px;height:30px;flex:none;color:#fff}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="hm" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></symbol>
+<symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="cart" viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="wrench" viewBox="0 0 24 24"><path d="M14.5 6a4.5 4.5 0 0 0 5.5 5.5L9 22.5 5.5 19l11-11"/><path d="M14 6l3-3 4 4-3 3"/></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><path d="M2 6h11v11H2zM13 9h4l4 4v4h-8"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></symbol>
+<symbol id="gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+<symbol id="phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+<symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c3 0 5 1.5 5 5"/></symbol>
+<symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+<symbol id="cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+<symbol id="drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></symbol>
+<symbol id="plug" viewBox="0 0 24 24"><path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></symbol>
+<symbol id="trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#bcc7d8"/></linearGradient>
+<radialGradient id="gt" cx=".35" cy=".3" r=".95"><stop offset="0" stop-color="#ff4a52"/><stop offset="1" stop-color="#a30f16"/></radialGradient>
+</defs></svg>
+
+<div class="app">
+<div class="tb"><a href="tel:+2250708534131">&#8203;<svg class="ic"><use href="#phone"/></svg>+225 07 08 53 41 31</a><a href="https://wa.me/2250708534131" target="_blank" rel="noopener"><svg class="ic"><use href="#chat"/></svg>WhatsApp</a><a class="dk2" href="mailto:savprorci@gmail.com"><svg class="ic"><use href="#mail"/></svg>savprorci@gmail.com</a><a class="dk2"><svg class="ic"><use href="#pin"/></svg>Abidjan, Marcory</a></div>
+<header class="hd">
+ <div class="ib" id="bk" onclick="back()" style="display:none"><svg class="ic"><use href="#back"/></svg></div>
+ <div class="logo" onclick="secret()">
+  <svg class="mk" viewBox="0 0 250 240" aria-label="SAV PRO"><ellipse cx="150" cy="230" rx="88" ry="8" fill="#000" opacity=".28"/>
+   <rect x="44" y="150" width="26" height="78" rx="13" fill="url(#gw)"/><rect x="74" y="150" width="26" height="78" rx="13" fill="url(#gw)"/>
+   <path d="M36 92c0-18 14-26 34-26s34 8 34 26v70c0 8-8 12-34 12s-34-4-34-12z" fill="url(#gw)"/><circle cx="70" cy="40" r="30" fill="url(#gw)"/>
+   <path d="M96 88C130 80 150 70 166 56" stroke="url(#gw)" stroke-width="20" stroke-linecap="round" fill="none"/>
+   <g transform="translate(160,150)"><circle r="82" fill="url(#gt)"/><circle r="64" fill="#fff"/><circle r="46" fill="url(#gt)"/><circle r="28" fill="#fff"/><circle r="12" fill="url(#gt)"/><circle r="81" fill="none" stroke="#7a0a10" stroke-width="3"/></g>
+   <circle cx="166" cy="62" r="12" fill="url(#gw)"/><path d="M52 98C38 122 52 142 92 152" stroke="url(#gw)" stroke-width="18" stroke-linecap="round" fill="none"/></svg>
+  <div class="lt"><b>SAV PRO</b><small>CÔTE D’IVOIRE</small></div>
+ </div>
+ <div class="sp1"></div>
+ <div class="ib ct" onclick="cartOpen()"><svg class="ic"><use href="#cart"/></svg><span class="bd" id="cc">0</span></div>
+ <div class="ib mn" onclick="menuOpen()"><svg class="ic"><use href="#menu"/></svg></div>
+ <i class="brk"></i>
+ <div class="search"><svg class="ic"><use href="#search"/></svg><input id="hq" placeholder="Rechercher un groupe, une pièce, un engin…" oninput="onSearch()"></div>
+ <button class="btn spd" onclick="go('speed')"><svg class="ic"><use href="#bolt"/></svg>Speed<span class="dk2">&nbsp;Dépannage</span></button>
+</header>
+<div id="toast" class="toast"></div>
+
+<main id="main">
+<section id="home" class="screen on"><div class="w">
+ <div class="sl" id="sl"><div id="slides"></div><div class="sbar"><button class="btn" onclick="go('speed')"><svg class="ic"><use href="#bolt"/></svg>Speed Dépannage</button><button class="btn ghost" id="slcta"></button><div class="dots" id="dots"></div></div></div>
+ <div class="tiles" id="tiles"></div>
+ <div class="sec"><h2>Catalogue</h2><a onclick="cat=-1;go('shop');drawShop()">Tout voir</a></div>
+ <div class="chips" id="homeChips"></div>
+ <div class="grid" id="homeProds"></div>
+ <div class="pad" style="margin-top:8px"><button class="btn full" onclick="cat=-1;go('shop');drawShop()">Voir tout le catalogue<svg class="ic"><use href="#arrow"/></svg></button></div>
+</div></section>
+
+<section id="shop" class="screen"><div class="w">
+ <div class="pad" style="padding-top:18px"><h1>Catalogue</h1><p class="mut" style="margin-top:6px">Vente de groupes électrogènes, matériels et outillages de chantier, matériels d’électricité et pièces de rechange pour groupes.</p></div>
+ <div class="abar" id="abarS"></div><div class="chips" id="chipsS"></div>
+ <div class="mut" style="padding:8px 20px 2px" id="countS"></div><div class="grid" id="shopProds"></div>
+</div></section>
+
+<section id="location" class="screen"><div class="w">
+ <div class="pad" style="padding-top:18px"><h1>Location & engins</h1><p class="mut" style="margin-top:6px">Groupes électrogènes, engins TP et matériels de chantier à la journée. Tarifs et disponibilités sur devis.</p></div>
+ <div class="abar" id="abarL"></div><div class="chips" id="chipsL"></div>
+ <div class="mut" style="padding:8px 20px 2px" id="countL"></div><div class="grid" id="locProds"></div>
+</div></section>
+
+<section id="detail" class="screen"><div class="w"><div class="det" id="detBox"></div></div></section>
+
+<section id="domains" class="screen"><div class="w">
+ <div class="pad" style="padding-top:18px"><h1>Domaines couverts</h1><p class="mut" style="margin-top:6px">Une fiche technique détaillée pour chaque domaine d’intervention.</p></div><div style="height:14px"></div>
+ <div class="opts" id="domList"></div>
+</div></section>
+<section id="domain" class="screen"><div class="w" id="domBox"></div></section>
+
+<section id="speed" class="screen"><div class="w">
+ <div class="sp-hero"><div class="live"><i></i>DISPONIBLE 24/7</div><h1>Speed Dépannage</h1><p class="mut" style="margin-top:8px;max-width:560px;color:#dbe4f2">Maintenance, dépannage, réparations, fourniture avec ou sans pose de matériels et de pièces de rechange. Un technicien certifié, les pièces critiques dans le véhicule.</p><div class="sp-contact"><a class="sp-tel" href="tel:+2250708534131"><svg class="ic"><use href="#phone"/></svg><span><small>Appelez-nous 24/7</small><b>07 08 53 41 31</b></span></a><a class="sp-wa" href="https://wa.me/2250708534131?text=Bonjour%20SAV%20PRO%2C%20j%E2%80%99ai%20besoin%20d%E2%80%99un%20d%C3%A9pannage%20urgent." target="_blank" rel="noopener"><svg class="wa-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span><small>Écrivez-nous sur</small><b>WhatsApp</b></span></a></div></div>
+ <div class="stats"><div class="stat"><b>15 min</b><span>Prise en charge</span></div><div class="stat"><b>4 h</b><span>Sur site (Or)</span></div><div class="stat"><b>24/7</b><span>365 jours</span></div></div>
+ <div class="sec"><h2>Nos prestations</h2></div>
+ <div class="opts" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+  <div class="opt"><svg class="ic"><use href="#gear"/></svg>Maintenance<small>Préventive et corrective, contrats à visites planifiées.</small></div>
+  <div class="opt"><svg class="ic"><use href="#bolt"/></svg>Dépannage<small>Intervention d’urgence sur site, diagnostic immédiat.</small></div>
+  <div class="opt"><svg class="ic"><use href="#wrench"/></svg>Réparations<small>Remise en état moteurs, alternateurs, coffrets, régulation.</small></div>
+  <div class="opt"><svg class="ic"><use href="#box"/></svg>Fourniture sans pose<small>Matériels et pièces de rechange livrés.</small></div>
+  <div class="opt"><svg class="ic"><use href="#shield"/></svg>Fourniture avec pose<small>Fourniture, installation et mise en service.</small></div></div>
+ <div class="sec"><h2>Comment ça marche</h2></div>
+ <div class="steps" id="stepsL"></div>
+ <div class="sec"><h2>Niveaux de service (SLA)</h2></div><div class="plans" id="plans"></div>
+ <div class="sec"><h2>Demande urgente</h2></div><div class="opts" id="needs"></div><div style="height:14px"></div>
+ <div class="fg"><label>Description du besoin</label><textarea id="fd" rows="3" placeholder="Ex : le groupe ne démarre plus, voyant rouge…"></textarea></div>
+ <div class="fg"><label>Lieu d’intervention</label><input id="fl" placeholder="Ex : Zone industrielle de Yopougon"></div>
+ <div class="fg"><label>Téléphone</label><input id="ft" type="tel" placeholder="+225 …"></div>
+ <div class="err" id="fe"></div>
+ <div class="pad"><button class="btn full" onclick="submitReq()"><svg class="ic"><use href="#bolt"/></svg>Envoyer la demande urgente</button></div>
+</div></section>
+
+<section id="track" class="screen"><div class="w"><div style="height:16px"></div><div class="card" id="tkCard"></div><div class="tl" id="tl"></div></div></section>
+
+<section id="parc" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Mon parc</h1><p class="mut" style="margin-top:6px">Vos équipements, leur état et l’appel d’un technicien en un clic.</p></div><div style="height:14px"></div><div id="parcBox"></div></div></section>
+<section id="espace" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Mon espace</h1><p class="mut" style="margin-top:6px">Accès client par e-mail et code PIN généré automatiquement.</p></div><div style="height:14px"></div><div id="espBox"></div></div></section>
+<section id="partners" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Espace partenaires</h1><p class="mut" style="margin-top:6px">Fournisseurs, installateurs et prestataires : même accès sécurisé par e-mail et code PIN.</p></div><div style="height:14px"></div><div id="parBox"></div></div></section>
+
+<footer class="ft"><div class="w pad"><h2>SAV PRO Côte d’Ivoire</h2>
+ <a href="https://wa.me/2250708534131" target="_blank" rel="noopener"><svg class="ic"><use href="#chat"/></svg>WhatsApp : +225 07 08 53 41 31</a>
+ <a href="mailto:savprorci@gmail.com"><svg class="ic"><use href="#mail"/></svg>savprorci@gmail.com</a>
+ <a href="tel:+2250708534131"><svg class="ic"><use href="#phone"/></svg>+225 07 08 53 41 31</a>
+ <a><svg class="ic"><use href="#pin"/></svg>Abidjan, Marcory</a></div></footer>
+</main>
+
+<nav class="nav" id="navb"></nav>
+<div class="sheet" id="sheet" onclick="if(event.target===this)shClose()"><div class="sh" id="sh"></div></div>
+</div>
+
+<script src="config.js?v=2"></script>
+<script>
+const CATALOG=[{"id": 0, "n": "Groupe Hyundai 825 kVA", "c": 0, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 1, "n": "Groupe Perkins 1250 kVA", "c": 0, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 2, "n": "Groupe Cummins 200 kVA", "c": 0, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 3, "n": "Groupe SDMO Kohler 100 kVA", "c": 0, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 4, "n": "Groupe silencieux 50 kVA", "c": 0, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 5, "n": "Groupe Weichai 250 kVA", "c": 0, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 6, "n": "Coffret ATS 400 A 4P", "c": 2, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 7, "n": "ATS tri-source 400 A", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 8, "n": "Coffret ATS 63 A", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 9, "n": "Coffret ATS 63 A (modèle 2)", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 10, "n": "Coffret ATS 125 A", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 11, "n": "Tableau électrique 48 modules", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 12, "n": "AVR Stamford AS440", "c": 3, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 13, "n": "Alternateur de charge 12 V Perkins", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 14, "n": "Courroie alternateur Perkins", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 15, "n": "Démarreur Perkins 12 V", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 16, "n": "Injecteur Perkins 1104", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 17, "n": "Pompe à eau Perkins 1104", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 18, "n": "Module Deep Sea DSE7320", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 19, "n": "Batterie 12 V 200 Ah", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 20, "n": "Filtre à air Perkins 26560145", "c": 3, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 21, "n": "Filtre à huile Perkins 2654403", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 22, "n": "Filtre à carburant Perkins 26510362", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 23, "n": "Huile moteur 15W40 – 20 L", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 24, "n": "Kit vidange complet 500 h", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 25, "n": "Liquide de refroidissement 20 L", "c": 3, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 26, "n": "Batterie LiFePO4 10 kWh", "c": 2, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 27, "n": "Kit solaire 30 kWc toiture", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 28, "n": "Onduleur APC 3000 VA", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 29, "n": "Onduleur hybride solaire", "c": 2, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 30, "n": "Panneaux solaires C&I", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 31, "n": "Étude de dimensionnement C&I", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 32, "n": "Câble U1000 R2V 4G6", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 33, "n": "Câble U1000 R2V 4G35", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 34, "n": "Câble U1000 R2V 3 conducteurs", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 35, "n": "Interrupteur Chint NH4 125 A 4P", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 36, "n": "Contacteur Schneider LC1D25", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 37, "n": "Contacteur Schneider LC1DT60A bobine 230 V", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 38, "n": "Contacteur 3 pôles AC-3 440 V 12 A", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 39, "n": "Contacteur 3P AC-3 440 V 40 A", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 40, "n": "Contacteur 4P AC-1 200 A LC1D115004M5", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 41, "n": "Contacteur LC1-D1810", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 42, "n": "Disjoncteur Schneider NSX250 250 A", "c": 2, "p": null, "h": 1, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 43, "n": "Disjoncteur Schneider iC60N 63 A", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 44, "n": "Disjoncteur Schneider iC60N 4P", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 45, "n": "Interrupteur différentiel 40 A 30 mA", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 46, "n": "Parafoudre Schneider", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 47, "n": "Prises industrielles P17", "c": 2, "p": null, "h": 0, "a": 1, "d": "", "r": -1, "pj": null}, {"id": 48, "n": "Bulldozer lourd chantiers & mines", "c": -1, "p": null, "h": 1, "a": 1, "d": "", "r": 1, "pj": null}, {"id": 49, "n": "Camion benne 10 t 6x4", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 1, "pj": null}, {"id": 50, "n": "Camion benne 15 t", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 1, "pj": null}, {"id": 51, "n": "Camion benne poids lourd 40 t", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 1, "pj": null}, {"id": 52, "n": "Chargeuse sur pneus 3 m³", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 1, "pj": null}, {"id": 53, "n": "Tractopelle 4x4 Pro", "c": -1, "p": null, "h": 1, "a": 1, "d": "", "r": 1, "pj": null}, {"id": 54, "n": "Bétonnière électrique", "c": 1, "p": null, "h": 0, "a": 1, "d": "", "r": 2, "pj": null}, {"id": 55, "n": "Bétonnière autochargeuse", "c": 1, "p": null, "h": 0, "a": 1, "d": "", "r": 2, "pj": null}, {"id": 56, "n": "Compacteur à plaque réversible", "c": 1, "p": null, "h": 0, "a": 1, "d": "", "r": 2, "pj": null}, {"id": 57, "n": "Compresseur 7 bar", "c": 1, "p": null, "h": 0, "a": 1, "d": "", "r": 2, "pj": null}, {"id": 58, "n": "Scie à sol à essence", "c": 1, "p": null, "h": 0, "a": 1, "d": "", "r": 2, "pj": null}, {"id": 59, "n": "Poste autonome de soudure 400 A", "c": 1, "p": null, "h": 0, "a": 1, "d": "", "r": 2, "pj": null}, {"id": 60, "n": "Groupe 6 kVA", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 0, "pj": null}, {"id": 61, "n": "Groupe électrogène 6 kVA", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 0, "pj": null}, {"id": 62, "n": "Groupe insonorisé 8 kVA", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 0, "pj": null}, {"id": 63, "n": "Groupe insonorisé 100 kVA", "c": -1, "p": null, "h": 1, "a": 1, "d": "", "r": 0, "pj": null}, {"id": 64, "n": "Groupe électrogène insonorisé", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 0, "pj": null}, {"id": 65, "n": "Yamaha YG5200", "c": -1, "p": null, "h": 0, "a": 1, "d": "", "r": 0, "pj": null}];const IMG={
+"0": "assets/img/0.jpg",
+"1": "assets/img/1.jpg",
+"2": "assets/img/2.jpg",
+"3": "assets/img/3.jpg",
+"4": "assets/img/4.jpg",
+"5": "assets/img/5.jpg",
+"6": "assets/img/6.jpg",
+"7": "assets/img/7.jpg",
+"8": "assets/img/8.jpg",
+"9": "assets/img/9.jpg",
+"10": "assets/img/10.jpg",
+"11": "assets/img/11.jpg",
+"12": "assets/img/12.jpg",
+"13": "assets/img/13.jpg",
+"14": "assets/img/14.jpg",
+"15": "assets/img/15.jpg",
+"16": "assets/img/16.jpg",
+"17": "assets/img/17.jpg",
+"18": "assets/img/18.jpg",
+"19": "assets/img/19.jpg",
+"20": "assets/img/20.jpg",
+"21": "assets/img/21.jpg",
+"22": "assets/img/22.jpg",
+"23": "assets/img/23.jpg",
+"24": "assets/img/24.jpg",
+"25": "assets/img/25.jpg",
+"26": "assets/img/26.jpg",
+"27": "assets/img/27.jpg",
+"28": "assets/img/28.jpg",
+"29": "assets/img/29.jpg",
+"30": "assets/img/30.jpg",
+"31": "assets/img/31.jpg",
+"32": "assets/img/32.jpg",
+"33": "assets/img/33.jpg",
+"34": "assets/img/34.jpg",
+"35": "assets/img/35.jpg",
+"36": "assets/img/36.jpg",
+"37": "assets/img/37.jpg",
+"38": "assets/img/38.jpg",
+"39": "assets/img/39.jpg",
+"40": "assets/img/40.jpg",
+"41": "assets/img/41.jpg",
+"42": "assets/img/42.jpg",
+"43": "assets/img/43.jpg",
+"44": "assets/img/44.jpg",
+"45": "assets/img/45.jpg",
+"46": "assets/img/46.jpg",
+"47": "assets/img/47.jpg",
+"48": "assets/img/48.jpg",
+"49": "assets/img/49.jpg",
+"50": "assets/img/50.jpg",
+"51": "assets/img/51.jpg",
+"52": "assets/img/52.jpg",
+"53": "assets/img/53.jpg",
+"54": "assets/img/54.jpg",
+"55": "assets/img/55.jpg",
+"56": "assets/img/56.jpg",
+"57": "assets/img/57.jpg",
+"58": "assets/img/58.jpg",
+"59": "assets/img/59.jpg",
+"60": "assets/img/60.jpg",
+"61": "assets/img/61.jpg",
+"62": "assets/img/62.jpg",
+"63": "assets/img/63.jpg",
+"64": "assets/img/64.jpg",
+"65": "assets/img/65.jpg"
+};
+const WA="2250708534131",MAIL="savprorci@gmail.com";
+const CATC=[["bolt","Groupes électrogènes"],["wrench","Matériels & outillages chantiers"],["plug","Matériels d’électricité"],["gear","Pièces de rechange groupes"]];
+const CATL=[["bolt","Groupes électrogènes"],["truck","Engins TP"],["wrench","Matériels de chantier"]];
+const NAV=[["home","hm","Accueil",1],["shop","grid","Catalogue",1],["domains","cpu","Domaines couverts",0],["location","truck","Location & engins",1],["speed","bolt","Speed Dépannage",1,1],["parc","box","Mon parc",0],["espace","user","Mon espace",1],["partners","users","Espace partenaires",0]];
+const NEEDS=[["gear","Maintenance"],["bolt","Dépannage"],["wrench","Réparation"],["box","Fourniture sans pose"],["shield","Fourniture avec pose"]];
+const PLANS=[["Standard","24 h","Intervention sous 24 h · jours ouvrés"],["Argent","8 h","Intervention sous 8 h · 7j/7"],["Or","4 h","Intervention sous 4 h · 24/7 · pièces prioritaires"]];
+const STEPS=[["Demande reçue","Dossier créé et qualifié","alert"],["Technicien assigné","Un expert prend votre dossier","user"],["En route","Le technicien est en chemin","truck"],["Sur site · diagnostic","Analyse de la panne","cpu"],["Réparation terminée","Signature du bon de clôture","shield"]];
+const HOW=[["alert","1. Signalez le besoin","Formulaire en 30 secondes : besoin, lieu, téléphone."],["cpu","2. Qualification","Un ingénieur analyse l’urgence et prépare le diagnostic à distance."],["truck","3. Dispatch","Le technicien le plus proche part avec outillage et pièces."],["wrench","4. Intervention","Diagnostic, réparation, fourniture avec ou sans pose."],["shield","5. Clôture signée","Rapport d’intervention et bon de clôture numérique."]];
+const DOM=[
+{i:"bolt",t:"Groupes électrogènes",cat:0,lead:"Vente, installation, mise en service, maintenance et dépannage de groupes diesel de 6 à 1250 kVA (Perkins, Cummins, SDMO Kohler, Weichai, Hyundai).",
+ S:[["Prestations",["Installation et raccordement : socle, échappement, ventilation, alimentation carburant, mise à la terre","Mise en service et essais en charge avec relevé des paramètres","Maintenance préventive : vidange moteur, filtres huile, air et gazole, liquide de refroidissement, courroies","Réparations : injecteurs, démarreur, alternateur de charge, pompe à eau","Régulation et protection : AVR (ex. Stamford AS440), modules de contrôle (ex. DSE7320)"]],
+ ["Contrôles et mesures",["Tension 400 V / 230 V et fréquence 50 Hz en charge","Pression et température d’huile, température d’eau","Tension et état de la batterie de démarrage (12 ou 24 V)","Niveaux, fuites, état des flexibles et des supports antivibratiles","Essai en charge périodique : au moins 30 % de la charge nominale pour limiter l’encrassement"]],
+ ["Périodicité indicative",["Inspection visuelle et niveaux : chaque semaine","Test de démarrage : au moins une fois par mois","Vidange et filtres : selon préconisation constructeur (souvent 250 à 500 h ou 12 mois)","Contrats de maintenance en plusieurs niveaux, astreinte possible"]]]},
+{i:"cpu",t:"Coffrets ATS & inverseurs de source",cat:2,lead:"Coffrets de permutation automatique réseau / groupe de 63 A à 400 A, 4 pôles, version tri-source, inverseurs motorisés et tableaux de commande.",
+ S:[["Fonctions",["Détection de défaut réseau : tension, fréquence, ordre des phases","Ordre de démarrage du groupe et transfert automatique de la charge","Temporisations réglables : démarrage, transfert, retour réseau, refroidissement du groupe","Verrouillage mécanique et électrique entre les sources","Retour réseau automatique, mode manuel de secours"]],
+ ["Dimensionnement",["Calibre supérieur au courant de la charge totale, avec marge de sécurité","Choix 3P ou 4P selon la commutation du neutre","Coordination avec les protections amont (disjoncteurs) et la puissance du groupe","Enveloppe adaptée à l’environnement (IP, ventilation, température)"]],
+ ["Contrôles",["Serrage des connexions de puissance et contrôle visuel des échauffements","Essais de permutation en charge et mesure des temps de transfert","Vérification des temporisations et des seuils de détection","Contrôle des commandes, voyants et alarmes"]]]},
+{i:"sun",t:"Solaire & stockage d’énergie",cat:2,lead:"Kits solaires de toiture pour le tertiaire et l’industrie (ex. 30 kWc), onduleurs hybrides, batteries LiFePO4 (ex. 51,2 V 200 Ah, 10 kWh) et études de dimensionnement C&I.",
+ S:[["Étude et dimensionnement",["Analyse du profil de charge et des besoins en autonomie","Estimation de la production selon surface, orientation et ensoleillement","Choix de la puissance crête, de l’onduleur et de la capacité de stockage","Hybridation possible avec le réseau et un groupe électrogène"]],
+ ["Architecture",["Panneaux PV, onduleur ou convertisseur, batterie, tableau AC, charges critiques","Gestion de l’énergie et supervision à distance","Protections DC et AC, parafoudre, mise à la terre et liaison équipotentielle","Structures de fixation adaptées : tuile, tôle, sol"]],
+ ["Contrôles et maintenance",["Tension à vide et courant de court-circuit des chaînes de modules","Mesure d’isolement côté DC et serrage des connexions","État des batteries : niveau de charge, température, cycles","Nettoyage des panneaux et mise à jour du micrologiciel des onduleurs"]]]},
+{i:"truck",t:"Engins TP",cat:-1,loc:1,lead:"Bulldozers, chargeuses sur pneus 3 m³, tractopelles 4x4 et camions bennes 10, 15 et 40 tonnes : mise à disposition et maintenance.",
+ S:[["Maintenance",["Vidange moteur et circuit hydraulique, remplacement des filtres","Graissage des articulations, contrôle du train de roulement ou des pneumatiques","Inspection des flexibles hydrauliques, freins et circuit de refroidissement","Diagnostic des pannes mécaniques et hydrauliques"]],
+ ["Contrôles avant démarrage",["Niveaux : huile, eau, hydraulique, carburant","Recherche de fuites et état des flexibles","Pression des pneus, serrage des roues, état des godets et lames","Dispositifs de sécurité : ceinture, alarme de recul, extincteur, éclairage"]],
+ ["Mise à disposition",["Location à la journée, conditions et tarifs sur devis","Livraison et reprise sur chantier selon disponibilité","Assistance technique pendant la durée de la location"]]]},
+{i:"plug",t:"Tableaux & câblage",cat:2,lead:"Tableaux électriques (jusqu’à 48 modules), protections Schneider, Legrand et Chint, contacteurs, câbles U1000 R2V et prises industrielles.",
+ S:[["Prestations",["Conception et réalisation de tableaux de distribution","Protection des circuits : disjoncteurs modulaires et boîtiers moulés jusqu’à 250 A","Protection des personnes : interrupteurs différentiels 30 mA","Protection contre les surtensions : parafoudres","Commande moteurs : contacteurs et relais"]],
+ ["Règles de conception",["Section des câbles selon le courant admissible et la chute de tension (ex. 3 % éclairage, 5 % autres usages, NF C 15-100)","Sélectivité et coordination des protections","Repérage des circuits et schémas à jour","Prises industrielles P17 pour les raccordements de chantier et d’atelier"]],
+ ["Contrôles",["Mesure d’isolement et continuité des conducteurs de protection","Résistance de la prise de terre","Test des différentiels et des parafoudres","Contrôle thermographique des connexions"]]]},
+{i:"drop",t:"Filtres & fluides",cat:3,lead:"Filtres à air, à huile et à carburant, huile moteur 15W40, liquide de refroidissement et kits de vidange complets pour groupes électrogènes.",
+ S:[["Rôle de chaque composant",["Filtre à air : protège le moteur des poussières, à remplacer selon colmatage","Filtre à huile : retient les particules métalliques et les suies","Filtre à carburant : sépare eau et impuretés, protège les injecteurs","Huile 15W40 : lubrification des moteurs diesel","Liquide de refroidissement : protection contre la surchauffe et la corrosion"]],
+ ["Bonnes pratiques",["Remplacer filtres et huile ensemble lors de chaque vidange","Respecter les références constructeur (ex. gamme Perkins)","Purger régulièrement l’eau du préfiltre à carburant","Ne pas mélanger des liquides de refroidissement de types différents"]],
+ ["Environnement",["Collecte des huiles et filtres usagés par une filière agréée","Stockage des fluides à l’abri de la chaleur et des contaminations"]]]}
+];
+const KEY="savpro_cat_v3";
+const $=id=>document.getElementById(id),ic=n=>`<svg class="ic"><use href="#${n}"/></svg>`,esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=n=>Number(n).toLocaleString("fr-FR")+" FCFA";
+const LS=(k,v)=>{try{if(v===undefined){const s=localStorage.getItem(k);return s?JSON.parse(s):null}localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+let DB=LS(KEY)||JSON.parse(JSON.stringify(CATALOG));
+const save=()=>LS(KEY,DB);
+let cart={},cat=-1,lc=-1,need=-1,plan=2,tick=null,admin=false,cur="home",H=[],cp=0,ct=null,tmpImg=null,dctx="c",si=0,st=null,SESS={client:null,partner:null},authTab={client:"login",partner:"login"},pinShow=null,tries={},localEdited=false;
+const SBU=(window.SAV_CONFIG||{}).SUPABASE_URL||"";
+const src=p=>p.img||(SBU?SBU+"/storage/v1/object/public/products/"+p.id+".jpg":(IMG[p.id]||"assets/img/"+p.id+".jpg"));
+/* photo introuvable dans le stockage : repli sur assets/img/, sinon masquée */
+document.addEventListener("error",e=>{const t=e.target;if(!t||t.tagName!=="IMG")return;const m=/\/products\/(\d+)\.jpg/.exec(t.src);if(m&&!t.dataset.fb){t.dataset.fb=1;t.src="assets/img/"+m[1]+".jpg"}else t.style.visibility="hidden"},true);
+const price=(p,x)=>x==="l"?(p.pj?fmt(p.pj)+" / jour":"Tarif / jour sur devis"):(p.p?fmt(p.p):"Sur devis");
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2600)}
+/* navigation */
+function show(){document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===cur));const m={detail:dctx==="l"?"location":"shop",domain:"domains",track:"speed"}[cur]||cur;document.querySelectorAll(".ni").forEach(n=>n.classList.toggle("on",n.dataset.s===m));$("bk").style.display=cur==="home"?"none":"grid";$("main").scrollTop=0;document.querySelector(".app").classList.remove("cmp");if(cur==="parc")renderParc();if(cur==="espace")renderAuth("client");if(cur==="partners")renderAuth("partner");if(cur==="shop")drawShop();if(cur==="location")drawLoc();if(cur!=="espace"&&cur!=="partners")pinShow=null}
+function go(id){if(id!==cur)H.push(cur);cur=id;show()}
+function nav(id){H=[];cur=id;if(id==="shop")cat=-1;if(id==="location")lc=-1;show()}
+function back(){cur=H.pop()||"home";show()}
+function menuOpen(){$("sh").innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:6px"><h2>Menu</h2><div class="ib" onclick="shClose()">${ic("x")}</div></div>`+NAV.map(n=>`<div class="mi" onclick="shClose();nav('${n[0]}')">${ic(n[1])}${n[2]}</div>`).join("");$("sheet").classList.add("on")}
+function shClose(){$("sheet").classList.remove("on")}
+function onSearch(){if(cur!=="shop"&&cur!=="location")go("shop");cur==="shop"?drawShop():drawLoc()}
+/* accès admin : 8 clics sur le logo */
+function secret(){if(REMOTE){toast("Modifie le catalogue depuis admin.html");return}cp++;clearTimeout(ct);ct=setTimeout(()=>cp=0,2500);if(cp>=8){cp=0;admin=!admin;toast(admin?"Mode administrateur activé":"Mode administrateur désactivé");refresh();if(admin&&cur==="home")go("shop")}}
+function refresh(){home();if(cur==="shop")drawShop();if(cur==="location")drawLoc()}
+/* produits */
+function card(p,x){return `<div class="prod">${p.a?"":'<span class="off">Indisponible</span>'}<div class="pi" onclick="openP(${p.id},'${x}')"><img loading="lazy" src="${esc(src(p))}" alt=""></div><h4 onclick="openP(${p.id},'${x}')">${esc(p.n)}</h4><div class="pr">${price(p,x)}</div>${admin?`<div class="adm"><div class="ib" onclick="editP(${p.id})">${ic("edit")}</div><div class="ib" onclick="delP(${p.id})">${ic("trash")}</div></div>`:`<button class="btn sm" ${p.a?"":"disabled"} onclick="add(${p.id},'${x}')">${ic("plus")}${(x==="l"?p.pj:p.p)?"Ajouter":"Devis"}</button>`}</div>`}
+const chips=(L,cur_,fn)=>`<div class="chip ${cur_<0?"on":""}" onclick="${fn}(-1)">Tout</div>`+L.map((c,i)=>`<div class="chip ${cur_===i?"on":""}" onclick="${fn}(${i})">${c[1]}</div>`).join("");
+const setCat=i=>{cat=i;drawShop();home()},setLoc=i=>{lc=i;drawLoc()},homeCat=i=>{cat=i;go("shop")};
+const abar=(id)=>{const a=$(id);a.style.display=admin?"flex":"none";a.innerHTML=admin?`${ic("lock")}<span>Mode admin</span><button class="btn sm" onclick="editP(null)">${ic("plus")}Ajouter un produit</button><button class="btn sm ghost" onclick="resetDB()">Réinitialiser</button><button class="btn sm ghost" onclick="admin=false;refresh();toast('Mode administrateur désactivé')">Quitter</button>`:""};
+function drawShop(){const q=hq.value.trim().toLowerCase();const l=DB.filter(p=>p.c>=0&&(cat<0||p.c===cat)&&p.n.toLowerCase().includes(q));$("shopProds").innerHTML=l.map(p=>card(p,"c")).join("")||'<p class="mut" style="grid-column:1/-1;padding:20px 0">Aucun produit trouvé.</p>';$("countS").textContent=l.length+" article(s)";$("chipsS").innerHTML=chips(CATC,cat,"setCat");abar("abarS")}
+function drawLoc(){const q=hq.value.trim().toLowerCase();const l=DB.filter(p=>p.r>=0&&(lc<0||p.r===lc)&&p.n.toLowerCase().includes(q));$("locProds").innerHTML=l.map(p=>card(p,"l")).join("")||'<p class="mut" style="grid-column:1/-1;padding:20px 0">Aucun équipement trouvé.</p>';$("countL").textContent=l.length+" équipement(s)";$("chipsL").innerHTML=chips(CATL,lc,"setLoc");abar("abarL")}
+function openP(id,x){dctx=x;const p=DB.find(v=>v.id===id);$("detBox").innerHTML=`<div class="big"><img src="${esc(src(p))}" alt=""></div><div style="display:grid;gap:12px;align-content:start;justify-items:start"><span class="mut">${x==="l"?"Location · "+CATL[p.r][1]:CATC[p.c][1]}</span><h1>${esc(p.n)}</h1><div class="pr" style="font-size:32px">${price(p,x)}</div><p class="mut" style="font-size:15px">${esc(p.d||"Contactez-nous pour le prix, la disponibilité et les conditions.")}</p><div class="tag"><i class="dot ${p.a?"g":"r"}"></i>${p.a?"Disponible":"Indisponible"}</div>${admin?`<button class="btn" onclick="editP(${p.id})">${ic("edit")}Modifier</button>`:`<button class="btn" ${p.a?"":"disabled"} onclick="add(${p.id},'${x}')">${ic("cart")}Ajouter à ma demande</button><a class="btn yl" target="_blank" rel="noopener" href="${wa("Bonjour SAV PRO, je souhaite un devis pour : "+p.n)}">${ic("chat")}Devis par WhatsApp</a>`}<button class="btn ghost" onclick="back()">${ic("back")}Retour</button></div>`;go("detail")}
+/* panier / devis */
+function add(id,x){cart[id]=(cart[id]||0)+1;cnt();toast("Ajouté à votre demande")}
+function cnt(){$("cc").textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
+function cartOpen(){const k=Object.keys(cart);let t=0,lines=[];$("sh").innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:8px"><h2>Ma demande</h2><div class="ib" onclick="shClose()">${ic("x")}</div></div>`+(k.length?k.map(i=>{const p=DB.find(x=>x.id==i);if(!p)return"";const u=p.p||p.pj;if(u)t+=u*cart[i];lines.push(`- ${cart[i]} × ${p.n}`);return `<div class="ci"><span>${esc(p.n)}<br><span class="mut">${cart[i]} × ${p.p?fmt(p.p):p.pj?fmt(p.pj)+" / jour":"sur devis"}</span></span><span class="row"><b onclick="cart[${i}]>1?cart[${i}]--:delete cart[${i}];cnt();cartOpen()" style="cursor:pointer;padding:4px 10px">−</b><b onclick="cart[${i}]++;cnt();cartOpen()" style="cursor:pointer;padding:4px 10px">+</b></span></div>`}).join("")+(t?`<div class="ci"><b>Total indicatif</b><b style="color:var(--yl)">${fmt(t)}</b></div>`:"")+`<a class="btn full" style="margin-top:14px" target="_blank" rel="noopener" href="${wa("Bonjour SAV PRO, je souhaite un devis :\n"+lines.join("\n"))}">${ic("chat")}Envoyer par WhatsApp</a><button class="btn ghost full" style="margin-top:10px" onclick="cart={};cnt();shClose()">Vider la demande</button>`:'<p class="mut" style="padding:24px 0;text-align:center">Votre demande est vide.</p>');$("sheet").classList.add("on")}
+/* administration produits */
+function editP(id){const p=id==null?{id:null,n:"",c:cur==="location"?-1:Math.max(cat,0),r:cur==="location"?Math.max(lc,0):-1,p:null,pj:null,a:1,d:""}:DB.find(x=>x.id===id);tmpImg=null;const so=(L,v)=>`<option value="-1" ${v<0?"selected":""}>Non</option>`+L.map((c,i)=>`<option value="${i}" ${v===i?"selected":""}>${c[1]}</option>`).join("");$("sh").innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:12px"><h2>${id==null?"Nouveau produit":"Modifier"}</h2><div class="ib" onclick="shClose()">${ic("x")}</div></div>
+<div class="fg"><label>Nom</label><input id="en" value="${esc(p.n)}"></div>
+<div class="fg"><label>Catalogue (vente)</label><select id="ec">${so(CATC,p.c)}</select></div>
+<div class="fg"><label>Location & engins</label><select id="er">${so(CATL,p.r)}</select></div>
+<div class="fg"><label>Prix de vente en FCFA (vide = sur devis)</label><input id="ep" type="number" min="0" value="${p.p||""}"></div>
+<div class="fg"><label>Tarif de location par jour en FCFA (vide = sur devis)</label><input id="ej" type="number" min="0" value="${p.pj||""}"></div>
+<div class="fg"><label>Description</label><textarea id="ed" rows="3">${esc(p.d)}</textarea></div>
+<div class="fg"><label>Photo (optionnel)</label><input id="ef" type="file" accept="image/*" onchange="pick(this)"></div>
+<div class="fg"><label><input id="ea" type="checkbox" style="width:auto" ${p.a?"checked":""}> Disponible</label></div>
+<div class="fg"><label><input id="eh" type="checkbox" style="width:auto" ${p.h?"checked":""}> Afficher en vedette sur l’accueil</label></div>
+<button class="btn full" onclick="saveP(${id})">${ic("check")}Enregistrer</button>`;$("sheet").classList.add("on")}
+function pick(el){const f=el.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,340/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);tmpImg=c.toDataURL("image/jpeg",.75)};im.src=r.result};r.readAsDataURL(f)}
+function saveP(id){const n=$("en").value.trim();const c=+$("ec").value,r=+$("er").value;if(n.length<2){toast("Nom requis");return}if(c<0&&r<0){toast("Choisissez le catalogue ou la location");return}const v={n,c,r,p:+$("ep").value||null,pj:+$("ej").value||null,d:$("ed").value.trim(),a:$("ea").checked?1:0,h:$("eh").checked?1:0};if(id==null){const p={id:Math.max(0,...DB.map(x=>x.id))+1,...v};if(tmpImg)p.img=tmpImg;DB.push(p)}else{const p=DB.find(x=>x.id===id);Object.assign(p,v);if(tmpImg)p.img=tmpImg}localEdited=true;save();shClose();refresh();if(cur==="detail")back();toast("Produit enregistré")}
+function delP(id){const p=DB.find(x=>x.id===id);if(!confirm("Supprimer « "+p.n+" » ?"))return;DB=DB.filter(x=>x.id!==id);delete cart[id];cnt();localEdited=true;save();refresh()}
+function resetDB(){if(!confirm("Rétablir le catalogue d’origine ? Vos modifications seront perdues."))return;DB=JSON.parse(JSON.stringify(CATALOG));localEdited=false;save();refresh()}
+/* accueil : slider, grille, catalogue */
+const imOf=n=>{const p=DB.find(x=>x.n.includes(n));return p?src(p):""};
+function SL(){const nc=DB.filter(p=>p.c>=0).length,nl=DB.filter(p=>p.r>=0).length;return[
+{t:"ZÉRO PANNE.<br>ÉNERGIE CONTINUE.",p:"Équipements, pièces, location d’engins et dépannage express 24/7 pour l’industrie ivoirienne.",im:"Cummins",pg:"shop",cta:"Voir le catalogue"},
+{t:"CATALOGUE",p:`${nc} références : groupes électrogènes, matériels et outillages de chantier, matériels d’électricité, pièces de rechange pour groupes.`,im:"ATS 400",pg:"shop",cta:"Parcourir"},
+{t:"DOMAINES COUVERTS",p:`${DOM.length} domaines avec fiches techniques détaillées : ${DOM.slice(0,4).map(d=>d.t.toLowerCase()).join(", ")}…`,im:"NSX250",pg:"domains",cta:"Fiches techniques"},
+{t:"LOCATION & ENGINS",p:`${nl} équipements à la journée : groupes électrogènes, engins TP et matériels de chantier.`,im:"Tractopelle",pg:"location",cta:"Voir la location"},
+{t:"SPEED DÉPANNAGE",p:"Maintenance, dépannage, réparations, fourniture avec ou sans pose de matériels et de pièces de rechange.",im:"DSE7320",pg:"speed",cta:"En savoir plus"},
+{t:"MON ESPACE",p:"Accès client par e-mail et code PIN généré automatiquement : profil, parc et suivi des interventions.",im:"Onduleur hybride",pg:"espace",cta:"Accéder"},
+{t:"ESPACE PARTENAIRES",p:"Rejoignez le réseau SAV PRO : fournisseurs, installateurs et prestataires, avec le même accès sécurisé.",im:"Chargeuse",pg:"partners",cta:"Devenir partenaire"}]}
+function slide(n){const L=SL();si=(n+L.length)%L.length;document.querySelectorAll(".sld").forEach((e,i)=>e.classList.toggle("on",i===si));document.querySelectorAll("#dots i").forEach((e,i)=>e.classList.toggle("on",i===si));$("slcta").innerHTML=L[si].cta+ic("arrow");$("slcta").onclick=()=>go(L[si].pg)}
+function slides(){const L=SL();$("slides").innerHTML=L.map(s=>`<div class="sld"><div class="im"><img src="${imOf(s.im)}" alt=""></div><div class="tx"><h1>${s.t}</h1><p>${s.p}</p></div></div>`).join("");$("dots").innerHTML=L.map((s,i)=>`<i onclick="slide(${i});auto()"></i>`).join("");slide(si)}
+function auto(){clearInterval(st);st=setInterval(()=>slide(si+1),5500)}
+function home(){$("tiles").innerHTML=[["shop","grid","Catalogue","Vente"],["location","truck","Location","Engins & groupes"],["speed","bolt","Speed","Dépannage 24/7"]].map(t=>`<div class="tile" onclick="nav('${t[0]}')">${ic(t[1])}<b>${t[2]}</b><span>${t[3]}</span></div>`).join("");$("homeChips").innerHTML=CATC.map((c,i)=>`<div class="chip" onclick="homeCat(${i})">${c[1]}</div>`).join("");$("homeProds").innerHTML=DB.filter(p=>p.c>=0&&p.h).slice(0,8).map(p=>card(p,"c")).join("");slides()}
+/* domaines couverts */
+function domList(){$("domList").innerHTML=DOM.map((d,i)=>`<div class="opt" onclick="openD(${i})">${ic(d.i)}${d.t}<small>${d.lead.slice(0,92)}…</small></div>`).join("")}
+function openD(i){const d=DOM[i];$("domBox").innerHTML=`<div class="pad" style="padding-top:18px"><div class="sn" style="width:54px;height:54px;margin-bottom:12px">${ic(d.i)}</div><h1>${d.t}</h1><p class="mut" style="margin:10px 0 18px;font-size:16px">${d.lead}</p></div>`+d.S.map(s=>`<div class="card"><h3>${s[0]}</h3><ul>${s[1].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")+`<div class="pad" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">${d.loc?`<button class="btn" onclick="go('location')">${ic("truck")}Voir la location d’engins</button>`:`<button class="btn" onclick="cat=${d.cat};go('shop')">${ic("grid")}Voir les produits du catalogue</button>`}<button class="btn yl" onclick="need=1;pick2();go('speed')">${ic("bolt")}Demander un dépannage</button><a class="btn ghost" target="_blank" rel="noopener" href="${wa("Bonjour SAV PRO, je souhaite des informations sur : "+d.t)}">${ic("chat")}Poser une question sur WhatsApp</a></div>`;go("domain")}
+/* speed & suivi */
+function submitReq(){const e=$("fe");if(need<0||fd.value.trim().length<5||fl.value.trim().length<3||ft.value.replace(/\D/g,"").length<8){e.textContent="Choisissez un besoin et renseignez description, lieu et téléphone valide.";e.style.display="block";return}e.style.display="none";track("SAV-"+new Date().getFullYear()+"-"+Math.floor(1000+Math.random()*9000),NEEDS[need][1],fl.value.trim(),fd.value.trim(),ft.value.trim())}
+function track(id,label,lieu,desc,tel){try{postRequest("depannage",tel,{reference:id,besoin:label,lieu:lieu,description:desc,niveau:PLANS[plan][0]})}catch(e){}let s=0;const P=PLANS[plan];const msg=`Bonjour SAV PRO, demande ${id}\nBesoin : ${label}\nLieu : ${lieu}\nDescription : ${desc||"-"}\nTéléphone : ${tel||"-"}\nNiveau : ${P[0]}`;$("tkCard").innerHTML=`<div class="row" style="justify-content:space-between"><b>Dossier #${id}</b><span class="tag" style="margin:0;color:var(--yl)">Niveau ${P[0]}</span></div><p class="mut" style="margin-top:6px">${esc(label)} · ${esc(lieu)}</p><p class="tag" style="color:var(--ok)">${ic("alert")}Intervention sous ${P[1]} garantie</p><a class="btn full" style="margin-top:14px" target="_blank" rel="noopener" href="${wa(msg)}">${ic("chat")}Envoyer la demande à SAV PRO (WhatsApp)</a>`;const r=()=>{$("tl").innerHTML=STEPS.map((x,i)=>`<div class="ti ${i<s?"done":i===s?"now":""}"><div class="sn">${ic(i<s?"check":x[2])}</div><div><h5>${x[0]}</h5><p>${x[1]}</p></div></div>`).join("")};r();go("track");clearInterval(tick);tick=setInterval(()=>{if(s<STEPS.length-1){s++;r()}else{r();clearInterval(tick)}},3500);toast("Demande enregistrée · envoyez-la par WhatsApp pour confirmation")}
+function pick2(){document.querySelectorAll("#needs .opt").forEach((o,i)=>o.classList.toggle("on",i===need))}
+function pl(){$("plans").innerHTML=PLANS.map((p,i)=>`<div class="plan ${i===plan?"on":""}" onclick="plan=${i};pl()"><b>${p[0]}</b><em>${p[1]}</em><span>${p[2]}</span></div>`).join("")}
+/* Mon espace / Espace partenaires : e-mail + code PIN */
+async function sha(s){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return"x"+s}}
+function genPin(){const a=new Uint32Array(1);crypto.getRandomValues(a);return String(a[0]%1000000).padStart(6,"0")}
+const ACC=r=>LS("savpro_acc_"+r)||{},setACC=(r,a)=>LS("savpro_acc_"+r,a);
+SESS.client=LS("savpro_s_client");SESS.partner=LS("savpro_s_partner");
+const boxOf=r=>r==="client"?"espBox":"parBox";
+function renderAuth(r){const b=$(boxOf(r)),em=SESS[r],a=ACC(r)[em];
+ if(em&&a){const P=r==="client"?[["name","Nom et prénom"],["co","Société"],["tel","Téléphone"]]:[["co","Société"],["dom","Domaine d’activité"],["ville","Ville"],["tel","Téléphone"]];
+  b.innerHTML=(pinShow&&pinShow.r===r?`<div class="pin"><p class="mut">Votre code PIN personnel (affiché une seule fois) :</p><b>${pinShow.pin}</b><p class="mut" style="margin:8px 0">Conservez-le : il sert à vous reconnecter avec votre e-mail.</p><a class="btn sm yl" href="mailto:${esc(em)}?subject=${encodeURIComponent("Mon code PIN SAV PRO")}&body=${encodeURIComponent("Mon code PIN SAV PRO : "+pinShow.pin)}">${ic("mail")}Me l’envoyer par e-mail</a> <button class="btn sm ghost" onclick="pinShow=null;renderAuth('${r}')">J’ai noté mon code</button></div>`:"")+
+  `<div class="card"><div class="row" style="justify-content:space-between"><h3>${r==="client"?"Mon profil":"Profil partenaire"}</h3><span class="mut">${esc(em)}</span></div></div>`+P.map(f=>`<div class="fg"><label>${f[1]}</label><input id="pf_${f[0]}" value="${esc(a[f[0]])}"></div>`).join("")+
+  `<div class="pad" style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn" onclick="saveProf('${r}')">${ic("check")}Enregistrer mon profil</button>${r==="client"?`<button class="btn ghost" onclick="go('parc')">${ic("box")}Mon parc (${(a.parc||[]).length})</button>`:""}<button class="btn ghost" onclick="logout('${r}')">Se déconnecter</button></div>`+(r==="partner"?partnerRefs(a):"");
+ }else{b.innerHTML=`<div class="tabs"><div class="chip ${authTab[r]==="login"?"on":""}" onclick="authTab.${r}='login';renderAuth('${r}')">Me connecter</div><div class="chip ${authTab[r]==="new"?"on":""}" onclick="authTab.${r}='new';renderAuth('${r}')">Créer mon accès</div></div>
+  <div class="fg"><label>Adresse e-mail</label><input id="ae_${r}" type="email" autocomplete="email" placeholder="vous@societe.com"></div>
+  ${authTab[r]==="login"?`<div class="fg"><label>Code PIN (6 chiffres)</label><input id="ap_${r}" inputmode="numeric" maxlength="6" placeholder="••••••"></div>`:`<p class="mut pad" style="margin-bottom:12px">Un code PIN à 6 chiffres est généré automatiquement et vous est présenté à la création de votre accès.</p>`}
+  <div class="err" id="ar_${r}"></div><div class="pad"><button class="btn full" onclick="${authTab[r]==="login"?"login":"signup"}('${r}')">${ic("lock")}${authTab[r]==="login"?"Me connecter":"Générer mon code PIN"}</button></div>`}}
+function aerr(r,t){const e=$("ar_"+r);e.textContent=t;e.style.display="block"}
+async function signup(r){const em=$("ae_"+r).value.trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){aerr(r,"Adresse e-mail invalide.");return}const A=ACC(r);if(A[em]){aerr(r,"Un accès existe déjà pour cet e-mail. Connectez-vous.");return}const pin=genPin();A[em]={h:await sha(em+":"+pin),name:"",co:"",tel:"",dom:"",ville:"",parc:[],refs:[],date:new Date().toISOString().slice(0,10)};setACC(r,A);SESS[r]=em;LS("savpro_s_"+r,em);pinShow={r,pin};renderAuth(r);toast("Accès créé")}
+async function login(r){const em=$("ae_"+r).value.trim().toLowerCase(),pin=$("ap_"+r).value.trim(),A=ACC(r);if((tries[em]||0)>=5){aerr(r,"Trop d’essais. Rechargez la page.");return}if(!A[em]||A[em].h!==await sha(em+":"+pin)){tries[em]=(tries[em]||0)+1;aerr(r,"E-mail ou code PIN incorrect.");return}SESS[r]=em;LS("savpro_s_"+r,em);pinShow=null;renderAuth(r);toast("Connecté")}
+function logout(r){SESS[r]=null;LS("savpro_s_"+r,null);pinShow=null;renderAuth(r);toast("Déconnecté")}
+function saveProf(r){const A=ACC(r),a=A[SESS[r]];["name","co","tel","dom","ville"].forEach(k=>{const e=$("pf_"+k);if(e)a[k]=e.value.trim()});setACC(r,A);toast("Profil enregistré")}
+function partnerRefs(a){return `<div class="sec"><h2>Mes références</h2></div>${(a.refs||[]).map((x,i)=>`<div class="card row" style="justify-content:space-between"><span>${esc(x)}</span><div class="ib" onclick="delRef(${i})">${ic("trash")}</div></div>`).join("")}<div class="fg"><label>Produit, service ou chantier réalisé</label><input id="rf"></div><div class="pad"><button class="btn ghost" onclick="addRef()">${ic("plus")}Ajouter</button></div>`}
+function addRef(){const v=$("rf").value.trim();if(!v)return;const A=ACC("partner"),a=A[SESS.partner];a.refs.push(v);setACC("partner",A);renderAuth("partner")}
+function delRef(i){const A=ACC("partner");A[SESS.partner].refs.splice(i,1);setACC("partner",A);renderAuth("partner")}
+/* Mon parc */
+function renderParc(){const b=$("parcBox"),em=SESS.client,a=ACC("client")[em];if(!em||!a){b.innerHTML=`<div class="card" style="text-align:center"><p class="mut" style="margin-bottom:12px">Connectez-vous à Mon espace pour gérer votre parc.</p><button class="btn" onclick="go('espace')">${ic("lock")}Accéder à Mon espace</button></div>`;return}
+ const E=[["g","Optimal"],["w2","Maintenance requise"],["r","En panne"]];
+ b.innerHTML=(a.parc||[]).map((x,i)=>`<div class="card"><div class="row"><div class="sn" style="width:54px;height:54px">${ic("box")}</div><div style="flex:1"><h3>${esc(x.n)}</h3><p class="mut">N° ${esc(x.s||"—")}</p><div class="tag"><i class="dot ${E[x.e][0]}"></i>${E[x.e][1]}</div></div><div class="ib" onclick="delEq(${i})">${ic("trash")}</div></div><button class="btn ${x.e?"":"ghost"} full" style="margin-top:12px" onclick="callTech(${i})">${ic("bolt")}Appeler un technicien</button></div>`).join("")||'<p class="mut pad">Aucun équipement enregistré.</p>'
+ +`<div class="sec"><h2>Ajouter un équipement</h2></div><div class="fg"><label>Équipement</label><input id="qn" placeholder="Ex : Groupe Perkins 100 kVA"></div><div class="fg"><label>Numéro de série</label><input id="qs"></div><div class="fg"><label>État</label><select id="qe"><option value="0">Optimal</option><option value="1">Maintenance requise</option><option value="2">En panne</option></select></div><div class="pad"><button class="btn full" onclick="addEq()">${ic("plus")}Ajouter à mon parc</button></div>`}
+function addEq(){const n=$("qn").value.trim();if(n.length<2){toast("Nom de l’équipement requis");return}const A=ACC("client"),a=A[SESS.client];a.parc.push({n,s:$("qs").value.trim(),e:+$("qe").value});setACC("client",A);renderParc()}
+function delEq(i){if(!confirm("Retirer cet équipement ?"))return;const A=ACC("client");A[SESS.client].parc.splice(i,1);setACC("client",A);renderParc()}
+function callTech(i){const a=ACC("client")[SESS.client],x=a.parc[i];need=x.e===2?1:0;fd.value="Équipement : "+x.n+(x.s?" (n° "+x.s+")":"");if(a.tel)ft.value=a.tel;pick2();go("speed")}
+function init(){$("navb").innerHTML=NAV.map(n=>`<div class="ni ${n[4]?"sp":""} ${n[3]?"":"dk"} ${n[0]==="home"?"on":""}" data-s="${n[0]}" onclick="nav('${n[0]}')">${n[4]?`<div class="ib2">${ic(n[1])}</div>`:ic(n[1])}${n[4]?"Speed":n[2].replace(" couverts","").replace("Espace ","")}</div>`).join("");
+ $("stepsL").innerHTML=HOW.map(h=>`<div class="step"><div class="sn">${ic(h[0])}</div><div><h5>${h[1]}</h5><p>${h[2]}</p></div></div>`).join("");
+ $("needs").innerHTML=NEEDS.map((n,i)=>`<div class="opt" onclick="need=${i};pick2()">${ic(n[0])}${n[1]}</div>`).join("");pl();domList();home();auto();cnt();show()}
+let lastY=0,lockT=0;$("main").addEventListener("scroll",()=>{const m=$("main"),y=m.scrollTop,A=document.querySelector(".app");if(Date.now()<lockT){lastY=y;return}const d=y-lastY;if(Math.abs(d)<10)return;const on=A.classList.contains("cmp"),want=d>0?(y>140&&m.scrollHeight-m.clientHeight>260):false;lastY=y;if(want!==on){A.classList.toggle("cmp",want);lockT=Date.now()+450}},{passive:true});
+init();
+/* Backend Supabase : catalogue en ligne (repli sur le catalogue intégré si indisponible) */
+const SB=window.SAV_CONFIG||{},SBOK=!!(SB.SUPABASE_URL&&SB.SUPABASE_ANON_KEY&&!/COLLE/.test(SB.SUPABASE_ANON_KEY));
+let REMOTE=false;
+const sbH=()=>/^sb_/.test(SB.SUPABASE_ANON_KEY)?{apikey:SB.SUPABASE_ANON_KEY}:{apikey:SB.SUPABASE_ANON_KEY,Authorization:"Bearer "+SB.SUPABASE_ANON_KEY};
+async function loadRemote(){
+  if(!SBOK||localEdited)return;
+  try{
+    const r=await fetch(SB.SUPABASE_URL+"/rest/v1/products?select=*&order=id",{headers:sbH()});
+    if(!r.ok)throw 0;const a=await r.json();if(!Array.isArray(a)||!a.length)throw 0;
+    DB=a.map(x=>({id:x.id,n:x.name,c:x.sale_category,p:x.price,h:x.featured?1:0,a:x.available?1:0,d:x.description||"",r:x.rental_category,pj:x.daily_price,img:x.image_url||undefined}));
+    REMOTE=true;admin=false;refresh()
+  }catch(e){console.warn("[SAV PRO] Supabase indisponible, repli sur le catalogue local",e)}
+}
+function postRequest(kind,phone,payload){
+  if(!SBOK)return;
+  fetch(SB.SUPABASE_URL+"/rest/v1/requests",{method:"POST",headers:{...sbH(),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({kind,phone:String(phone||"").slice(0,40),payload})}).catch(e=>console.warn("[SAV PRO] Envoi Supabase échoué",e))
+}
+loadRemote();
+</script>
+</body>
+</html>

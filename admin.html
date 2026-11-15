@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Espace pro · SAV PRO Côte d’Ivoire</title>
+<style>
+:root{--bg:#fff;--ink:#0f2a52;--mut:#52627d;--line:#dbe3ee;--blue:#173b70;--blue2:#0f2a52;--yl:#f7c948;--red:#e63946;--ok:#1a9e55}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px clamp(14px,3vw,24px);border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:5}
+h1{font-size:clamp(17px,3vw,21px);margin:0}h2{font-size:18px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 6px}
+main{max-width:1000px;margin:0 auto;padding:16px clamp(14px,3vw,24px) 60px}
+.btn{border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--red);color:#fff;transition:transform .2s,box-shadow .2s,opacity .2s;text-decoration:none;display:inline-block}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(230,57,70,.25)}.btn:active{transform:scale(.97)}.btn:disabled{opacity:.6;pointer-events:none}
+.btn.blue{background:var(--blue)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.sm{padding:7px 12px;font-size:14px}.btn.ok{background:var(--ok)}.btn.wa{background:#25D366}
+.card{background:linear-gradient(160deg,#173b70,#0f2a52);color:#fff;border-radius:16px;padding:14px;border-bottom:3px solid var(--yl);box-shadow:0 6px 18px rgba(15,42,82,.2)}
+.mut{color:var(--mut)}.card .mut{color:#c3d1e6}
+label{display:block;font-size:13px;margin:10px 0 4px;color:#c3d1e6}
+input,select,textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #3b68a8;background:rgba(255,255,255,.1);color:#fff;font:inherit}
+select option{color:#0f2a52}input::placeholder,textarea::placeholder{color:#aebfd9}
+.narrow{max-width:440px;margin:6vh auto 0}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:8px 16px;border-radius:999px;border:1px solid var(--line);cursor:pointer;background:#fff;transition:.2s;user-select:none}
+.tab.on{background:var(--yl);border-color:var(--yl);font-weight:700}
+.list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.thumb{width:64px;height:64px;border-radius:10px;background:#fff;object-fit:contain;flex:none}
+.grow{flex:1;min-width:0}.grow b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+.tag{font-size:12px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.15);display:inline-block;margin:2px 4px 0 0}
+.tag.off{background:rgba(230,57,70,.4)}.tag.wait{background:rgba(247,201,72,.35)}.tag.good{background:rgba(26,158,85,.45)}
+.bar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center}.bar input,.bar select{flex:1 1 180px;background:#fff;color:var(--ink);border-color:var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi b{display:block;font-size:clamp(18px,4vw,24px);color:var(--yl)}.kpi span{font-size:13px;color:#c3d1e6}
+.sheet{position:fixed;inset:0;background:rgba(15,42,82,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet.on{display:flex;animation:f .25s}.sheet .card{width:min(640px,100%);max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;animation:up .35s cubic-bezier(.22,.9,.3,1)}
+@keyframes f{from{opacity:0}}@keyframes up{from{transform:translateY(40px);opacity:0}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.chk{display:flex;gap:8px;align-items:center;margin-top:12px}.chk input{width:auto}
+.msg{padding:10px 12px;border-radius:10px;margin:10px 0;background:#fdecee;color:#a0202b;display:none}.msg.ok{background:#e6f6ec;color:#146c3b}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--blue2);color:#fff;padding:10px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.3s;z-index:30;max-width:92vw}.toast.on{opacity:1}
+.hide{display:none!important}
+.qr{background:#fff;border-radius:12px;padding:8px;display:block;margin:10px auto;width:200px;height:200px}
+.code{letter-spacing:8px;text-align:center;font-size:24px}
+.sec{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all;background:rgba(255,255,255,.1);padding:6px 8px;border-radius:8px}
+.log{font-size:13px;border-bottom:1px solid rgba(255,255,255,.14);padding:8px 0}.log:last-child{border:0}.log small{color:#c3d1e6;display:block;word-break:break-word}
+.who{color:#fff;font-weight:600}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><h1>Espace pro · SAV PRO CI</h1><div class="row"><span class="mut hide" id="who" style="font-size:14px"></span><a class="btn ghost sm" href="index.html">Voir le site</a><button class="btn ghost sm hide" id="out" onclick="logout()">Déconnexion</button></div></header>
+<main>
+
+<section id="login" class="narrow card">
+  <h2>Connexion</h2>
+  <p class="mut" style="margin:0">Administrateurs, partenaires et techniciens. Un code à 2 facteurs (2FA) est demandé.</p>
+  <label>E-mail</label><input id="em" type="email" autocomplete="username">
+  <label>Mot de passe</label><input id="pw" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+  <div class="chk"><input id="rem" type="checkbox" checked><span>Rester connecté sur cet appareil</span></div>
+  <div class="msg" id="lmsg"></div>
+  <button class="btn" id="lbtn" style="margin-top:14px;width:100%" onclick="login()">Me connecter</button>
+</section>
+
+<section id="mfa" class="narrow card hide">
+  <h2 id="mfaT">Code de sécurité</h2>
+  <div id="mfaEnroll" class="hide">
+    <p class="mut" style="margin:0">1. Installe une application d’authentification (Google Authenticator, Microsoft Authenticator, Authy…).<br>2. Scanne ce QR code, ou saisis la clé ci-dessous.<br>3. Entre le code à 6 chiffres affiché.</p>
+    <img id="qr" class="qr" alt="QR code 2FA"><div class="sec" id="sec"></div>
+  </div>
+  <p class="mut" id="mfaV" style="margin:0">Entre le code à 6 chiffres de ton application d’authentification.</p>
+  <label>Code à 6 chiffres</label><input id="code" class="code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" onkeydown="if(event.key==='Enter')verify()">
+  <div class="msg" id="mmsg"></div>
+  <button class="btn" id="mbtn" style="margin-top:14px;width:100%" onclick="verify()">Valider</button>
+  <button class="btn ghost" style="margin-top:10px;width:100%;background:transparent;color:#fff;border-color:#3b68a8" onclick="logout()">Annuler</button>
+</section>
+
+<section id="app" class="hide">
+  <div class="tabs" id="tabs"></div>
+
+  <div id="p_cat" class="hide">
+    <div class="bar"><input id="q" placeholder="Rechercher un produit…" oninput="drawCat()"><button class="btn" onclick="editP(null)">+ Nouveau produit</button></div>
+    <p class="mut" id="catHint" style="margin-top:-6px"></p>
+    <div class="list" id="plist"></div>
+  </div>
+
+  <div id="p_ven" class="hide">
+    <div class="kpis" id="vk"></div>
+    <div class="bar"><button class="btn" onclick="saleForm()">+ Enregistrer une vente</button>
+      <select id="vf" onchange="drawSales()" style="max-width:220px"><option value="">Toutes les ventes</option><option value="a_payer">Commissions à payer</option><option value="payee">Commissions payées</option></select></div>
+    <div class="list" id="slist"></div>
+  </div>
+
+  <div id="p_com" class="hide">
+    <div class="kpis" id="ck"></div>
+    <p class="mut" id="comHint"></p>
+    <div class="list" id="clist"></div>
+  </div>
+
+  <div id="p_dem" class="hide">
+    <div class="bar"><select id="df" onchange="drawReq()" style="max-width:220px"><option value="">Tous les statuts</option><option>nouveau</option><option>en cours</option><option>traité</option></select><button class="btn ghost sm" onclick="loadReq()">Actualiser</button></div>
+    <div class="list" id="rlist"></div>
+  </div>
+
+  <div id="p_eq" class="hide">
+    <div class="bar"><button class="btn" onclick="memberForm(null)">+ Ajouter un membre</button></div>
+    <p class="mut">Pour ajouter quelqu’un : crée d’abord son compte dans Supabase (Authentication → Users → Add user), puis attribue-lui un rôle ici avec son e-mail.</p>
+    <div class="list" id="tlist"></div>
+  </div>
+
+  <div id="p_log" class="hide">
+    <div class="bar"><input id="lq" placeholder="Filtrer (action, table, nom…)" oninput="drawLog()"><button class="btn ghost sm" onclick="loadLog()">Actualiser</button><button class="btn blue sm" onclick="csvLog()">Exporter CSV</button></div>
+    <div class="card" id="logbox"></div>
+  </div>
+</section>
+</main>
+
+<div class="sheet" id="sh" onclick="if(event.target===this)closeS()"><div class="card" id="shB"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js?v=2"></script>
+<script>
+const C=window.SAV_CONFIG||{},U=C.SUPABASE_URL,K=C.SUPABASE_ANON_KEY;
+const CATC=["Groupes électrogènes","Matériels & outillages chantiers","Matériels d’électricité","Pièces de rechange groupes"];
+const CATL=["Groupes électrogènes","Engins TP","Matériels de chantier"];
+const ROLES={admin:"Administrateur",partenaire:"Partenaire",technicien:"Technicien"};
+const TABS={admin:[["cat","Catalogue"],["ven","Ventes & commissions"],["dem","Demandes"],["eq","Équipe"],["log","Journal"]],partenaire:[["cat","Mes produits"],["com","Mes commissions"]],technicien:[["dem","Demandes de dépannage"]]};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=n=>n==null?"Sur devis":new Intl.NumberFormat("fr-FR").format(n)+" FCFA";
+const money=n=>new Intl.NumberFormat("fr-FR").format(Math.round(n||0))+" FCFA";
+const num=v=>{v=String(v).trim();return v===""?null:Number(v)};
+const JSONH={"Content-Type":"application/json"};
+let S=null,ME=null,P=null,FID=null,ENR=false,PR=[],TEAM=[],SALES=[],REQ=[],LOG=[],cur=null;
+if(!K||/COLLE/.test(K)){document.body.innerHTML='<main><p>Clé Supabase manquante : renseigne <b>config.js</b>.</p></main>'}
+
+/* ---------- session (connexion automatique) ---------- */
+function loadS(){try{return JSON.parse(localStorage.getItem("sav_sess")||sessionStorage.getItem("sav_sess")||"null")}catch(e){return null}}
+function saveS(s,remember){S={access_token:s.access_token,refresh_token:s.refresh_token};
+  if(remember===undefined)remember=!!localStorage.getItem("sav_sess");
+  const j=JSON.stringify(S);(remember?localStorage:sessionStorage).setItem("sav_sess",j);(remember?sessionStorage:localStorage).removeItem("sav_sess")}
+function clearS(){S=null;localStorage.removeItem("sav_sess");sessionStorage.removeItem("sav_sess")}
+const jwt=t=>{try{return JSON.parse(atob(t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")))}catch(e){return{}}};
+async function ensure(){
+  if(!S)return;const p=jwt(S.access_token);
+  if(!p.exp||p.exp*1000-Date.now()<60000){
+    const r=await fetch(U+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:{apikey:K,...JSONH},body:JSON.stringify({refresh_token:S.refresh_token})});
+    if(!r.ok){clearS();throw new Error("Session expirée, reconnecte-toi.")}
+    saveS(await r.json())
+  }
+}
+const hdr=(x={})=>({apikey:K,...(S?{Authorization:"Bearer "+S.access_token}:{}),...x});
+async function api(path,opt={}){
+  await ensure();
+  const r=await fetch(U+path,{...opt,headers:hdr(opt.headers)});
+  if(!r.ok){let m="";try{const j=await r.json();m=j.message||j.msg||j.error_description||""}catch(e){}
+    if(r.status===401&&!path.startsWith("/auth/v1/factors")){clearS();view("login");throw new Error("Session expirée, reconnecte-toi.")}
+    throw new Error(m||("Erreur "+r.status))}
+  const t=await r.text();return t?JSON.parse(t):null
+}
+const rpc=(fn,args)=>api("/rest/v1/rpc/"+fn,{method:"POST",headers:JSONH,body:JSON.stringify(args||{})});
+const logEv=(a,d)=>{try{fetch(U+"/rest/v1/rpc/log_event",{method:"POST",headers:hdr(JSONH),body:JSON.stringify({p_action:a,p_details:d||{}}),keepalive:true}).catch(()=>{})}catch(e){}};
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2600)}
+function msg(id,t,ok){const e=$(id);e.textContent=t;e.classList.toggle("ok",!!ok);e.style.display=t?"block":"none"}
+function view(v){["login","mfa","app"].forEach(x=>$(x).classList.toggle("hide",x!==v));$("out").classList.toggle("hide",v==="login");$("who").classList.toggle("hide",v!=="app")}
+
+/* ---------- connexion + 2FA ---------- */
+async function login(){
+  msg("lmsg","");const b=$("lbtn");b.disabled=true;
+  try{
+    const r=await fetch(U+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:K,...JSONH},body:JSON.stringify({email:$("em").value.trim(),password:$("pw").value})});
+    const j=await r.json();
+    if(!r.ok){msg("lmsg",j.error_description||j.msg||"Connexion impossible");return}
+    saveS(j,$("rem").checked);await afterAuth()
+  }catch(e){msg("lmsg",e.message||"Réseau indisponible. Réessaie.")}finally{b.disabled=false}
+}
+async function afterAuth(){
+  const u=await api("/auth/v1/user");ME={id:u.id,email:u.email,factors:u.factors||[]};
+  let prof;try{prof=await api("/rest/v1/profiles?select=*&user_id=eq."+ME.id)}catch(e){throw new Error("Profils indisponibles : lance supabase/v2-roles-commissions-audit.sql. ("+e.message+")")}
+  if(!prof.length||!prof[0].active){msg("lmsg","Ce compte n’a pas de rôle actif. Contacte l’administrateur.");await logout(true);return}
+  P=prof[0];
+  if(jwt(S.access_token).aal==="aal2"){enter();return}
+  const fac=ME.factors.find(f=>f.factor_type==="totp"&&f.status==="verified");
+  if(fac){FID=fac.id;ENR=false;mfaView(false)}else{await enroll()}
+}
+function mfaView(enroll){
+  view("mfa");$("mfaEnroll").classList.toggle("hide",!enroll);
+  $("mfaT").textContent=enroll?"Activer la double authentification":"Code de sécurité";
+  $("mfaV").classList.toggle("hide",enroll);$("code").value="";msg("mmsg","");setTimeout(()=>$("code").focus(),200)
+}
+async function enroll(){
+  for(const f of ME.factors.filter(f=>f.status!=="verified")){try{await api("/auth/v1/factors/"+f.id,{method:"DELETE"})}catch(e){}}
+  const r=await api("/auth/v1/factors",{method:"POST",headers:JSONH,body:JSON.stringify({factor_type:"totp",friendly_name:"SAVPRO-"+Date.now(),issuer:"SAV PRO CI"})});
+  FID=r.id;ENR=true;const q=r.totp.qr_code||"";
+  $("qr").src=q.startsWith("<svg")?"data:image/svg+xml;utf8,"+encodeURIComponent(q):q;$("sec").textContent=r.totp.secret;mfaView(true)
+}
+async function verify(){
+  const code=$("code").value.replace(/\D/g,"");if(code.length!==6){msg("mmsg","Entre les 6 chiffres du code.");return}
+  const b=$("mbtn");b.disabled=true;msg("mmsg","");
+  try{
+    const ch=await api("/auth/v1/factors/"+FID+"/challenge",{method:"POST",headers:JSONH,body:"{}"});
+    const v=await api("/auth/v1/factors/"+FID+"/verify",{method:"POST",headers:JSONH,body:JSON.stringify({challenge_id:ch.id,code})});
+    saveS(v);logEv(ENR?"2fa_active":"2fa_ok",{role:P.role});enter()
+  }catch(e){msg("mmsg",/invalid|expired/i.test(e.message)?"Code incorrect ou expiré. Réessaie.":e.message)}finally{b.disabled=false}
+}
+async function logout(silent){
+  try{if(S&&!silent)logEv("deconnexion_pro",{});if(S)await fetch(U+"/auth/v1/logout",{method:"POST",headers:hdr()})}catch(e){}
+  clearS();ME=null;P=null;view("login")
+}
+function enter(){
+  view("app");$("who").textContent=(P.full_name||ME.email)+" · "+ROLES[P.role];
+  logEv("connexion_pro",{role:P.role});
+  $("tabs").innerHTML=TABS[P.role].map(([k,t])=>`<div class="tab" id="t_${k}" onclick="tab('${k}')">${t}</div>`).join("");
+  tab(TABS[P.role][0][0])
+}
+const LOADERS={cat:()=>loadCat(),ven:()=>loadSales(),com:()=>loadCom(),dem:()=>loadReq(),eq:()=>loadTeam().then(drawTeam),log:()=>loadLog()};
+async function tab(k){
+  cur=k;document.querySelectorAll("[id^=p_]").forEach(e=>e.classList.add("hide"));$("p_"+k).classList.remove("hide");
+  document.querySelectorAll(".tab").forEach(e=>e.classList.toggle("on",e.id==="t_"+k));
+  try{await LOADERS[k]()}catch(e){toast(e.message)}
+}
+function openS(html){$("shB").innerHTML=html;$("sh").classList.add("on")}
+function closeS(){$("sh").classList.remove("on")}
+async function loadTeam(){if(P.role==="admin")TEAM=await rpc("list_team")||[];return TEAM}
+const tname=id=>{const m=TEAM.find(t=>t.user_id===id);return m?(m.full_name||m.email):(id?id.slice(0,8):"")};
+
+/* ---------- catalogue ---------- */
+const STAT={publie:["Publié","good"],en_attente:["En attente de validation","wait"],brouillon:["Brouillon","off"]};
+const imgOf=p=>p.image_url||(U+"/storage/v1/object/public/products/"+p.id+".jpg");
+document.addEventListener("error",e=>{const t=e.target;if(!t||t.tagName!=="IMG")return;const m=/\/products\/(\d+)\.jpg/.exec(t.src);if(m&&!t.dataset.fb){t.dataset.fb=1;t.src="assets/img/"+m[1]+".jpg"}else t.style.visibility="hidden"},true);
+async function loadCat(){
+  if(P.role==="admin")await loadTeam();
+  const f=P.role==="partenaire"?"&owner_id=eq."+ME.id:"";
+  PR=await api("/rest/v1/products?select=*&order=id.desc"+f);
+  $("catHint").textContent=P.role==="partenaire"?"Tes produits sont publiés après validation par SAV PRO. Tu touches "+P.commission_rate+" % de commission sur chaque vente.":"";
+  drawCat()
+}
+function drawCat(){
+  const q=$("q").value.trim().toLowerCase();
+  $("plist").innerHTML=PR.filter(p=>!q||p.name.toLowerCase().includes(q)).map(p=>{const st=STAT[p.status]||STAT.publie;return `
+  <div class="card"><div class="row" style="flex-wrap:nowrap"><img class="thumb" src="${esc(imgOf(p))}" alt="" loading="lazy">
+  <div class="grow"><b>${esc(p.name)}</b><div class="mut">${fmt(p.price)}</div>
+  <span class="tag ${st[1]}">${st[0]}</span>${p.available?"":'<span class="tag off">Indisponible</span>'}${p.owner_id&&P.role==="admin"?`<span class="tag">${esc(tname(p.owner_id))}</span>`:""}</div></div>
+  <div class="row" style="margin-top:10px"><button class="btn blue sm" onclick="editP(${p.id})">Modifier</button>${P.role==="admin"&&p.status!=="publie"?`<button class="btn ok sm" onclick="publish(${p.id})">Publier</button>`:""}</div></div>`}).join("")||'<p class="mut">Aucun produit.</p>'
+}
+async function publish(id){try{await api("/rest/v1/products?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({status:"publie"})});toast("Produit publié");loadCat()}catch(e){toast(e.message)}}
+function editP(id){
+  const cp=id==null?null:PR.find(p=>p.id===id);window._cp=cp;
+  const p=cp||{name:"",sale_category:0,price:null,rental_category:-1,daily_price:null,description:"",available:true,featured:false,status:"publie",owner_id:null};
+  const adm=P.role==="admin";
+  openS(`<h2>${cp?"Modifier le produit":"Nouveau produit"}</h2>
+  <label>Nom</label><input id="f_name" value="${esc(p.name)}">
+  <div class="two"><div><label>Catégorie (vente)</label><select id="f_sc"><option value="-1">Non vendu</option>${CATC.map((c,i)=>`<option value="${i}" ${p.sale_category===i?"selected":""}>${c}</option>`).join("")}</select></div>
+  <div><label>Prix de vente (FCFA)</label><input id="f_price" type="number" inputmode="numeric" value="${p.price??""}" placeholder="Sur devis si vide"></div></div>
+  <div class="two"><div><label>Catégorie (location)</label><select id="f_rc"><option value="-1">Non loué</option>${CATL.map((c,i)=>`<option value="${i}" ${p.rental_category===i?"selected":""}>${c}</option>`).join("")}</select></div>
+  <div><label>Prix par jour (FCFA)</label><input id="f_dp" type="number" inputmode="numeric" value="${p.daily_price??""}"></div></div>
+  <label>Description</label><textarea id="f_desc" rows="3">${esc(p.description||"")}</textarea>
+  <div class="chk"><input id="f_av" type="checkbox" ${p.available?"checked":""}><span>Disponible</span></div>
+  ${adm?`<div class="chk"><input id="f_feat" type="checkbox" ${p.featured?"checked":""}><span>Mis en avant</span></div>
+  <div class="two"><div><label>Statut</label><select id="f_st">${Object.entries(STAT).map(([k,v])=>`<option value="${k}" ${p.status===k?"selected":""}>${v[0]}</option>`).join("")}</select></div>
+  <div><label>Partenaire (commission)</label><select id="f_ow"><option value="">Aucun (produit SAV PRO)</option>${TEAM.filter(t=>t.role==="partenaire").map(t=>`<option value="${t.user_id}" ${p.owner_id===t.user_id?"selected":""}>${esc(t.full_name||t.email)}</option>`).join("")}</select></div></div>`
+  :`<p class="mut" style="margin-top:10px">Toute création ou modification est soumise à validation avant publication.</p>`}
+  <label>Photo (JPEG ou PNG, redimensionnée automatiquement)</label><input id="f_file" type="file" accept="image/*">
+  <div class="msg" id="smsg"></div>
+  <div class="row" style="margin-top:14px;justify-content:space-between">${cp?`<button class="btn ghost sm" style="color:#ffb3b9;background:transparent" onclick="delP()">Supprimer</button>`:"<span></span>"}
+  <div class="row"><button class="btn ghost sm" style="color:#fff;background:transparent" onclick="closeS()">Annuler</button><button class="btn" id="saveB" onclick="saveP()">Enregistrer</button></div></div>`)
+}
+async function resize(file){
+  const bmp=await createImageBitmap(file),m=900,k=Math.min(1,m/Math.max(bmp.width,bmp.height));
+  const c=document.createElement("canvas");c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0,c.width,c.height);
+  return new Promise(r=>c.toBlob(r,"image/jpeg",.82))
+}
+async function saveP(){
+  const cp=window._cp,name=$("f_name").value.trim();if(name.length<2){msg("smsg","Le nom est obligatoire.");return}
+  const body={name,sale_category:+$("f_sc").value,price:num($("f_price").value),rental_category:+$("f_rc").value,daily_price:num($("f_dp").value),description:$("f_desc").value.trim(),available:$("f_av").checked};
+  if(P.role==="admin"){body.featured=$("f_feat").checked;body.status=$("f_st").value;body.owner_id=$("f_ow").value||null}
+  else{body.status="en_attente";if(!cp)body.owner_id=ME.id}
+  const B=$("saveB");B.disabled=true;msg("smsg","Enregistrement…",true);
+  try{
+    let id;
+    if(cp){await api("/rest/v1/products?id=eq."+cp.id,{method:"PATCH",headers:JSONH,body:JSON.stringify(body)});id=cp.id}
+    else{const r=await api("/rest/v1/products",{method:"POST",headers:{...JSONH,Prefer:"return=representation"},body:JSON.stringify(body)});id=r[0].id}
+    const f=$("f_file").files[0];
+    if(f){
+      msg("smsg","Envoi de la photo…",true);
+      const blob=await resize(f);
+      await api("/storage/v1/object/products/"+id+".jpg",{method:"POST",headers:{"Content-Type":"image/jpeg","x-upsert":"true","cache-control":"max-age=3600"},body:blob});
+      await api("/rest/v1/products?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({image_url:U+"/storage/v1/object/public/products/"+id+".jpg?v="+Date.now()})})
+    }
+    closeS();toast(P.role==="admin"?"Enregistré · visible sur le site":"Enregistré · en attente de validation");await loadCat()
+  }catch(e){msg("smsg",e.message)}finally{B.disabled=false}
+}
+async function delP(){
+  const cp=window._cp;if(!cp||!confirm("Supprimer « "+cp.name+" » ?"))return;
+  try{await api("/rest/v1/products?id=eq."+cp.id,{method:"DELETE"});closeS();toast("Produit supprimé");await loadCat()}catch(e){msg("smsg",e.message)}
+}
+
+/* ---------- ventes & commissions ---------- */
+const SB_={a_payer:["À payer","wait"],payee:["Payée","good"]};
+async function loadSales(){
+  await loadTeam();if(!PR.length)PR=await api("/rest/v1/products?select=*&order=id.desc");
+  SALES=await api("/rest/v1/sales?select=*&order=created_at.desc&limit=200");
+  const bal=await api("/rest/v1/partner_balances?select=*");
+  const tot=bal.reduce((a,b)=>({ca:a.ca+ +b.chiffre_affaires,due:a.due+ +b.commission_due,paid:a.paid+ +b.commission_payee}),{ca:0,due:0,paid:0});
+  $("vk").innerHTML=`<div class="card kpi"><b>${money(tot.ca)}</b><span>Ventes partenaires</span></div><div class="card kpi"><b>${money(tot.due)}</b><span>Commissions à payer</span></div><div class="card kpi"><b>${money(tot.paid)}</b><span>Commissions payées</span></div>`+
+   bal.filter(b=>+b.commission_due>0).map(b=>`<div class="card kpi"><b>${money(b.commission_due)}</b><span>Dû à ${esc(tname(b.partner_id))}</span></div>`).join("");
+  drawSales()
+}
+function drawSales(){
+  const f=$("vf").value;
+  $("slist").innerHTML=SALES.filter(s=>!f||s.status===f).map(s=>{const st=SB_[s.status];return `
+  <div class="card"><b style="text-transform:uppercase">${esc(s.product_name||"Vente")}</b>
+  <div class="mut">${new Date(s.sold_at).toLocaleDateString("fr-FR")}${s.customer?" · "+esc(s.customer):""}</div>
+  <div style="margin-top:6px">Montant : <b>${money(s.amount)}</b></div>
+  ${s.partner_id?`<div>Partenaire : ${esc(tname(s.partner_id))}</div><div>Commission ${s.commission_rate} % : <b style="color:var(--yl)">${money(s.commission)}</b></div>
+  <span class="tag ${st[1]}">${st[0]}</span>${s.pay_method?`<span class="tag">${esc(s.pay_method)}${s.pay_ref?" · "+esc(s.pay_ref):""}</span>`:""}`:'<span class="tag">Produit SAV PRO · pas de commission</span>'}
+  ${s.status==="a_payer"&&s.partner_id?`<div style="margin-top:10px"><button class="btn ok sm" onclick="payForm('${s.id}')">Marquer la commission payée</button></div>`:""}</div>`}).join("")||'<p class="mut">Aucune vente.</p>'
+}
+function saleForm(){
+  openS(`<h2>Enregistrer une vente</h2>
+  <label>Produit</label><select id="s_pr" onchange="saleHint()"><option value="">Choisir…</option>${PR.filter(p=>p.status==="publie").map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("")}</select>
+  <p class="mut" id="s_hint" style="margin:6px 0 0"></p>
+  <div class="two"><div><label>Montant de la vente (FCFA)</label><input id="s_am" type="number" inputmode="numeric"></div><div><label>Date</label><input id="s_dt" type="date" value="${new Date().toISOString().slice(0,10)}"></div></div>
+  <label>Client</label><input id="s_cu"><label>Note</label><input id="s_no">
+  <div class="msg" id="smsg"></div>
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn ghost sm" style="color:#fff;background:transparent" onclick="closeS()">Annuler</button><button class="btn" id="saveB" onclick="saveSale()">Enregistrer</button></div>`)
+}
+function saleHint(){const p=PR.find(x=>x.id==$("s_pr").value);const t=p&&p.owner_id?TEAM.find(m=>m.user_id===p.owner_id):null;
+  $("s_hint").textContent=!p?"":t?`Partenaire : ${t.full_name||t.email} · commission ${t.commission_rate} % calculée automatiquement.`:"Produit SAV PRO : aucune commission."}
+async function saveSale(){
+  const pid=+$("s_pr").value,am=num($("s_am").value);if(!pid||!am||am<=0){msg("smsg","Choisis un produit et saisis le montant.");return}
+  const B=$("saveB");B.disabled=true;
+  try{await api("/rest/v1/sales",{method:"POST",headers:JSONH,body:JSON.stringify({product_id:pid,amount:am,sold_at:$("s_dt").value||undefined,customer:$("s_cu").value.trim()||null,note:$("s_no").value.trim()||null})});
+    closeS();toast("Vente enregistrée");loadSales()}catch(e){msg("smsg",e.message)}finally{B.disabled=false}
+}
+function payForm(id){
+  const s=SALES.find(x=>x.id===id);
+  openS(`<h2>Commission payée</h2><p class="mut" style="margin:0">${esc(tname(s.partner_id))} · <b style="color:#f7c948">${money(s.commission)}</b></p>
+  <label>Moyen de paiement</label><select id="p_m"><option>Orange Money</option><option>MTN MoMo</option><option>Moov Money</option><option>Wave</option><option>Virement</option><option>Espèces</option></select>
+  <label>Référence de la transaction</label><input id="p_r">
+  <div class="msg" id="smsg"></div>
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn ghost sm" style="color:#fff;background:transparent" onclick="closeS()">Annuler</button><button class="btn ok" id="saveB" onclick="paySale('${id}')">Confirmer le paiement</button></div>`)
+}
+async function paySale(id){
+  try{await api("/rest/v1/sales?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({status:"payee",pay_method:$("p_m").value,pay_ref:$("p_r").value.trim()||null})});closeS();toast("Commission marquée payée");loadSales()}catch(e){msg("smsg",e.message)}
+}
+async function loadCom(){
+  const bal=await api("/rest/v1/partner_balances?select=*");const b=bal[0]||{nb_ventes:0,chiffre_affaires:0,commission_due:0,commission_payee:0};
+  $("ck").innerHTML=`<div class="card kpi"><b>${b.nb_ventes}</b><span>Ventes</span></div><div class="card kpi"><b>${money(b.chiffre_affaires)}</b><span>Chiffre d’affaires</span></div><div class="card kpi"><b>${money(b.commission_due)}</b><span>Commission à recevoir</span></div><div class="card kpi"><b>${money(b.commission_payee)}</b><span>Déjà payée</span></div>`;
+  $("comHint").textContent="Ta commission : "+P.commission_rate+" % sur chaque vente de tes produits, payée par SAV PRO (mobile money ou virement).";
+  const L=await api("/rest/v1/sales?select=*&order=created_at.desc&limit=200");
+  $("clist").innerHTML=L.map(s=>{const st=SB_[s.status];return `<div class="card"><b style="text-transform:uppercase">${esc(s.product_name||"Vente")}</b><div class="mut">${new Date(s.sold_at).toLocaleDateString("fr-FR")}</div>
+  <div style="margin-top:6px">Vente : ${money(s.amount)}</div><div>Commission ${s.commission_rate} % : <b style="color:var(--yl)">${money(s.commission)}</b></div>
+  <span class="tag ${st[1]}">${st[0]}</span>${s.paid_at?`<span class="tag">${new Date(s.paid_at).toLocaleDateString("fr-FR")}${s.pay_method?" · "+esc(s.pay_method):""}</span>`:""}</div>`}).join("")||'<p class="mut">Aucune vente enregistrée pour le moment.</p>'
+}
+
+/* ---------- demandes ---------- */
+const KIND={devis:"Devis",depannage:"Dépannage",commande:"Commande",autre:"Autre"};
+async function loadReq(){if(P.role==="admin")await loadTeam();REQ=await api("/rest/v1/requests?select=*&order=created_at.desc&limit=150");drawReq()}
+function drawReq(){
+  const f=$("df").value;
+  $("rlist").innerHTML=REQ.filter(r=>!f||r.status===f).map(r=>{
+    const tel=String(r.phone||"").replace(/\D/g,""),wa=tel?("https://wa.me/"+(tel.length===10?"225"+tel:tel)):"";
+    const d=Object.entries(r.payload||{}).map(([k,v])=>`<div class="mut">${esc(k)} : ${esc(typeof v==="object"?JSON.stringify(v):v)}</div>`).join("");
+    const mine=r.assigned_to===ME.id;
+    return `<div class="card"><div class="row"><div class="grow"><b style="text-transform:none">${esc(KIND[r.kind]||r.kind)} · ${esc(r.name||"Sans nom")}</b><div class="mut">${new Date(r.created_at).toLocaleString("fr-FR")} · ${esc(r.phone||"")}</div></div>
+    <select style="width:auto" onchange="setS('${r.id}',this.value)">${["nouveau","en cours","traité"].map(s=>`<option ${s===r.status?"selected":""}>${s}</option>`).join("")}</select></div>${d}
+    ${r.assigned_to?`<span class="tag good">${mine?"Pris en charge par moi":"Technicien : "+esc(tname(r.assigned_to))}</span>`:'<span class="tag wait">Non attribuée</span>'}
+    ${r.tech_note?`<div class="mut" style="margin-top:6px">Note : ${esc(r.tech_note)}</div>`:""}
+    <div class="row" style="margin-top:10px">${!r.assigned_to?`<button class="btn blue sm" onclick="take('${r.id}')">Prendre en charge</button>`:""}<button class="btn ghost sm" style="color:#fff;background:transparent" onclick="note('${r.id}')">Note</button>${wa?`<a class="btn wa sm" target="_blank" rel="noopener" href="${wa}">WhatsApp</a>`:""}</div></div>`}).join("")||'<p class="mut">Aucune demande.</p>'
+}
+async function setS(id,s){try{await api("/rest/v1/requests?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({status:s})});toast("Statut mis à jour")}catch(e){toast(e.message)}}
+async function take(id){try{await api("/rest/v1/requests?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({assigned_to:ME.id,status:"en cours"})});toast("Demande prise en charge");loadReq()}catch(e){toast(e.message)}}
+async function note(id){const r=REQ.find(x=>x.id===id),t=prompt("Note d’intervention :",r.tech_note||"");if(t===null)return;
+  try{await api("/rest/v1/requests?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({tech_note:t.trim()||null})});toast("Note enregistrée");loadReq()}catch(e){toast(e.message)}}
+
+/* ---------- équipe ---------- */
+function drawTeam(){
+  $("tlist").innerHTML=TEAM.map(t=>`<div class="card"><b style="text-transform:none">${esc(t.full_name||t.email)}</b><div class="mut">${esc(t.email)}${t.phone?" · "+esc(t.phone):""}</div>
+  <span class="tag">${ROLES[t.role]}</span>${t.role==="partenaire"?`<span class="tag">Commission ${t.commission_rate} %</span>`:""}<span class="tag ${t.active?"good":"off"}">${t.active?"Actif":"Désactivé"}</span>
+  <div style="margin-top:10px"><button class="btn blue sm" onclick="memberForm('${t.user_id}')">Modifier</button></div></div>`).join("")||'<p class="mut">Aucun membre.</p>'
+}
+function memberForm(id){
+  const t=id?TEAM.find(x=>x.user_id===id):{email:"",full_name:"",phone:"",role:"partenaire",commission_rate:10,active:true};
+  openS(`<h2>${id?"Modifier le membre":"Ajouter un membre"}</h2>
+  <label>E-mail du compte</label><input id="m_em" type="email" value="${esc(t.email)}" ${id?"readonly":""}>
+  <div class="two"><div><label>Nom</label><input id="m_nm" value="${esc(t.full_name||"")}"></div><div><label>Téléphone</label><input id="m_ph" value="${esc(t.phone||"")}"></div></div>
+  <div class="two"><div><label>Rôle</label><select id="m_ro">${Object.entries(ROLES).map(([k,v])=>`<option value="${k}" ${t.role===k?"selected":""}>${v}</option>`).join("")}</select></div>
+  <div><label>Commission (%)</label><input id="m_rt" type="number" min="0" max="100" step="0.5" value="${t.commission_rate}"></div></div>
+  <div class="chk"><input id="m_ac" type="checkbox" ${t.active?"checked":""}><span>Compte actif</span></div>
+  <div class="msg" id="smsg"></div>
+  <div class="row" style="margin-top:14px;justify-content:flex-end"><button class="btn ghost sm" style="color:#fff;background:transparent" onclick="closeS()">Annuler</button><button class="btn" id="saveB" onclick="saveMember()">Enregistrer</button></div>`)
+}
+async function saveMember(){
+  const em=$("m_em").value.trim();if(!em){msg("smsg","E-mail obligatoire.");return}
+  const B=$("saveB");B.disabled=true;
+  try{await rpc("assign_role",{p_email:em,p_role:$("m_ro").value,p_name:$("m_nm").value.trim()||null,p_phone:$("m_ph").value.trim()||null,p_rate:num($("m_rt").value)??10,p_active:$("m_ac").checked});
+    closeS();toast("Membre enregistré");await loadTeam();drawTeam()}catch(e){msg("smsg",e.message)}finally{B.disabled=false}
+}
+
+/* ---------- journal d'activité ---------- */
+async function loadLog(){await loadTeam();LOG=await api("/rest/v1/activity_log?select=*&order=at.desc&limit=300");drawLog()}
+const who=l=>l.user_id?esc(tname(l.user_id)):"Visiteur";
+function summary(l){const d=l.details||{};if(d.apres&&d.avant){const ch=Object.keys(d.apres).filter(k=>JSON.stringify(d.apres[k])!==JSON.stringify(d.avant[k])&&k!=="updated_at");return ch.length?"Champs modifiés : "+ch.join(", "):""}
+  if(d.apres)return d.apres.name||d.apres.product_name||d.apres.kind||d.apres.full_name||"";if(d.avant)return d.avant.name||d.avant.product_name||"";return Object.entries(d).map(([k,v])=>k+": "+v).join(" · ")}
+function drawLog(){
+  const q=$("lq").value.trim().toLowerCase();
+  const rows=LOG.filter(l=>!q||(l.action+" "+(l.entity||"")+" "+(l.role||"")+" "+(l.user_id?tname(l.user_id):"visiteur")+" "+JSON.stringify(l.details)).toLowerCase().includes(q));
+  $("logbox").innerHTML=rows.map(l=>`<div class="log"><span class="who">${who(l)}</span> <span class="tag">${esc(l.role||"public")}</span><span class="tag">${esc(l.action)}</span>${l.entity?`<span class="tag">${esc(l.entity)}${l.entity_id?" #"+esc(String(l.entity_id).slice(0,8)):""}</span>`:""}
+  <small>${new Date(l.at).toLocaleString("fr-FR")}${l.ip?" · IP "+esc(l.ip):""}</small><small>${esc(summary(l))}</small></div>`).join("")||'<p class="mut">Aucune activité.</p>'
+}
+function csvLog(){
+  const q=s=>'"'+String(s??"").replace(/"/g,'""')+'"';
+  const lines=[["date","utilisateur","role","action","entite","id","ip","details"].join(",")].concat(LOG.map(l=>[l.at,l.user_id?tname(l.user_id):"visiteur",l.role||"",l.action,l.entity||"",l.entity_id||"",l.ip||"",JSON.stringify(l.details)].map(q).join(",")));
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+lines.join("\n")],{type:"text/csv"}));a.download="journal-activite.csv";a.click()
+}
+
+/* ---------- démarrage : connexion automatique ---------- */
+(async()=>{
+  if(!K||/COLLE/.test(K))return;
+  S=loadS();if(!S)return;
+  try{await afterAuth()}catch(e){clearS();view("login");msg("lmsg",e.message)}
+})();
+</script>
+</body>
+</html>

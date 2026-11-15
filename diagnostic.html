@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Diagnostic · SAV PRO CI</title>
+<style>
+body{margin:0;font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#0f2a52;background:#fff}
+main{max-width:760px;margin:0 auto;padding:18px clamp(14px,3vw,24px) 60px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:22px 0 8px}
+.mut{color:#52627d;font-size:14px}
+.card{background:linear-gradient(160deg,#173b70,#0f2a52);color:#fff;border-radius:14px;padding:6px 14px;border-bottom:3px solid #f7c948}
+.t{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}.t:last-child{border:0}
+.i{flex:none;width:22px;text-align:center;font-weight:700}
+.ok .i{color:#5ee08e}.ko .i{color:#ff8b95}.wa .i{color:#f7c948}.in .i{color:#9fb6d8}
+.t b{display:block}.t small{color:#c3d1e6;display:block}.fix{color:#f7c948;font-size:14px;margin-top:2px;display:block}
+.btn{border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer;background:#e63946;color:#fff;margin:6px 8px 0 0}
+.btn.g{background:#fff;color:#0f2a52;border:1px solid #dbe3ee}
+input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #dbe3ee;font:inherit;margin:4px 0}
+</style></head><body><main>
+<h1>Diagnostic SAV PRO CI</h1>
+<p class="mut">Teste le site (GitHub) et la base (Supabase). Appuie sur « Lancer le diagnostic » puis envoie-moi une capture ou le rapport copié.</p>
+<button class="btn" onclick="run()">Lancer le diagnostic</button>
+<button class="btn g" onclick="copyR()">Copier le rapport</button>
+
+<h2>1. Côté GitHub (fichiers du site)</h2><div class="card" id="g"></div>
+<h2>2. Côté Supabase (base et API)</h2><div class="card" id="s"></div>
+<h2>3. Test administrateur (facultatif)</h2>
+<div class="mut">Entre l'e-mail et le mot de passe du compte admin pour tester les droits d'écriture.</div>
+<input id="em" type="email" placeholder="E-mail admin" autocomplete="username">
+<input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
+<button class="btn" onclick="admin()">Tester l'admin</button>
+<div class="card" id="a" style="margin-top:10px"></div>
+
+<script src="config.js?v=2"></script>
+<script>
+const $=id=>document.getElementById(id);
+const C=window.SAV_CONFIG||{},U=C.SUPABASE_URL||"",K=C.SUPABASE_ANON_KEY||"";
+let REP=[];
+function add(box,st,title,detail,fix){
+  REP.push((st==="ok"?"[OK] ":st==="ko"?"[ERREUR] ":st==="wa"?"[ATTENTION] ":"[INFO] ")+title+(detail?" — "+detail:"")+(fix?" => "+fix:""));
+  const ic={ok:"✔",ko:"✖",wa:"!",in:"i"}[st];
+  box.insertAdjacentHTML("beforeend",`<div class="t ${st}"><span class="i">${ic}</span><div><b>${title}</b>${detail?`<small>${detail}</small>`:""}${fix?`<span class="fix">→ ${fix}</span>`:""}</div></div>`)
+}
+const H=(tok)=>({apikey:K,...(tok?{Authorization:"Bearer "+tok}:(/^sb_/.test(K)?{}:{Authorization:"Bearer "+K}))});
+async function exists(path){try{const r=await fetch(path+(path.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});return r.status}catch(e){return 0}}
+
+async function run(){
+  REP=[];$("g").innerHTML="";$("s").innerHTML="";const g=$("g"),s=$("s");
+  add(g,"in","Adresse testée",location.href);
+  for(const [f,hint] of [["index.html","Le fichier index.html doit être à la racine du dépôt."],["admin.html","Envoie admin.html à la racine du dépôt."],["config.js","Envoie config.js à la racine du dépôt."],["assets/img/0.jpg","Le dossier assets/img/ avec les 66 photos n'est pas publié."],["assets/img/65.jpg","Il manque des photos dans assets/img/."]]){
+    const c=await exists(f);
+    c===200?add(g,"ok",f+" présent"):add(g,"ko",f+" introuvable (code "+(c||"réseau")+")",null,hint)
+  }
+  /* config */
+  if(!U||!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(U))add(g,"ko","URL Supabase invalide dans config.js",U||"vide","Vérifie SUPABASE_URL dans config.js (sans / à la fin).");
+  else add(g,"ok","URL Supabase renseignée",U);
+  if(!K||/COLLE/.test(K))add(g,"ko","Clé publique absente dans config.js",null,"Remplace COLLE_ICI… par la clé publishable / anon public.");
+  else if(/^sb_secret|service_role/.test(K))add(g,"ko","Mauvaise clé : clé secrète détectée",null,"N'utilise JAMAIS la clé secrète. Prends la clé « publishable ».");
+  else add(g,"ok","Clé publique renseignée",K.slice(0,18)+"…");
+
+  /* Supabase */
+  if(!U||!K||/COLLE/.test(K)){add(s,"ko","Tests Supabase impossibles","config.js incomplet");return}
+  try{
+    const r=await fetch(U+"/rest/v1/products?select=id&limit=1",{headers:{...H(),Prefer:"count=exact",Range:"0-0"}});
+    const cr=r.headers.get("content-range")||"";let body="";try{body=await r.text()}catch(e){}
+    if(r.ok){
+      const n=(cr.split("/")[1]||"?");
+      n==="66"?add(s,"ok","Catalogue lisible : "+n+" produits"):n==="0"?add(s,"ko","La table products est vide",null,"Lance supabase/seed.sql dans le SQL Editor."):add(s,"wa","Catalogue lisible : "+n+" produits","Attendu : 66 si aucun ajout depuis l'import")
+    }else{
+      let j={};try{j=JSON.parse(body)}catch(e){}
+      const code=j.code||"",msg=j.message||body.slice(0,120);
+      let fix="Copie ce message et envoie-le moi.";
+      if(code==="42501"||/permission denied/i.test(msg))fix="Lance supabase/fix-acces.sql dans le SQL Editor (droits d'accès).";
+      else if(code==="PGRST205"||/schema cache|does not exist/i.test(msg))fix="La table n'existe pas : lance supabase/schema.sql puis seed.sql.";
+      else if(r.status===401||r.status===403||/api key|jwt/i.test(msg))fix="Clé refusée : recopie la clé publishable depuis Project Settings → API Keys dans config.js.";
+      add(s,"ko","Lecture du catalogue refusée (code "+r.status+")",(code?code+" · ":"")+msg,fix)
+    }
+  }catch(e){add(s,"ko","Supabase injoignable","Réseau ou URL incorrecte : "+e.message,"Vérifie la connexion et SUPABASE_URL ; ouvre l'URL du projet dans le navigateur.")}
+  try{
+    const r=await fetch(U+"/storage/v1/object/public/products/0.jpg",{method:"HEAD"});
+    r.ok?add(s,"ok","Photo en ligne dans le stockage (0.jpg)"):add(s,"in","Stockage : 0.jpg absent (code "+r.status+")","Normal : le site utilise alors assets/img/. Les photos passeront dans le stockage via admin.html.")
+  }catch(e){add(s,"wa","Stockage non testé",e.message)}
+  add(s,"in","Fin du diagnostic","Si tout est ✔ ici mais que le site reste vide : ouvre le site en navigation privée ou fais Ctrl+F5.")
+}
+
+async function admin(){
+  const a=$("a");a.innerHTML="";
+  if(!U||!K){add(a,"ko","config.js incomplet");return}
+  try{
+    const r=await fetch(U+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:K,"Content-Type":"application/json"},body:JSON.stringify({email:$("em").value.trim(),password:$("pw").value})});
+    const j=await r.json();
+    if(!r.ok){
+      const m=j.error_description||j.msg||j.message||"";
+      add(a,"ko","Connexion refusée",m,/confirm/i.test(m)?"Authentication → Users → ouvre l'utilisateur et confirme l'e-mail (Confirm user).":"Vérifie l'e-mail et le mot de passe dans Authentication → Users (ou réinitialise le mot de passe).");return
+    }
+    add(a,"ok","Connexion réussie");const T=j.access_token;
+    const q=await fetch(U+"/rest/v1/profiles?select=role,active",{headers:H(T)});
+    if(!q.ok){let t="";try{t=(await q.json()).message}catch(e){}add(a,"ko","Table profiles illisible (code "+q.status+")",t,"Lance supabase/v2-roles-commissions-audit.sql dans le SQL Editor.");return}
+    const pr=await q.json();
+    if(!pr.length)add(a,"ko","Aucun rôle pour ce compte",null,"Lance la requête « insert into public.profiles … » en commentaire dans v2-roles-commissions-audit.sql avec ton e-mail, ou attribue le rôle depuis l'onglet Équipe.");
+    else add(a,pr[0].active?"ok":"ko","Rôle : "+pr[0].role+(pr[0].active?"":" (compte désactivé)"));
+    add(a,"in","Connexion simple réussie","L'écriture exige aussi le code 2FA : ouvre admin.html pour activer la 2FA puis tester l'enregistrement.");
+    const up=await fetch(U+"/storage/v1/bucket/products",{headers:H(T)});
+    up.ok?add(a,"ok","Bucket de photos « products » présent"):add(a,"ko","Bucket « products » introuvable (code "+up.status+")",null,"Storage → New bucket : nom « products », cochez Public ; ou relance schema.sql.")
+  }catch(e){add(a,"ko","Erreur réseau",e.message)}
+}
+function copyR(){const t=REP.join("\n")||"Lance d'abord le diagnostic.";navigator.clipboard?.writeText(t).then(()=>alert("Rapport copié"),()=>prompt("Copie le rapport :",t))}
+</script></main></body></html>
