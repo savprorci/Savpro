@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · SAV PRO Côte d’Ivoire</title>
+<style>
+:root{--bg:#fff;--ink:#0f2a52;--mut:#52627d;--line:#dbe3ee;--blue:#173b70;--blue2:#0f2a52;--yl:#f7c948;--red:#e63946;--ok:#1a9e55}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px clamp(14px,3vw,24px);border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:5}
+h1{font-size:clamp(17px,3vw,21px);margin:0}h2{font-size:18px;margin:0 0 10px}
+main{max-width:980px;margin:0 auto;padding:16px clamp(14px,3vw,24px) 60px}
+.btn{border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--red);color:#fff;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(230,57,70,.25)}.btn:active{transform:scale(.97)}
+.btn.blue{background:var(--blue)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.sm{padding:7px 12px;font-size:14px}
+.card{background:linear-gradient(160deg,#173b70,#0f2a52);color:#fff;border-radius:16px;padding:14px;border-bottom:3px solid var(--yl);box-shadow:0 6px 18px rgba(15,42,82,.2)}
+.card .mut{color:#c3d1e6}.mut{color:var(--mut)}
+label{display:block;font-size:13px;margin:10px 0 4px;color:#c3d1e6}
+input,select,textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #3b68a8;background:rgba(255,255,255,.1);color:#fff;font:inherit}
+select option{color:#0f2a52}input::placeholder,textarea::placeholder{color:#aebfd9}
+.login{max-width:420px;margin:8vh auto 0}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:8px 16px;border-radius:999px;border:1px solid var(--line);cursor:pointer;background:#fff;transition:.2s}
+.tab.on{background:var(--yl);border-color:var(--yl);font-weight:700}
+.list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.row{display:flex;gap:12px;align-items:center}
+.thumb{width:64px;height:64px;border-radius:10px;background:#fff;object-fit:contain;flex:none}
+.grow{flex:1;min-width:0}.grow b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tag{font-size:12px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.15)}
+.tag.off{background:rgba(230,57,70,.35)}
+.bar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.bar input{flex:1 1 200px;background:#fff;color:var(--ink);border-color:var(--line)}
+.sheet{position:fixed;inset:0;background:rgba(15,42,82,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet.on{display:flex;animation:f .25s}.sheet .card{width:min(640px,100%);max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;animation:up .35s cubic-bezier(.22,.9,.3,1)}
+@keyframes f{from{opacity:0}}@keyframes up{from{transform:translateY(40px);opacity:0}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.chk{display:flex;gap:8px;align-items:center;margin-top:12px}.chk input{width:auto}
+.msg{padding:10px 12px;border-radius:10px;margin:10px 0;background:#fdecee;color:#a0202b;display:none}.msg.ok{background:#e6f6ec;color:#146c3b}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--blue2);color:#fff;padding:10px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.3s;z-index:30}.toast.on{opacity:1}
+.hide{display:none!important}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><h1>Admin · SAV PRO CI</h1><div class="row"><a class="btn ghost sm" href="index.html">Voir le site</a><button class="btn ghost sm hide" id="out" onclick="logout()">Déconnexion</button></div></header>
+<main>
+<section id="login" class="login card">
+  <h2>Connexion administrateur</h2>
+  <label>E-mail</label><input id="em" type="email" autocomplete="username">
+  <label>Mot de passe</label><input id="pw" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+  <div class="msg" id="lmsg"></div>
+  <button class="btn" style="margin-top:14px;width:100%" onclick="login()">Me connecter</button>
+</section>
+
+<section id="app" class="hide">
+  <div class="tabs"><div class="tab on" id="t1" onclick="tab(1)">Catalogue</div><div class="tab" id="t2" onclick="tab(2)">Demandes</div></div>
+  <div id="p1">
+    <div class="bar"><input id="q" placeholder="Rechercher un produit…" oninput="drawP()"><button class="btn" onclick="edit(null)">+ Nouveau produit</button></div>
+    <div class="list" id="plist"></div>
+  </div>
+  <div id="p2" class="hide"><div class="list" id="rlist"></div></div>
+</section>
+</main>
+
+<div class="sheet" id="sh" onclick="if(event.target===this)closeS()"><div class="card">
+  <h2 id="shT">Produit</h2>
+  <label>Nom</label><input id="f_name">
+  <div class="two"><div><label>Catégorie (vente)</label><select id="f_sc"></select></div><div><label>Prix de vente (FCFA)</label><input id="f_price" type="number" inputmode="numeric" placeholder="Sur devis si vide"></div></div>
+  <div class="two"><div><label>Catégorie (location)</label><select id="f_rc"></select></div><div><label>Prix par jour (FCFA)</label><input id="f_dp" type="number" inputmode="numeric"></div></div>
+  <label>Description</label><textarea id="f_desc" rows="3"></textarea>
+  <div class="chk"><input id="f_av" type="checkbox"><span>Disponible</span></div>
+  <div class="chk"><input id="f_feat" type="checkbox"><span>Mis en avant</span></div>
+  <label>Photo (JPEG ou PNG, redimensionnée automatiquement)</label><input id="f_file" type="file" accept="image/*">
+  <div class="msg" id="smsg"></div>
+  <div class="row" style="margin-top:14px;justify-content:space-between"><button class="btn ghost sm" style="color:#ffb3b9" id="delB" onclick="del()">Supprimer</button><div class="row"><button class="btn ghost sm" style="color:#fff;background:transparent" onclick="closeS()">Annuler</button><button class="btn" id="saveB" onclick="save()">Enregistrer</button></div></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js?v=2"></script>
+<script>
+const C=window.SAV_CONFIG||{},U=C.SUPABASE_URL,K=C.SUPABASE_ANON_KEY;
+const CATC=["Groupes électrogènes","Matériels & outillages chantiers","Matériels d’électricité","Pièces de rechange groupes"];
+const CATL=["Groupes électrogènes","Engins TP","Matériels de chantier"];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let T=sessionStorage.getItem("sav_t")||"",P=[],cur=null;
+if(!K||/COLLE/.test(K)){document.body.innerHTML='<main><p>Clé Supabase manquante : renseigne <b>config.js</b>.</p></main>'}
+const hdr=(extra={})=>({apikey:K,...(T?{Authorization:"Bearer "+T}:(/^sb_/.test(K)?{}:{Authorization:"Bearer "+K})),...extra});
+async function api(path,opt={}){const r=await fetch(U+path,{...opt,headers:hdr(opt.headers)});
+  if(!r.ok){let m="";try{m=(await r.json()).message||""}catch(e){}if(r.status===401){logout();throw new Error("Session expirée, reconnecte-toi.")}throw new Error(m||("Erreur "+r.status))}
+  const t=await r.text();return t?JSON.parse(t):null}
+const JSONH={"Content-Type":"application/json"};
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2400)}
+function msg(id,t,ok){const e=$(id);e.textContent=t;e.classList.toggle("ok",!!ok);e.style.display=t?"block":"none"}
+
+async function login(){
+  msg("lmsg","");
+  try{
+    const r=await fetch(U+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:K,...JSONH},body:JSON.stringify({email:$("em").value.trim(),password:$("pw").value})});
+    const j=await r.json();
+    if(!r.ok){msg("lmsg",j.error_description||j.msg||"Connexion impossible");return}
+    T=j.access_token;sessionStorage.setItem("sav_t",T);start()
+  }catch(e){msg("lmsg","Réseau indisponible. Réessaie.")}
+}
+function logout(){T="";sessionStorage.removeItem("sav_t");$("app").classList.add("hide");$("out").classList.add("hide");$("login").classList.remove("hide")}
+async function start(){
+  try{const a=await api("/rest/v1/admins?select=user_id");
+    if(!a||!a.length){msg("lmsg","Ce compte n’a pas les droits administrateur.");logout();return}
+    $("login").classList.add("hide");$("app").classList.remove("hide");$("out").classList.remove("hide");
+    $("f_sc").innerHTML='<option value="-1">Non vendu</option>'+CATC.map((c,i)=>`<option value="${i}">${c}</option>`).join("");
+    $("f_rc").innerHTML='<option value="-1">Non loué</option>'+CATL.map((c,i)=>`<option value="${i}">${c}</option>`).join("");
+    await loadP()
+  }catch(e){msg("lmsg",e.message);logout()}
+}
+function tab(n){$("p1").classList.toggle("hide",n!==1);$("p2").classList.toggle("hide",n!==2);$("t1").classList.toggle("on",n===1);$("t2").classList.toggle("on",n===2);if(n===2)loadR()}
+
+/* Catalogue */
+const fmt=n=>n==null?"Sur devis":new Intl.NumberFormat("fr-FR").format(n)+" FCFA";
+const imgOf=p=>p.image_url||(U+"/storage/v1/object/public/products/"+p.id+".jpg");
+document.addEventListener("error",e=>{const t=e.target;if(!t||t.tagName!=="IMG")return;const m=/\/products\/(\d+)\.jpg/.exec(t.src);if(m&&!t.dataset.fb){t.dataset.fb=1;t.src="assets/img/"+m[1]+".jpg"}else t.style.visibility="hidden"},true);
+async function loadP(){P=await api("/rest/v1/products?select=*&order=id");drawP()}
+function drawP(){
+  const q=$("q").value.trim().toLowerCase();
+  $("plist").innerHTML=P.filter(p=>!q||p.name.toLowerCase().includes(q)).map(p=>`
+  <div class="card"><div class="row"><img class="thumb" src="${esc(imgOf(p))}" alt="" loading="lazy">
+  <div class="grow"><b>${esc(p.name)}</b><div class="mut">${fmt(p.price)}</div>
+  <span class="tag ${p.available?"":"off"}">${p.available?"Disponible":"Indisponible"}</span></div>
+  <button class="btn blue sm" onclick="edit(${p.id})">Modifier</button></div></div>`).join("")||'<p class="mut">Aucun produit.</p>'
+}
+function edit(id){
+  cur=id==null?null:P.find(p=>p.id===id);const p=cur||{name:"",sale_category:0,price:null,rental_category:-1,daily_price:null,description:"",available:true,featured:false};
+  $("shT").textContent=cur?"Modifier le produit":"Nouveau produit";
+  $("f_name").value=p.name;$("f_sc").value=p.sale_category;$("f_rc").value=p.rental_category;
+  $("f_price").value=p.price??"";$("f_dp").value=p.daily_price??"";$("f_desc").value=p.description||"";
+  $("f_av").checked=!!p.available;$("f_feat").checked=!!p.featured;$("f_file").value="";
+  $("delB").classList.toggle("hide",!cur);msg("smsg","");$("sh").classList.add("on")
+}
+function closeS(){$("sh").classList.remove("on")}
+const num=v=>{v=String(v).trim();return v===""?null:Number(v)};
+async function resize(file){
+  const bmp=await createImageBitmap(file),m=900,k=Math.min(1,m/Math.max(bmp.width,bmp.height));
+  const c=document.createElement("canvas");c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0,c.width,c.height);
+  return new Promise(r=>c.toBlob(r,"image/jpeg",.82))
+}
+async function save(){
+  const name=$("f_name").value.trim();if(name.length<2){msg("smsg","Le nom est obligatoire.");return}
+  const body={name,sale_category:+$("f_sc").value,price:num($("f_price").value),rental_category:+$("f_rc").value,daily_price:num($("f_dp").value),description:$("f_desc").value.trim(),available:$("f_av").checked,featured:$("f_feat").checked};
+  const B=$("saveB");B.disabled=true;msg("smsg","Enregistrement…",true);
+  try{
+    let id;
+    if(cur){await api("/rest/v1/products?id=eq."+cur.id,{method:"PATCH",headers:JSONH,body:JSON.stringify(body)});id=cur.id}
+    else{const r=await api("/rest/v1/products",{method:"POST",headers:{...JSONH,Prefer:"return=representation"},body:JSON.stringify(body)});id=r[0].id}
+    const f=$("f_file").files[0];
+    if(f){
+      msg("smsg","Envoi de la photo…",true);
+      const blob=await resize(f);
+      await api("/storage/v1/object/products/"+id+".jpg",{method:"POST",headers:{"Content-Type":"image/jpeg","x-upsert":"true","cache-control":"max-age=3600"},body:blob});
+      await api("/rest/v1/products?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({image_url:U+"/storage/v1/object/public/products/"+id+".jpg?v="+Date.now()})})
+    }
+    closeS();toast("Enregistré · visible sur le site");await loadP()
+  }catch(e){msg("smsg",e.message)}finally{B.disabled=false}
+}
+async function del(){
+  if(!cur||!confirm("Supprimer « "+cur.name+" » ?"))return;
+  try{await api("/rest/v1/products?id=eq."+cur.id,{method:"DELETE"});closeS();toast("Produit supprimé");await loadP()}catch(e){msg("smsg",e.message)}
+}
+
+/* Demandes */
+const KIND={devis:"Devis",depannage:"Dépannage",commande:"Commande",autre:"Autre"};
+async function loadR(){
+  try{
+    const R=await api("/rest/v1/requests?select=*&order=created_at.desc&limit=100");
+    $("rlist").innerHTML=R.map(r=>{
+      const tel=String(r.phone||"").replace(/\D/g,""),wa=tel?("https://wa.me/"+(tel.length===10?"225"+tel:tel)):"";
+      const d=Object.entries(r.payload||{}).map(([k,v])=>`<div class="mut">${esc(k)} : ${esc(typeof v==="object"?JSON.stringify(v):v)}</div>`).join("");
+      return `<div class="card"><div class="row"><div class="grow"><b>${esc(KIND[r.kind]||r.kind)} · ${esc(r.name||"Sans nom")}</b><div class="mut">${new Date(r.created_at).toLocaleString("fr-FR")} · ${esc(r.phone||"")}</div></div>
+      <select style="width:auto" onchange="setS('${r.id}',this.value)">${["nouveau","en cours","traité"].map(s=>`<option ${s===r.status?"selected":""}>${s}</option>`).join("")}</select></div>${d}
+      ${wa?`<a class="btn sm" style="display:inline-block;margin-top:10px;text-decoration:none;background:#25D366" target="_blank" rel="noopener" href="${wa}">Répondre sur WhatsApp</a>`:""}</div>`}).join("")||'<p class="mut">Aucune demande pour le moment.</p>'
+  }catch(e){$("rlist").innerHTML='<p class="mut">'+esc(e.message)+'</p>'}
+}
+async function setS(id,s){try{await api("/rest/v1/requests?id=eq."+id,{method:"PATCH",headers:JSONH,body:JSON.stringify({status:s})});toast("Statut mis à jour")}catch(e){toast(e.message)}}
+
+if(T&&K&&!/COLLE/.test(K))start();
+</script>
+</body>
+</html>
