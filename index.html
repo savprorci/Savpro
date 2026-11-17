@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e63946">
+<meta name="application-name" content="SAV PRO">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SAV PRO">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" href="icons/favicon.ico">
 <title>SAV PRO Côte d’Ivoire — Énergie, engins & dépannage</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -215,6 +225,58 @@ h2{font-size:clamp(20px,2.6vw,25px)}
 .sp-tel .ic{width:26px;height:26px;color:#f7c948;stroke-width:1.6}
 .sp-wa{background:#25D366;border:1.5px solid #25D366}
 .sp-wa .wa-logo{width:30px;height:30px;flex:none;color:#fff}
+
+/* ===== v2 : noms de produits agrandis en majuscules ===== */
+.prod h4{font-size:clamp(15.5px,4.3vw,18.5px);font-weight:700;text-transform:uppercase;letter-spacing:.4px;line-height:1.22;min-height:46px}
+.prod .pr{font-size:clamp(19px,5vw,23px)}
+#detBox h1,#detBox h2,#detBox h3{text-transform:uppercase;letter-spacing:.4px;font-size:clamp(22px,6vw,30px);line-height:1.15}
+
+/* ===== v2 : Speed Dépannage en rouge et blanc ===== */
+#speed .stat b{font-size:clamp(24px,7vw,34px);white-space:nowrap}
+#speed{--card:#fff;--ink:#1b1b1f;--mut:#6b5558;--line:#f3c9cd;--yl:#e63946;--soft:rgba(230,57,70,.08)}
+#speed .sp-hero{background:linear-gradient(160deg,#b80d1b 0%,#e63946 100%);border-bottom:4px solid #fff;color:#fff;box-shadow:0 8px 22px rgba(230,57,70,.25)}
+#speed .sp-hero h1{color:#fff}
+#speed .sp-hero .mut{color:#ffe6e8!important}
+#speed .live{background:rgba(255,255,255,.2);color:#fff}
+#speed .live i{background:#fff}
+#speed .sp-tel{background:rgba(255,255,255,.14);border-color:#fff}
+#speed .sp-tel .ic{color:#fff}
+#speed .stat,#speed .opt,#speed .plan,#speed .card{background:#fff;color:#1b1b1f;border:1.5px solid #f3c9cd;border-top:4px solid #e63946;border-bottom:1.5px solid #f3c9cd;box-shadow:0 4px 14px rgba(230,57,70,.10)}
+#speed .stat b,#speed .plan em{color:#e63946}
+#speed .opt small,#speed .stat span{color:#6b5558}
+#speed .opt svg,#speed .opt .ic{color:#e63946}
+#speed .opt.on,#speed .plan.on{background:#fff1f2;border-color:#e63946}
+#speed .sec h2{color:#c1121f}
+#speed .fg label{color:#6b5558}
+#speed .fg input,#speed .fg textarea,#speed .fg select{background:#fff;color:#1b1b1f;border:1.5px solid #f3c9cd}
+#speed .fg input:focus,#speed .fg textarea:focus{border-color:#e63946;box-shadow:0 0 0 4px rgba(230,57,70,.15)}
+#speed .btn{background:#e63946;color:#fff}
+#speed .btn:hover{background:#c1121f}
+#speed .steps *{--ink:#1b1b1f}
+
+/* ===== PWA : bandeau d'installation ===== */
+.pwa-bar{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:linear-gradient(160deg,#173b70,#0f2a52);color:#fff;box-shadow:0 12px 30px rgba(15,42,82,.35);border-bottom:3px solid #f7c948;max-width:520px;margin:0 auto;animation:pwaIn .4s cubic-bezier(.22,.9,.3,1)}
+.pwa-bar img{width:44px;height:44px;border-radius:11px;flex:none}
+.pwa-bar div{flex:1;min-width:0;font-size:14px;line-height:1.3}.pwa-bar b{display:block;font-size:15px}
+.pwa-bar button{border:0;border-radius:11px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer;background:#e63946;color:#fff}
+.pwa-bar .x{background:transparent;color:#c3d1e6;padding:6px 8px;font-size:20px;line-height:1}
+@keyframes pwaIn{from{opacity:0;transform:translateY(20px)}}
+
+/* ===== v3 : fenêtres images agrandies, image entière visible ===== */
+.sld .im,.pi,.det .big{position:relative}
+.sld .im img,.pi img,.det .big img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px}
+.sld .im.cv img,.sld .im.cv video{padding:0;object-fit:cover}
+.sld .im video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0f2a52}
+.sld .im{height:170px}
+.sl{height:510px}
+.pi{height:140px}
+.det .big{height:340px}
+@media (min-width:900px){
+  .sld .im{width:370px;height:280px}
+  .sl{height:460px}
+  .pi{height:175px}
+  .det .big{height:470px}
+}
 </style>
 </head>
 <body>
@@ -323,14 +385,14 @@ h2{font-size:clamp(20px,2.6vw,25px)}
  <div class="fg"><label>Lieu d’intervention</label><input id="fl" placeholder="Ex : Zone industrielle de Yopougon"></div>
  <div class="fg"><label>Téléphone</label><input id="ft" type="tel" placeholder="+225 …"></div>
  <div class="err" id="fe"></div>
- <div class="pad"><button class="btn full" onclick="submitReq()"><svg class="ic"><use href="#bolt"/></svg>Envoyer la demande urgente</button></div>
+ <div class="pad"><button class="btn full" onclick="sendReq()"><svg class="ic"><use href="#bolt"/></svg>Envoyer la demande urgente</button></div>
 </div></section>
 
 <section id="track" class="screen"><div class="w"><div style="height:16px"></div><div class="card" id="tkCard"></div><div class="tl" id="tl"></div></div></section>
 
 <section id="parc" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Mon parc</h1><p class="mut" style="margin-top:6px">Vos équipements, leur état et l’appel d’un technicien en un clic.</p></div><div style="height:14px"></div><div id="parcBox"></div></div></section>
 <section id="espace" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Mon espace</h1><p class="mut" style="margin-top:6px">Accès client par e-mail et code PIN généré automatiquement.</p></div><div style="height:14px"></div><div id="espBox"></div></div></section>
-<section id="partners" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Espace partenaires</h1><p class="mut" style="margin-top:6px">Fournisseurs, installateurs et prestataires : même accès sécurisé par e-mail et code PIN.</p></div><div style="height:14px"></div><div id="parBox"></div></div></section>
+<section id="partners" class="screen"><div class="w"><div class="pad" style="padding-top:18px"><h1>Espace partenaires</h1><p class="mut" style="margin-top:6px">Fournisseurs, installateurs et prestataires : vendez avec SAV PRO et touchez 10 % de commission sur chaque vente.</p></div><div style="height:14px"></div><div class="pad"><div class="card" style="padding:16px"><h2 style="margin:0 0 6px">Espace professionnel</h2><p class="mut" style="margin:0 0 12px">Partenaires, techniciens et administrateurs : connexion sécurisée avec code à 2 facteurs (2FA), gestion et création de contenu, suivi des ventes et des commissions.</p><a class="btn full" href="admin.html" style="text-decoration:none;display:block;text-align:center">Se connecter à l’espace pro</a></div></div><div id="parBox" style="display:none"></div></div></section>
 
 <footer class="ft"><div class="w pad"><h2>SAV PRO Côte d’Ivoire</h2>
  <a href="https://wa.me/2250708534131" target="_blank" rel="noopener"><svg class="ic"><use href="#chat"/></svg>WhatsApp : +225 07 08 53 41 31</a>
@@ -454,7 +516,7 @@ const LS=(k,v)=>{try{if(v===undefined){const s=localStorage.getItem(k);return s?
 const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
 let DB=LS(KEY)||JSON.parse(JSON.stringify(CATALOG));
 const save=()=>LS(KEY,DB);
-let cart={},cat=-1,lc=-1,need=-1,plan=2,tick=null,admin=false,cur="home",H=[],cp=0,ct=null,tmpImg=null,dctx="c",si=0,st=null,SESS={client:null,partner:null},authTab={client:"login",partner:"login"},pinShow=null,tries={},localEdited=false;
+let cart={},cat=-1,lc=-1,need=-1,plan=2,tick=null,admin=false,cur="home",H=[],cp=0,ct=null,tmpImg=null,dctx="c",si=0,st=null,SESS={client:null,partner:null},authTab={client:"login",partner:"login"},pinShow=null,tries={};
 const SBU=(window.SAV_CONFIG||{}).SUPABASE_URL||"";
 const src=p=>p.img||(SBU?SBU+"/storage/v1/object/public/products/"+p.id+".jpg":(IMG[p.id]||"assets/img/"+p.id+".jpg"));
 /* photo introuvable dans le stockage : repli sur assets/img/, sinon masquée */
@@ -462,7 +524,7 @@ document.addEventListener("error",e=>{const t=e.target;if(!t||t.tagName!=="IMG")
 const price=(p,x)=>x==="l"?(p.pj?fmt(p.pj)+" / jour":"Tarif / jour sur devis"):(p.p?fmt(p.p):"Sur devis");
 function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2600)}
 /* navigation */
-function show(){document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===cur));const m={detail:dctx==="l"?"location":"shop",domain:"domains",track:"speed"}[cur]||cur;document.querySelectorAll(".ni").forEach(n=>n.classList.toggle("on",n.dataset.s===m));$("bk").style.display=cur==="home"?"none":"grid";$("main").scrollTop=0;document.querySelector(".app").classList.remove("cmp");if(cur==="parc")renderParc();if(cur==="espace")renderAuth("client");if(cur==="partners")renderAuth("partner");if(cur==="shop")drawShop();if(cur==="location")drawLoc();if(cur!=="espace"&&cur!=="partners")pinShow=null}
+function show(){try{logEv("page_vue",{page:cur})}catch(e){}document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===cur));const m={detail:dctx==="l"?"location":"shop",domain:"domains",track:"speed"}[cur]||cur;document.querySelectorAll(".ni").forEach(n=>n.classList.toggle("on",n.dataset.s===m));$("bk").style.display=cur==="home"?"none":"grid";$("main").scrollTop=0;document.querySelector(".app").classList.remove("cmp");if(cur==="parc")renderParc();if(cur==="espace")renderAuth("client");if(cur==="partners")renderAuth("partner");if(cur==="shop")drawShop();if(cur==="location")drawLoc()}
 function go(id){if(id!==cur)H.push(cur);cur=id;show()}
 function nav(id){H=[];cur=id;if(id==="shop")cat=-1;if(id==="location")lc=-1;show()}
 function back(){cur=H.pop()||"home";show()}
@@ -470,16 +532,16 @@ function menuOpen(){$("sh").innerHTML=`<div class="row" style="justify-content:s
 function shClose(){$("sheet").classList.remove("on")}
 function onSearch(){if(cur!=="shop"&&cur!=="location")go("shop");cur==="shop"?drawShop():drawLoc()}
 /* accès admin : 8 clics sur le logo */
-function secret(){if(REMOTE){toast("Modifie le catalogue depuis admin.html");return}cp++;clearTimeout(ct);ct=setTimeout(()=>cp=0,2500);if(cp>=8){cp=0;admin=!admin;toast(admin?"Mode administrateur activé":"Mode administrateur désactivé");refresh();if(admin&&cur==="home")go("shop")}}
+function secret(){if(typeof REMOTE!=="undefined"&&REMOTE){toast("Modifie le catalogue depuis admin.html");return}cp++;clearTimeout(ct);ct=setTimeout(()=>cp=0,2500);if(cp>=8){cp=0;admin=!admin;toast(admin?"Mode administrateur activé":"Mode administrateur désactivé");refresh();if(admin&&cur==="home")go("shop")}}
 function refresh(){home();if(cur==="shop")drawShop();if(cur==="location")drawLoc()}
 /* produits */
-function card(p,x){return `<div class="prod">${p.a?"":'<span class="off">Indisponible</span>'}<div class="pi" onclick="openP(${p.id},'${x}')"><img loading="lazy" src="${esc(src(p))}" alt=""></div><h4 onclick="openP(${p.id},'${x}')">${esc(p.n)}</h4><div class="pr">${price(p,x)}</div>${admin?`<div class="adm"><div class="ib" onclick="editP(${p.id})">${ic("edit")}</div><div class="ib" onclick="delP(${p.id})">${ic("trash")}</div></div>`:`<button class="btn sm" ${p.a?"":"disabled"} onclick="add(${p.id},'${x}')">${ic("plus")}${(x==="l"?p.pj:p.p)?"Ajouter":"Devis"}</button>`}</div>`}
+function card(p,x){return `<div class="prod">${p.a?"":'<span class="off">Indisponible</span>'}<div class="pi" onclick="openP(${p.id},'${x}')"><img loading="lazy" src="${src(p)}" alt=""></div><h4 onclick="openP(${p.id},'${x}')">${esc(p.n)}</h4><div class="pr">${price(p,x)}</div>${admin?`<div class="adm"><div class="ib" onclick="editP(${p.id})">${ic("edit")}</div><div class="ib" onclick="delP(${p.id})">${ic("trash")}</div></div>`:`<button class="btn sm" ${p.a?"":"disabled"} onclick="add(${p.id},'${x}')">${ic("plus")}${(x==="l"?p.pj:p.p)?"Ajouter":"Devis"}</button>`}</div>`}
 const chips=(L,cur_,fn)=>`<div class="chip ${cur_<0?"on":""}" onclick="${fn}(-1)">Tout</div>`+L.map((c,i)=>`<div class="chip ${cur_===i?"on":""}" onclick="${fn}(${i})">${c[1]}</div>`).join("");
 const setCat=i=>{cat=i;drawShop();home()},setLoc=i=>{lc=i;drawLoc()},homeCat=i=>{cat=i;go("shop")};
 const abar=(id)=>{const a=$(id);a.style.display=admin?"flex":"none";a.innerHTML=admin?`${ic("lock")}<span>Mode admin</span><button class="btn sm" onclick="editP(null)">${ic("plus")}Ajouter un produit</button><button class="btn sm ghost" onclick="resetDB()">Réinitialiser</button><button class="btn sm ghost" onclick="admin=false;refresh();toast('Mode administrateur désactivé')">Quitter</button>`:""};
 function drawShop(){const q=hq.value.trim().toLowerCase();const l=DB.filter(p=>p.c>=0&&(cat<0||p.c===cat)&&p.n.toLowerCase().includes(q));$("shopProds").innerHTML=l.map(p=>card(p,"c")).join("")||'<p class="mut" style="grid-column:1/-1;padding:20px 0">Aucun produit trouvé.</p>';$("countS").textContent=l.length+" article(s)";$("chipsS").innerHTML=chips(CATC,cat,"setCat");abar("abarS")}
 function drawLoc(){const q=hq.value.trim().toLowerCase();const l=DB.filter(p=>p.r>=0&&(lc<0||p.r===lc)&&p.n.toLowerCase().includes(q));$("locProds").innerHTML=l.map(p=>card(p,"l")).join("")||'<p class="mut" style="grid-column:1/-1;padding:20px 0">Aucun équipement trouvé.</p>';$("countL").textContent=l.length+" équipement(s)";$("chipsL").innerHTML=chips(CATL,lc,"setLoc");abar("abarL")}
-function openP(id,x){dctx=x;const p=DB.find(v=>v.id===id);$("detBox").innerHTML=`<div class="big"><img src="${esc(src(p))}" alt=""></div><div style="display:grid;gap:12px;align-content:start;justify-items:start"><span class="mut">${x==="l"?"Location · "+CATL[p.r][1]:CATC[p.c][1]}</span><h1>${esc(p.n)}</h1><div class="pr" style="font-size:32px">${price(p,x)}</div><p class="mut" style="font-size:15px">${esc(p.d||"Contactez-nous pour le prix, la disponibilité et les conditions.")}</p><div class="tag"><i class="dot ${p.a?"g":"r"}"></i>${p.a?"Disponible":"Indisponible"}</div>${admin?`<button class="btn" onclick="editP(${p.id})">${ic("edit")}Modifier</button>`:`<button class="btn" ${p.a?"":"disabled"} onclick="add(${p.id},'${x}')">${ic("cart")}Ajouter à ma demande</button><a class="btn yl" target="_blank" rel="noopener" href="${wa("Bonjour SAV PRO, je souhaite un devis pour : "+p.n)}">${ic("chat")}Devis par WhatsApp</a>`}<button class="btn ghost" onclick="back()">${ic("back")}Retour</button></div>`;go("detail")}
+function openP(id,x){try{logEv("produit_vu",{id:id})}catch(e){}dctx=x;const p=DB.find(v=>v.id===id);$("detBox").innerHTML=`<div class="big"><img src="${src(p)}" alt=""></div><div style="display:grid;gap:12px;align-content:start;justify-items:start"><span class="mut">${x==="l"?"Location · "+CATL[p.r][1]:CATC[p.c][1]}</span><h1>${esc(p.n)}</h1><div class="pr" style="font-size:32px">${price(p,x)}</div><p class="mut" style="font-size:15px">${esc(p.d||"Contactez-nous pour le prix, la disponibilité et les conditions.")}</p><div class="tag"><i class="dot ${p.a?"g":"r"}"></i>${p.a?"Disponible":"Indisponible"}</div>${admin?`<button class="btn" onclick="editP(${p.id})">${ic("edit")}Modifier</button>`:`<button class="btn" ${p.a?"":"disabled"} onclick="add(${p.id},'${x}')">${ic("cart")}Ajouter à ma demande</button><a class="btn yl" target="_blank" rel="noopener" href="${wa("Bonjour SAV PRO, je souhaite un devis pour : "+p.n)}">${ic("chat")}Devis par WhatsApp</a>`}<button class="btn ghost" onclick="back()">${ic("back")}Retour</button></div>`;go("detail")}
 /* panier / devis */
 function add(id,x){cart[id]=(cart[id]||0)+1;cnt();toast("Ajouté à votre demande")}
 function cnt(){$("cc").textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
@@ -497,29 +559,41 @@ function editP(id){const p=id==null?{id:null,n:"",c:cur==="location"?-1:Math.max
 <div class="fg"><label><input id="eh" type="checkbox" style="width:auto" ${p.h?"checked":""}> Afficher en vedette sur l’accueil</label></div>
 <button class="btn full" onclick="saveP(${id})">${ic("check")}Enregistrer</button>`;$("sheet").classList.add("on")}
 function pick(el){const f=el.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,340/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);tmpImg=c.toDataURL("image/jpeg",.75)};im.src=r.result};r.readAsDataURL(f)}
-function saveP(id){const n=$("en").value.trim();const c=+$("ec").value,r=+$("er").value;if(n.length<2){toast("Nom requis");return}if(c<0&&r<0){toast("Choisissez le catalogue ou la location");return}const v={n,c,r,p:+$("ep").value||null,pj:+$("ej").value||null,d:$("ed").value.trim(),a:$("ea").checked?1:0,h:$("eh").checked?1:0};if(id==null){const p={id:Math.max(0,...DB.map(x=>x.id))+1,...v};if(tmpImg)p.img=tmpImg;DB.push(p)}else{const p=DB.find(x=>x.id===id);Object.assign(p,v);if(tmpImg)p.img=tmpImg}localEdited=true;save();shClose();refresh();if(cur==="detail")back();toast("Produit enregistré")}
-function delP(id){const p=DB.find(x=>x.id===id);if(!confirm("Supprimer « "+p.n+" » ?"))return;DB=DB.filter(x=>x.id!==id);delete cart[id];cnt();localEdited=true;save();refresh()}
-function resetDB(){if(!confirm("Rétablir le catalogue d’origine ? Vos modifications seront perdues."))return;DB=JSON.parse(JSON.stringify(CATALOG));localEdited=false;save();refresh()}
+function saveP(id){const n=$("en").value.trim();const c=+$("ec").value,r=+$("er").value;if(n.length<2){toast("Nom requis");return}if(c<0&&r<0){toast("Choisissez le catalogue ou la location");return}const v={n,c,r,p:+$("ep").value||null,pj:+$("ej").value||null,d:$("ed").value.trim(),a:$("ea").checked?1:0,h:$("eh").checked?1:0};if(id==null){const p={id:Math.max(0,...DB.map(x=>x.id))+1,...v};if(tmpImg)p.img=tmpImg;DB.push(p)}else{const p=DB.find(x=>x.id===id);Object.assign(p,v);if(tmpImg)p.img=tmpImg}save();shClose();refresh();if(cur==="detail")back();toast("Produit enregistré")}
+function delP(id){const p=DB.find(x=>x.id===id);if(!confirm("Supprimer « "+p.n+" » ?"))return;DB=DB.filter(x=>x.id!==id);delete cart[id];cnt();save();refresh()}
+function resetDB(){if(!confirm("Rétablir le catalogue d’origine ? Vos modifications seront perdues."))return;DB=JSON.parse(JSON.stringify(CATALOG));save();refresh()}
 /* accueil : slider, grille, catalogue */
 const imOf=n=>{const p=DB.find(x=>x.n.includes(n));return p?src(p):""};
-function SL(){const nc=DB.filter(p=>p.c>=0).length,nl=DB.filter(p=>p.r>=0).length;return[
+function SLdef(){const nc=DB.filter(p=>p.c>=0).length,nl=DB.filter(p=>p.r>=0).length;return[
 {t:"ZÉRO PANNE.<br>ÉNERGIE CONTINUE.",p:"Équipements, pièces, location d’engins et dépannage express 24/7 pour l’industrie ivoirienne.",im:"Cummins",pg:"shop",cta:"Voir le catalogue"},
 {t:"CATALOGUE",p:`${nc} références : groupes électrogènes, matériels et outillages de chantier, matériels d’électricité, pièces de rechange pour groupes.`,im:"ATS 400",pg:"shop",cta:"Parcourir"},
 {t:"DOMAINES COUVERTS",p:`${DOM.length} domaines avec fiches techniques détaillées : ${DOM.slice(0,4).map(d=>d.t.toLowerCase()).join(", ")}…`,im:"NSX250",pg:"domains",cta:"Fiches techniques"},
 {t:"LOCATION & ENGINS",p:`${nl} équipements à la journée : groupes électrogènes, engins TP et matériels de chantier.`,im:"Tractopelle",pg:"location",cta:"Voir la location"},
 {t:"SPEED DÉPANNAGE",p:"Maintenance, dépannage, réparations, fourniture avec ou sans pose de matériels et de pièces de rechange.",im:"DSE7320",pg:"speed",cta:"En savoir plus"},
 {t:"MON ESPACE",p:"Accès client par e-mail et code PIN généré automatiquement : profil, parc et suivi des interventions.",im:"Onduleur hybride",pg:"espace",cta:"Accéder"},
-{t:"ESPACE PARTENAIRES",p:"Rejoignez le réseau SAV PRO : fournisseurs, installateurs et prestataires, avec le même accès sécurisé.",im:"Chargeuse",pg:"partners",cta:"Devenir partenaire"}]}
-function slide(n){const L=SL();si=(n+L.length)%L.length;document.querySelectorAll(".sld").forEach((e,i)=>e.classList.toggle("on",i===si));document.querySelectorAll("#dots i").forEach((e,i)=>e.classList.toggle("on",i===si));$("slcta").innerHTML=L[si].cta+ic("arrow");$("slcta").onclick=()=>go(L[si].pg)}
-function slides(){const L=SL();$("slides").innerHTML=L.map(s=>`<div class="sld"><div class="im"><img src="${imOf(s.im)}" alt=""></div><div class="tx"><h1>${s.t}</h1><p>${s.p}</p></div></div>`).join("");$("dots").innerHTML=L.map((s,i)=>`<i onclick="slide(${i});auto()"></i>`).join("");slide(si)}
+{t:"ESPACE PARTENAIRES",p:"Rejoignez le réseau SAV PRO : vendez vos produits et touchez 10 % de commission sur chaque vente.",im:"Chargeuse",pg:"partners",cta:"Devenir partenaire"}]}
+const escS=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function SL(){
+  const A=window.SAV_SLIDES;if(!A||!A.length)return SLdef();
+  const nc=DB.filter(p=>p.c>=0).length,nl=DB.filter(p=>p.r>=0).length;
+  const rep=t=>String(t||"").replace(/\{nc\}/g,nc).replace(/\{nl\}/g,nl).replace(/\{dom\}/g,DOM.length);
+  return A.map(s=>({t:escS(rep(s.title)).replace(/\n/g,"<br>"),p:escS(rep(s.body)),im:s.product_ref||"",mt:s.media_type,mu:s.media_url,pg:s.cta_page||"shop",cta:s.cta_label||"En savoir plus"}))
+}
+function slMedia(s){
+  if(s.mt==="video"&&s.mu)return `<div class="im cv"><video src="${escS(s.mu)}" muted loop playsinline preload="metadata" aria-hidden="true"></video></div>`;
+  if(s.mt==="image"&&s.mu)return `<div class="im cv"><img src="${escS(s.mu)}" alt=""></div>`;
+  return `<div class="im"><img src="${imOf(s.im)}" alt=""></div>`
+}
+function slide(n){const L=SL();si=(n+L.length)%L.length;document.querySelectorAll(".sld").forEach((e,i)=>{e.classList.toggle("on",i===si);const v=e.querySelector("video");if(v){if(i===si){try{v.currentTime=0}catch(x){}v.play().catch(()=>{})}else v.pause()}});document.querySelectorAll("#dots i").forEach((e,i)=>e.classList.toggle("on",i===si));$("slcta").innerHTML=L[si].cta+ic("arrow");$("slcta").onclick=()=>go(L[si].pg)}
+function slides(){const L=SL();$("slides").innerHTML=L.map(s=>`<div class="sld">${slMedia(s)}<div class="tx"><h1>${s.t}</h1><p>${s.p}</p></div></div>`).join("");$("dots").innerHTML=L.map((s,i)=>`<i onclick="slide(${i});auto()"></i>`).join("");slide(si)}
 function auto(){clearInterval(st);st=setInterval(()=>slide(si+1),5500)}
 function home(){$("tiles").innerHTML=[["shop","grid","Catalogue","Vente"],["location","truck","Location","Engins & groupes"],["speed","bolt","Speed","Dépannage 24/7"]].map(t=>`<div class="tile" onclick="nav('${t[0]}')">${ic(t[1])}<b>${t[2]}</b><span>${t[3]}</span></div>`).join("");$("homeChips").innerHTML=CATC.map((c,i)=>`<div class="chip" onclick="homeCat(${i})">${c[1]}</div>`).join("");$("homeProds").innerHTML=DB.filter(p=>p.c>=0&&p.h).slice(0,8).map(p=>card(p,"c")).join("");slides()}
 /* domaines couverts */
 function domList(){$("domList").innerHTML=DOM.map((d,i)=>`<div class="opt" onclick="openD(${i})">${ic(d.i)}${d.t}<small>${d.lead.slice(0,92)}…</small></div>`).join("")}
 function openD(i){const d=DOM[i];$("domBox").innerHTML=`<div class="pad" style="padding-top:18px"><div class="sn" style="width:54px;height:54px;margin-bottom:12px">${ic(d.i)}</div><h1>${d.t}</h1><p class="mut" style="margin:10px 0 18px;font-size:16px">${d.lead}</p></div>`+d.S.map(s=>`<div class="card"><h3>${s[0]}</h3><ul>${s[1].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")+`<div class="pad" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">${d.loc?`<button class="btn" onclick="go('location')">${ic("truck")}Voir la location d’engins</button>`:`<button class="btn" onclick="cat=${d.cat};go('shop')">${ic("grid")}Voir les produits du catalogue</button>`}<button class="btn yl" onclick="need=1;pick2();go('speed')">${ic("bolt")}Demander un dépannage</button><a class="btn ghost" target="_blank" rel="noopener" href="${wa("Bonjour SAV PRO, je souhaite des informations sur : "+d.t)}">${ic("chat")}Poser une question sur WhatsApp</a></div>`;go("domain")}
 /* speed & suivi */
-function submitReq(){const e=$("fe");if(need<0||fd.value.trim().length<5||fl.value.trim().length<3||ft.value.replace(/\D/g,"").length<8){e.textContent="Choisissez un besoin et renseignez description, lieu et téléphone valide.";e.style.display="block";return}e.style.display="none";track("SAV-"+new Date().getFullYear()+"-"+Math.floor(1000+Math.random()*9000),NEEDS[need][1],fl.value.trim(),fd.value.trim(),ft.value.trim())}
-function track(id,label,lieu,desc,tel){try{postRequest("depannage",tel,{reference:id,besoin:label,lieu:lieu,description:desc,niveau:PLANS[plan][0]})}catch(e){}let s=0;const P=PLANS[plan];const msg=`Bonjour SAV PRO, demande ${id}\nBesoin : ${label}\nLieu : ${lieu}\nDescription : ${desc||"-"}\nTéléphone : ${tel||"-"}\nNiveau : ${P[0]}`;$("tkCard").innerHTML=`<div class="row" style="justify-content:space-between"><b>Dossier #${id}</b><span class="tag" style="margin:0;color:var(--yl)">Niveau ${P[0]}</span></div><p class="mut" style="margin-top:6px">${esc(label)} · ${esc(lieu)}</p><p class="tag" style="color:var(--ok)">${ic("alert")}Intervention sous ${P[1]} garantie</p><a class="btn full" style="margin-top:14px" target="_blank" rel="noopener" href="${wa(msg)}">${ic("chat")}Envoyer la demande à SAV PRO (WhatsApp)</a>`;const r=()=>{$("tl").innerHTML=STEPS.map((x,i)=>`<div class="ti ${i<s?"done":i===s?"now":""}"><div class="sn">${ic(i<s?"check":x[2])}</div><div><h5>${x[0]}</h5><p>${x[1]}</p></div></div>`).join("")};r();go("track");clearInterval(tick);tick=setInterval(()=>{if(s<STEPS.length-1){s++;r()}else{r();clearInterval(tick)}},3500);toast("Demande enregistrée · envoyez-la par WhatsApp pour confirmation")}
+function sendReq(){const e=$("fe");if(need<0||fd.value.trim().length<5||fl.value.trim().length<3||ft.value.replace(/\D/g,"").length<8){e.textContent="Choisissez un besoin et renseignez description, lieu et téléphone valide.";e.style.display="block";return}e.style.display="none";track("SAV-"+new Date().getFullYear()+"-"+Math.floor(1000+Math.random()*9000),NEEDS[need][1],fl.value.trim(),fd.value.trim(),ft.value.trim())}
+function track(id,label,lieu,desc,tel){try{sbReq("depannage",tel,{reference:id,besoin:label,lieu:lieu,description:desc,niveau:PLANS[plan][0]});logEv("demande_depannage",{reference:id,niveau:PLANS[plan][0]})}catch(e){}let s=0;const P=PLANS[plan];const msg=`Bonjour SAV PRO, demande ${id}\nBesoin : ${label}\nLieu : ${lieu}\nDescription : ${desc||"-"}\nTéléphone : ${tel||"-"}\nNiveau : ${P[0]}`;$("tkCard").innerHTML=`<div class="row" style="justify-content:space-between"><b>Dossier #${id}</b><span class="tag" style="margin:0;color:var(--yl)">Niveau ${P[0]}</span></div><p class="mut" style="margin-top:6px">${esc(label)} · ${esc(lieu)}</p><p class="tag" style="color:var(--ok)">${ic("alert")}Intervention sous ${P[1]} garantie</p><a class="btn full" style="margin-top:14px" target="_blank" rel="noopener" href="${wa(msg)}">${ic("chat")}Envoyer la demande à SAV PRO (WhatsApp)</a>`;const r=()=>{$("tl").innerHTML=STEPS.map((x,i)=>`<div class="ti ${i<s?"done":i===s?"now":""}"><div class="sn">${ic(i<s?"check":x[2])}</div><div><h5>${x[0]}</h5><p>${x[1]}</p></div></div>`).join("")};r();go("track");clearInterval(tick);tick=setInterval(()=>{if(s<STEPS.length-1){s++;r()}else{r();clearInterval(tick)}},3500);toast("Demande enregistrée · envoyez-la par WhatsApp pour confirmation")}
 function pick2(){document.querySelectorAll("#needs .opt").forEach((o,i)=>o.classList.toggle("on",i===need))}
 function pl(){$("plans").innerHTML=PLANS.map((p,i)=>`<div class="plan ${i===plan?"on":""}" onclick="plan=${i};pl()"><b>${p[0]}</b><em>${p[1]}</em><span>${p[2]}</span></div>`).join("")}
 /* Mon espace / Espace partenaires : e-mail + code PIN */
@@ -563,19 +637,107 @@ const SB=window.SAV_CONFIG||{},SBOK=!!(SB.SUPABASE_URL&&SB.SUPABASE_ANON_KEY&&!/
 let REMOTE=false;
 const sbH=()=>/^sb_/.test(SB.SUPABASE_ANON_KEY)?{apikey:SB.SUPABASE_ANON_KEY}:{apikey:SB.SUPABASE_ANON_KEY,Authorization:"Bearer "+SB.SUPABASE_ANON_KEY};
 async function loadRemote(){
-  if(!SBOK||localEdited)return;
+  if(!SBOK)return;
   try{
     const r=await fetch(SB.SUPABASE_URL+"/rest/v1/products?select=*&order=id",{headers:sbH()});
     if(!r.ok)throw 0;const a=await r.json();if(!Array.isArray(a)||!a.length)throw 0;
     DB=a.map(x=>({id:x.id,n:x.name,c:x.sale_category,p:x.price,h:x.featured?1:0,a:x.available?1:0,d:x.description||"",r:x.rental_category,pj:x.daily_price,img:x.image_url||undefined}));
     REMOTE=true;admin=false;refresh()
-  }catch(e){console.warn("[SAV PRO] Supabase indisponible, repli sur le catalogue local",e)}
+  }catch(e){}
 }
-function postRequest(kind,phone,payload){
+function sbReq(kind,phone,payload){
   if(!SBOK)return;
-  fetch(SB.SUPABASE_URL+"/rest/v1/requests",{method:"POST",headers:{...sbH(),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({kind,phone:String(phone||"").slice(0,40),payload})}).catch(e=>console.warn("[SAV PRO] Envoi Supabase échoué",e))
+  fetch(SB.SUPABASE_URL+"/rest/v1/requests",{method:"POST",headers:{...sbH(),"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({kind,phone:String(phone||"").slice(0,40),payload})}).catch(()=>{})
 }
-loadRemote();
+function logEv(action,details){
+  if(!SBOK)return;
+  try{fetch(SB.SUPABASE_URL+"/rest/v1/rpc/log_event",{method:"POST",headers:{...sbH(),"Content-Type":"application/json"},body:JSON.stringify({p_action:action,p_details:details||{}}),keepalive:true}).catch(()=>{})}catch(e){}
+}
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("a[href]");if(!a)return;const h=a.getAttribute("href")||"";
+  if(h.startsWith("tel:"))logEv("appel_clic",{lien:h.slice(0,30)});else if(h.includes("wa.me"))logEv("whatsapp_clic",{page:cur})},true);
+try{if(!sessionStorage.getItem("sav_visite")){sessionStorage.setItem("sav_visite","1");logEv("visite",{ref:(document.referrer||"").slice(0,120),ecran:innerWidth+"x"+innerHeight})}}catch(e){}
+/* ===== PWA : installation, raccourcis, hors ligne ===== */
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+try{const g=new URLSearchParams(location.search).get("go");if(g&&document.getElementById(g))nav(g)}catch(e){}
+(function(){
+  const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  if(standalone)return;
+  const DISMISS="pwa_dismiss",now=Date.now();
+  const dismissed=()=>{try{return now-(+localStorage.getItem(DISMISS)||0)<14*864e5}catch(e){return false}};
+  let ev=null,bar=null;
+  const hide=()=>{if(bar){bar.remove();bar=null}};
+  const make=(title,text,btn,onclick)=>{if(bar||dismissed())return;bar=document.createElement("div");bar.className="pwa-bar";
+    bar.innerHTML='<img src="icons/icon-192.png" alt=""><div><b>'+title+'</b>'+text+'</div>'+(btn?'<button type="button">'+btn+'</button>':'')+'<button type="button" class="x" aria-label="Fermer">×</button>';
+    const bs=bar.querySelectorAll("button");if(btn)bs[0].onclick=onclick;
+    bs[bs.length-1].onclick=()=>{try{localStorage.setItem(DISMISS,String(Date.now()))}catch(e){}hide()};
+    document.body.appendChild(bar)};
+  window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e;setTimeout(()=>make("Installer SAV PRO","Accès rapide depuis ton écran d’accueil, même avec peu de réseau.","Installer",async()=>{hide();ev.prompt();try{await ev.userChoice}catch(x){}ev=null}),4000)});
+  window.addEventListener("appinstalled",()=>{hide();try{logEv("page_vue",{page:"pwa_installee"})}catch(e){}});
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+  if(ios)setTimeout(()=>make("Installer SAV PRO","Appuie sur Partager puis « Sur l’écran d’accueil ».","",null),5000);
+})();
+async function loadSlides(){
+  if(!SBOK)return;
+  try{
+    const r=await fetch(SB.SUPABASE_URL+"/rest/v1/slides?select=*&active=eq.true&order=position.asc,id.asc",{headers:sbH()});
+    if(!r.ok)throw 0;const a=await r.json();
+    if(Array.isArray(a)&&a.length){window.SAV_SLIDES=a;si=0;slides();auto()}
+  }catch(e){}
+}
+/* ===== v4 : apparence (fond d'écran, couleurs des blocs, épaisseur des textes d'articles) ===== */
+const THEME_KEY="sav_theme";
+const okHex=h=>/^#[0-9a-f]{6}$/i.test(h||"");
+function hexRgb(h){h=String(h||"").replace("#","");if(h.length===3)h=h.split("").map(c=>c+c).join("");if(!/^[0-9a-f]{6}$/i.test(h))return null;const n=parseInt(h,16);return[n>>16&255,n>>8&255,n&255]}
+function lumOf(h){const c=hexRgb(h);if(!c)return 0;const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return .2126*f(c[0])+.7152*f(c[1])+.0722*f(c[2])}
+function darken(h,k){const c=hexRgb(h);return c?"#"+c.map(v=>Math.round(v*k).toString(16).padStart(2,"0")).join(""):h}
+const cssUrl=u=>String(u).replace(/["'\\\s]/g,x=>encodeURIComponent(x)).replace(/\(/g,"%28").replace(/\)/g,"%29");
+function applyTheme(t){
+  t=t||{};let css="";
+  if(okHex(t.page_bg))css+=`:root{--bg:${t.page_bg}}html,body{background:${t.page_bg}}`;
+  if(okHex(t.blk_c1)){
+    const c1=t.blk_c1,c2=okHex(t.blk_c2)?t.blk_c2:c1,ac=okHex(t.blk_accent)?t.blk_accent:"#f7c948";
+    const lightBg=t.blk_text==="dark"?true:t.blk_text==="light"?false:lumOf(c1)>.45;
+    const ink=lightBg?"#0f2a52":"#ffffff",mut=lightBg?"#52627d":"#c3d1e6",line=lightBg?"rgba(15,42,82,.2)":"rgba(255,255,255,.28)",yl=lightBg?darken(ac,.7):ac;
+    const ghost=lightBg?"rgba(15,42,82,.06)":"rgba(255,255,255,.1)",inb=lightBg?"#ffffff":"rgba(255,255,255,.1)",bd=lightBg?"rgba(15,42,82,.18)":"rgba(255,255,255,.18)";
+    css+=`.card,.tile,.stat,.plan,.opt,.chip,.sh,.pin,.prod{--card:${c2};--ink:${ink};--mut:${mut};--line:${line};--yl:${yl};color:${ink}}`+
+      `.card,.tile,.stat,.plan,.opt,.pin,.prod{background:linear-gradient(160deg,${c1} 0%,${c2} 100%);border-color:${bd}}`+
+      `.tile,.stat,.prod,.pin{border-bottom-color:${ac}}`+
+      `.plan.on,.opt.on{border-color:${ac}}`+
+      `.chip{background:${c1};color:${ink};border-color:${bd}}.chip.on{background:${ac};color:#06142a;border-color:${ac}}`+
+      `.sh{background:linear-gradient(180deg,${c1},${c2})}`+
+      `.prod h4,.prod .pr,.prod .mut{color:${ink}}.prod .pr{color:${yl}}`+
+      `.prod .btn.ghost,.card .btn.ghost,.sh .btn.ghost,.plan .btn.ghost,.opt .btn.ghost{background:${ghost};color:${ink};border-color:${bd}}`+
+      `.prod .ib,.sh .ib,.card .ib{background:${ghost};color:${ink};border-color:${bd}}`+
+      `.sh .fg input,.sh .fg textarea,.sh .fg select,.card .fg input,.card .fg textarea,.card .fg select{background:${inb};color:${ink};border-color:${bd}}`;
+  }
+  if(okHex(t.slider_c1)){
+    const s1=t.slider_c1,s2=okHex(t.slider_c2)?t.slider_c2:s1,lt=lumOf(s1)>.5;
+    css+=`.sl{background:linear-gradient(120deg,${s1} 0%,${s2} 100%)}`+(lt?`.sl,.sl h1,.sl p,.sl .mut{color:#0f2a52}.sl .btn.ghost{background:rgba(15,42,82,.08);color:#0f2a52;border-color:rgba(15,42,82,.3)}`:"");
+  }
+  const w=+t.art_weight;
+  if([300,400,500,600,700].includes(w))css+=`.prod h4,#detBox h1,#detBox h2,#detBox h3{font-weight:${w};letter-spacing:${w<=400?".2px":".4px"}}.prod .pr,#detBox .pr{font-weight:${w}}`;
+  if(t.art_upper===false)css+=`.prod h4,#detBox h1,#detBox h2,#detBox h3{text-transform:none}`;
+  let st=document.getElementById("themeCss");if(!st){st=document.createElement("style");st.id="themeCss";document.head.appendChild(st)}st.textContent=css;
+  let wl=document.getElementById("wall");
+  if(t.wall_url&&/^(https:\/\/|assets\/)/i.test(t.wall_url)){
+    if(!wl){wl=document.createElement("div");wl.id="wall";document.body.insertBefore(wl,document.body.firstChild)}
+    wl.style.cssText=`position:fixed;inset:0;z-index:0;pointer-events:none;background:url("${cssUrl(t.wall_url)}") ${t.wall_mode==="repeat"?"repeat":"center/cover no-repeat"}`;
+    const rgb=hexRgb(okHex(t.page_bg)?t.page_bg:"#ffffff"),ov=Math.min(.9,Math.max(0,+t.wall_overlay||0));
+    wl.innerHTML=`<div style="position:absolute;inset:0;background:rgba(${rgb.join(",")},${ov})"></div>`;
+  }else if(wl)wl.remove();
+}
+const themeBase=()=>({...((window.SAV_CONFIG||{}).THEME||{})});
+try{applyTheme(JSON.parse(localStorage.getItem(THEME_KEY)||"null")||themeBase())}catch(e){applyTheme(themeBase())}
+async function loadTheme(){
+  if(!SBOK)return;
+  try{
+    const r=await fetch(SB.SUPABASE_URL+"/rest/v1/site_settings?select=value&key=eq.theme",{headers:sbH()});if(!r.ok)throw 0;
+    const a=await r.json(),t={...themeBase(),...((a[0]&&a[0].value)||{})};
+    try{localStorage.setItem(THEME_KEY,JSON.stringify(t))}catch(e){}
+    applyTheme(t)
+  }catch(e){}
+}
+loadRemote();loadSlides();loadTheme();
 </script>
 </body>
 </html>

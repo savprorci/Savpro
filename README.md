@@ -21,6 +21,11 @@ Application web (sans installation) du service **SAV PRO Côte d'Ivoire** : éne
 .
 ├── index.html                  # Le site public (HTML, CSS, JS)
 ├── admin.html                  # Espace pro : 2FA, rôles, catalogue, ventes/commissions, demandes, équipe, journal
+├── manifest.json               # PWA : nom, icônes, captures, raccourcis
+├── sw.js                       # PWA : service worker (cache, hors ligne)
+├── offline.html                # PWA : page hors ligne
+├── icons/                      # PWA : icônes (192, 512, maskable, Apple, favicon)
+├── screenshots/                # PWA : captures d'écran (mobile et bureau)
 ├── config.js                   # URL et clé publique Supabase
 ├── diagnostic.html             # Test automatique GitHub + Supabase
 ├── ACTIVATION.md               # Procédure d'activation pas à pas
@@ -30,6 +35,8 @@ Application web (sans installation) du service **SAV PRO Côte d'Ivoire** : éne
 ├── supabase/schema.sql         # Tables, sécurité, stockage
 ├── supabase/seed.sql           # Import des 66 produits
 ├── supabase/fix-acces.sql      # Droits d'accès à l'API
+├── supabase/sql/               # Fichiers numérotés 01 à 07 pour le SQL Editor
+├── supabase/email-template-connexion.html  # Modèle d'e-mail du code de connexion
 ├── supabase/v2-roles-commissions-audit.sql  # Rôles, 2FA, commissions 10 %, journal
 ├── .nojekyll                   # Désactive Jekyll sur GitHub Pages
 ├── .gitignore

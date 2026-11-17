@@ -22,7 +22,8 @@ input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #dbe3ee;f
 
 <h2>1. Côté GitHub (fichiers du site)</h2><div class="card" id="g"></div>
 <h2>2. Côté Supabase (base et API)</h2><div class="card" id="s"></div>
-<h2>3. Test administrateur (facultatif)</h2>
+<h2>3. PWA (installation, PWABuilder)</h2><div class="card" id="w"></div>
+<h2>4. Test administrateur (facultatif)</h2>
 <div class="mut">Entre l'e-mail et le mot de passe du compte admin pour tester les droits d'écriture.</div>
 <input id="em" type="email" placeholder="E-mail admin" autocomplete="username">
 <input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
@@ -43,9 +44,9 @@ const H=(tok)=>({apikey:K,...(tok?{Authorization:"Bearer "+tok}:(/^sb_/.test(K)?
 async function exists(path){try{const r=await fetch(path+(path.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});return r.status}catch(e){return 0}}
 
 async function run(){
-  REP=[];$("g").innerHTML="";$("s").innerHTML="";const g=$("g"),s=$("s");
+  REP=[];$("g").innerHTML="";$("s").innerHTML="";$("w").innerHTML="";const g=$("g"),s=$("s");
   add(g,"in","Adresse testée",location.href);
-  for(const [f,hint] of [["index.html","Le fichier index.html doit être à la racine du dépôt."],["admin.html","Envoie admin.html à la racine du dépôt."],["config.js","Envoie config.js à la racine du dépôt."],["assets/img/0.jpg","Le dossier assets/img/ avec les 66 photos n'est pas publié."],["assets/img/65.jpg","Il manque des photos dans assets/img/."]]){
+  for(const [f,hint] of [["index.html","Le fichier index.html doit être à la racine du dépôt."],["admin.html","Envoie admin.html à la racine du dépôt."],["config.js","Envoie config.js à la racine du dépôt."],["assets/img/0.jpg","Le dossier assets/img/ avec les 66 photos n'est pas publié."],["assets/img/65.jpg","Il manque des photos dans assets/img/."],["manifest.json","PWA : envoie manifest.json à la racine."],["sw.js","PWA : envoie sw.js à la racine (pas dans un sous-dossier)."],["offline.html","PWA : envoie offline.html à la racine."],["icons/icon-512.png","PWA : envoie le dossier icons/."]]){
     const c=await exists(f);
     c===200?add(g,"ok",f+" présent"):add(g,"ko",f+" introuvable (code "+(c||"réseau")+")",null,hint)
   }
@@ -78,9 +79,57 @@ async function run(){
     const r=await fetch(U+"/storage/v1/object/public/products/0.jpg",{method:"HEAD"});
     r.ok?add(s,"ok","Photo en ligne dans le stockage (0.jpg)"):add(s,"in","Stockage : 0.jpg absent (code "+r.status+")","Normal : le site utilise alors assets/img/. Les photos passeront dans le stockage via admin.html.")
   }catch(e){add(s,"wa","Stockage non testé",e.message)}
+  await pwa();
   add(s,"in","Fin du diagnostic","Si tout est ✔ ici mais que le site reste vide : ouvre le site en navigation privée ou fais Ctrl+F5.")
 }
 
+
+async function pwa(){
+  const w=$("w");w.innerHTML="";
+  const base=location.href.replace(/[^\/]*(\?.*)?(#.*)?$/,"");
+  add(w,"in","Dossier testé",base);
+  (location.protocol==="https:"||location.hostname==="localhost")?add(w,"ok","HTTPS actif"):add(w,"ko","HTTPS absent",null,"Une PWA exige HTTPS (GitHub Pages le fournit).");
+  let mUrl=null;
+  try{
+    const t=await (await fetch(base+"index.html?t="+Date.now(),{cache:"no-store"})).text();
+    const m=/<link[^>]*rel=["']manifest["'][^>]*>/i.exec(t);
+    if(!m)add(w,"ko","index.html publié ne contient pas <link rel=\"manifest\">",null,"Envoie la dernière version de index.html sur GitHub (c'est la cause la plus fréquente de l'erreur PWABuilder).");
+    else{const h=/href=["']([^"']+)["']/i.exec(m[0]);mUrl=new URL(h[1],base).href;add(w,"ok","Lien manifest trouvé dans index.html",mUrl)}
+  }catch(e){add(w,"ko","index.html illisible",e.message)}
+  if(!mUrl)mUrl=base+"manifest.json";
+  let j=null;
+  try{
+    const r=await fetch(mUrl+(mUrl.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});
+    const ct=r.headers.get("content-type")||"";
+    if(!r.ok)add(w,"ko","Manifest introuvable (code "+r.status+")",mUrl,"Envoie manifest.json à la racine du dépôt.");
+    else{
+      try{j=await r.json();add(w,"ok","Manifest lisible (JSON valide)",ct)}catch(e){add(w,"ko","Manifest : JSON invalide",e.message,"Renvoie le fichier manifest.json fourni sans le modifier.")}
+    }
+  }catch(e){add(w,"ko","Manifest inaccessible",e.message)}
+  if(j){
+    for(const k of ["name","short_name","start_url","id","display","theme_color","background_color","description","icons","screenshots"]){
+      const v=j[k];(v&&(!Array.isArray(v)||v.length))?add(w,"ok","Champ « "+k+" » présent"):add(w,k==="screenshots"||k==="description"?"wa":"ko","Champ « "+k+" » manquant",null,"Utilise le manifest.json fourni.")
+    }
+    try{
+      const st=new URL(j.start_url,mUrl),sc=new URL(j.scope||".",mUrl);
+      st.pathname.startsWith(sc.pathname)?add(w,"ok","start_url dans le scope",st.pathname):add(w,"ko","start_url hors du scope",st.pathname+" / "+sc.pathname,"Dans manifest.json, start_url et scope doivent commencer par le nom du dépôt (/Sav-Pro/).");
+      if(!base.endsWith(sc.pathname))add(w,"wa","Le scope du manifest ne correspond pas à l'adresse du site",sc.pathname+" ≠ "+new URL(base).pathname,"Si le dépôt ou le domaine change, adapte id, start_url, scope et shortcuts dans manifest.json.")
+    }catch(e){}
+    const need=[["192x192","any"],["512x512","any"],["512x512","maskable"]];
+    for(const [sz,pu] of need){const ic=(j.icons||[]).find(i=>i.sizes===sz&&(i.purpose||"any").includes(pu));ic?add(w,"ok","Icône "+sz+" ("+pu+") déclarée"):add(w,"ko","Icône "+sz+" ("+pu+") manquante")}
+    for(const i of [...(j.icons||[]),...(j.screenshots||[])]){
+      try{const r=await fetch(new URL(i.src,mUrl).href,{cache:"no-store"});r.ok&&/image/.test(r.headers.get("content-type")||"")?add(w,"ok","Image accessible : "+i.src):add(w,"ko","Image introuvable : "+i.src+" (code "+r.status+")",null,"Envoie les dossiers icons/ et screenshots/ à la racine.")}catch(e){add(w,"ko","Image inaccessible : "+i.src)}
+    }
+  }
+  try{
+    const r=await fetch(base+"sw.js?t="+Date.now(),{cache:"no-store"});const ct=r.headers.get("content-type")||"";
+    r.ok&&/javascript/.test(ct)?add(w,"ok","sw.js accessible",ct):add(w,"ko","sw.js absent ou mal servi (code "+r.status+")",ct,"Envoie sw.js à la racine du dépôt.")
+  }catch(e){add(w,"ko","sw.js inaccessible",e.message)}
+  try{
+    const reg=await navigator.serviceWorker.getRegistration(base);
+    reg&&reg.active?add(w,"ok","Service worker actif",reg.scope):add(w,"wa","Service worker pas encore actif","Ouvre index.html une fois, attends 5 secondes, puis relance le diagnostic.")
+  }catch(e){add(w,"wa","Service worker non testable",e.message)}
+}
 async function admin(){
   const a=$("a");a.innerHTML="";
   if(!U||!K){add(a,"ko","config.js incomplet");return}

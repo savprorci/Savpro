@@ -140,3 +140,100 @@ Remplace `index.html`, `admin.html` et `diagnostic.html`, ajoute `supabase/v2-ro
 
 ### Téléphone perdu (2FA)
 Supabase → Authentication → Users → l'utilisateur → supprimer le facteur d'authentification ; il en recréera un à la prochaine connexion.
+
+
+---
+
+# PWA : application installable
+
+## Fichiers (tous à la RACINE du dépôt)
+`manifest.json`, `sw.js`, `offline.html`, dossiers `icons/` (7 images) et `screenshots/` (4 images), plus `index.html` et `admin.html` mis à jour.
+
+## Ce que ça apporte
+- **Installation** sur l'écran d'accueil (Android, ordinateur, iPhone) avec l'icône SAV PRO.
+- **Démarrage rapide** et **mode hors ligne** : la page s'ouvre sans réseau ; une page « Vous êtes hors ligne » propose d'appeler ou d'écrire sur WhatsApp.
+- **Raccourcis** (appui long sur l'icône) : Speed Dépannage, Catalogue, Espace pro.
+- **Mises à jour automatiques** : en ligne, le site charge toujours la dernière version ; les photos sont gardées en cache.
+- Les données Supabase (catalogue, comptes, 2FA, ventes, journal) ne sont **jamais** mises en cache.
+
+## Installer l'application
+- **Android (Chrome)** : un bandeau « Installer SAV PRO » apparaît, ou menu ⋮ → Installer l'application.
+- **iPhone (Safari)** : Partager → Sur l'écran d'accueil.
+- **Ordinateur (Chrome/Edge)** : icône d'installation dans la barre d'adresse.
+
+## Vérifier
+1. `diagnostic.html` : la section « 3. PWA » doit être entièrement en ✔.
+2. Chrome → F12 → onglet Application : Manifest sans erreur, Service Workers « activated ».
+
+## Publier une nouvelle version
+Après un changement important, augmente `VERSION` dans `sw.js` (`savpro-v2`, `savpro-v3`…) pour forcer le renouvellement du cache.
+
+
+## Erreur PWABuilder (name, icons, short_name, start_url en rouge)
+PWABuilder affiche ces quatre champs en rouge quand il **ne trouve pas le manifest**. Causes, de la plus fréquente à la plus rare :
+1. **L'ancien `index.html` est encore en ligne** (sans la ligne `<link rel="manifest">`). Remplace-le par la version du zip.
+2. **`manifest.json` n'est pas à la racine du dépôt** ou le dossier `icons/` / `screenshots/` manque.
+3. **Mauvaise adresse saisie** : utilise exactement `https://savprorci.github.io/Sav-Pro/` (avec le `/` final et les majuscules).
+4. **Résultat gardé en mémoire par PWABuilder** : après la correction, ouvre `https://savprorci.github.io/Sav-Pro/manifest.json` dans le navigateur (le JSON doit s'afficher), puis relance l'analyse dans PWABuilder.
+
+Contrôle rapide : ouvre `…/Sav-Pro/diagnostic.html`, appuie sur « Lancer le diagnostic » et regarde la section **3. PWA**. Chaque ✖ indique le fichier à renvoyer.
+
+Remarque : `manifest.json` contient le chemin du dépôt (`/Sav-Pro/`). Si tu passes sur un domaine à toi (racine du site), remplace `/Sav-Pro/` par `/` dans `id`, `start_url`, `scope` et `shortcuts`.
+
+
+---
+
+# VERSION 3 : connexion par e-mail, slides modifiables, images agrandies
+
+## Ce qui change
+- **Connexion unique par e-mail** (espace pro) : tu saisis ton e-mail, tu reçois un code à usage unique, puis le code 2FA de ton application d'authentification. Plus de mot de passe à retenir. La connexion automatique sur l'appareil est conservée.
+- **Slides de l'accueil modifiables par l'administrateur** (onglet **Slides** de `admin.html`) : titre, texte, bouton, page ouverte, ordre, affichage/masquage, et média = photo d'un produit, image téléversée ou vidéo (MP4/WebM, 25 Mo max). Les modifications sont visibles tout de suite sur le site ; sans slide en base, le site garde ses slides d'origine.
+- **Fenêtres images agrandies** (slides, fiches produits, détail) et **image entière visible** (les photos étaient rognées dans les petites fenêtres sur téléphone).
+
+## A. Connexion par e-mail : à configurer dans Supabase (obligatoire)
+L'envoi d'e-mails intégré à Supabase est réservé aux tests : environ 2 e-mails par heure et seulement vers les membres de ton organisation Supabase. Il faut donc un service d'envoi (SMTP).
+
+1. Crée un compte gratuit chez un service d'envoi (Brevo, Resend, Mailjet…) et vérifie ton adresse ou ton domaine d'expéditeur.
+2. Supabase → **Authentication → Emails → SMTP Settings** : active « Custom SMTP » et saisis serveur, port, identifiant, mot de passe et adresse d'expédition.
+3. Supabase → **Authentication → Emails → Templates → Magic link** : objet `Votre code de connexion SAV PRO`, contenu = fichier `supabase/email-template-connexion.html` (il contient `{{ .Token }}`, le code à 6 chiffres).
+4. Supabase → **Authentication → URL Configuration** : Site URL = `https://savprorci.github.io/Sav-Pro/admin.html`.
+5. Supabase → **Authentication → Rate Limits** : relève la limite d'e-mails par heure si besoin.
+6. Chaque membre doit avoir un compte (Authentication → Users) et un rôle (onglet **Équipe**) : un e-mail inconnu ne reçoit aucun code.
+
+Tant que le SMTP n'est pas prêt, le lien **« Se connecter avec un mot de passe »** reste disponible. Quand tout fonctionne, mets `PASSWORD_LOGIN: false` dans `config.js` pour que l'e-mail soit le seul mode de connexion.
+
+## B. Slides : à activer
+1. SQL Editor → colle `supabase/sql/07_slides.sql` → Run (crée la table, le stockage `slides` et recopie les 7 slides d'origine).
+2. `admin.html` → onglet **Slides** : ↑ ↓ pour l'ordre, **Modifier** pour le texte et le média, **+ Nouvelle slide**.
+3. Variables possibles dans les textes : `{nc}` (références du catalogue), `{nl}` (équipements en location), `{dom}` (domaines).
+
+Conseils vidéo : MP4 (H.264), 720p, 10 à 15 secondes, moins de 25 Mo ; elle se lance sans son, en boucle, quand sa slide s'affiche. Image : format paysage, 1600 px de large au plus (réduite automatiquement).
+
+## C. Publier
+Envoie sur GitHub `index.html`, `admin.html`, `sw.js`, `config.js` et le dossier `supabase/`, puis attends la coche verte. Le cache du service worker passe en version `savpro-v3` : les téléphones se mettent à jour au prochain chargement en ligne.
+
+
+---
+
+# VERSION 4 : apparence modifiable (fond d'écran, couleurs des blocs, textes fins)
+
+## Ce que l'administrateur peut régler (admin.html → onglet « Apparence »)
+- **Fond d'écran** : image (JPEG/PNG), affichage « couvrir l'écran » ou « mosaïque », **voile de lisibilité** réglable (0 à 90 %) pour que les textes restent lisibles.
+- **Couleur de fond de la page.**
+- **Couleur des blocs** (cartes produits, tuiles, formules, fenêtres) : couleur 1 + couleur 2 (dégradé), couleur du liseré et du prix, texte clair/foncé/automatique. 5 modèles prêts : Bleu (origine), Rouge, Clair, Sombre, Vert. La page Speed Dépannage garde son rouge et blanc.
+- **Couleur du slider** (bandeau de l'accueil).
+- **Textes des articles** : épaisseur **Gras / Semi-gras / Normal / Fin**, et casse MAJUSCULES ou normale.
+- Un **aperçu** s'affiche avant d'enregistrer ; **Rétablir l'apparence d'origine** remet tout à zéro.
+
+## Activer
+1. Supabase → SQL Editor : lance `supabase/sql/08_apparence.sql` (étapes 4 et 7 déjà faites).
+2. GitHub : remplace `index.html`, `admin.html`, `sw.js`, `config.js` ; ajoute `supabase/sql/08_apparence.sql`.
+3. `admin.html` → Apparence → règle, vérifie l'aperçu, **Enregistrer**. Les visiteurs voient le changement au prochain chargement (Ctrl+F5 si besoin).
+
+## Sans Supabase (fichier HTML seul)
+Dans `config.js`, la ligne `THEME` accepte les mêmes réglages (exemple en commentaire) : `wall_url`, `wall_overlay`, `blk_c1`, `blk_c2`, `blk_accent`, `art_weight` (300 = fin), etc. Le réglage enregistré dans l'admin a priorité.
+
+## Conseils
+- Fond d'écran : image légère (moins de 500 Ko après envoi, elle est réduite à 1600 px), voile de 40 à 70 % si l'image est chargée.
+- Blocs clairs : choisis « Texte des blocs » automatique ; le site passe tout seul en texte foncé.
+- Textes « Fin » : plus élégants en grande taille ; garde « Normal » si la lisibilité en plein soleil compte.
